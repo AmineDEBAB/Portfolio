@@ -417,7 +417,6 @@ figure {
 				min-height: 700px;
 				padding: 2.5em;
 				position: relative;
-				.desc{
 				}
 				@media screen and (max-width: $screen-sm ) {
 					text-align: center;
@@ -486,7 +485,6 @@ figure {
 		}
 	}
 
-}
 
 body {
 	&.offcanvas {
