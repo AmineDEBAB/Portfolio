@@ -323,7 +323,7 @@ th {
 
 html {
   font-size: 10px;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: #721212;
 }
 
 body {
@@ -331,7 +331,7 @@ body {
   font-size: 14px;
   line-height: 1.42857;
   color: #333333;
-  background-color: #fff;
+  background-color: #f3ebeb;
 }
 
 input,
@@ -344,7 +344,7 @@ textarea {
 }
 
 a {
-  color: #7525cc;
+  color: #531a93;
   text-decoration: none;
 }
 a:hover, a:focus {
