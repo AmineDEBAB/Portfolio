@@ -4927,7 +4927,7 @@ body[dir='rtl'] #USE_CHAT_GPT_AI_ROOT {
 						<li class=""><a href="file:///C:/Users/m.debab/Downloads/Amine%20DEBAB/index.html#" data-nav-section="experience">Experience</a></li>
 						<li class=""><a href="file:///C:/Users/m.debab/Downloads/Amine%20DEBAB/index.html#" data-nav-section="work">Work</a></li>
 						<li class=""><a href="file:///C:/Users/m.debab/Downloads/Amine%20DEBAB/index.html#" data-nav-section="contact">Contact</a></li>
-						<li class=""><a href="file:///C:/Users/m.debab/Downloads/Amine%20DEBAB/index.html#" data-nav-section="contact">Download</a></li>
+						<li class=""><a href="file:///C:/Users/m.debab/Downloads/Amine%20DEBAB/index.html#" data-nav-section="download">Download</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -4956,7 +4956,7 @@ body[dir='rtl'] #USE_CHAT_GPT_AI_ROOT {
       
       .topnav {
         overflow: hidden;
-        background-color: #b76ac5;
+        background-color: #807c80;
       }
       
       .topnav a {
@@ -4971,7 +4971,7 @@ body[dir='rtl'] #USE_CHAT_GPT_AI_ROOT {
       
       .topnav a:hover {
         background-color: #ddd;
-        color: rgb(170, 77, 232);
+        color: rgb(112, 106, 115);
       }
       
       .topnav a.active {
@@ -6088,6 +6088,7 @@ opacity:1
   max-width: 600px;
   margin: 2rem auto;
   
+  
     }	
     
   .slider_focus ul{
@@ -6100,7 +6101,8 @@ opacity:1
   position: relative;
   justify-content: center;
   overflow: hidden;
-  aspect-ratio:3/2;gap:.5rem;
+  aspect-ratio:3/2;gap:1.5rem;
+  border-radius: 10px;
   
     
   }
@@ -6287,6 +6289,52 @@ opacity:1
 					</div>
 				</div>
 			</section>
+
+      
+      <section id="Download" class="colorlib-Download" data-section="download">
+        <div class="colorlib-narrow-content">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft">
+              <span class="heading-meta">More about Me</span>
+              <h2 class="colorlib-heading">Download</h2>
+              <p> Please feel free to Download my CV in both languages : French - English</p>
+        
+            <style>
+            button {
+              color: #7a2484;
+              background-color: #5dbaed;
+              border-radius: 10px;
+              padding: 10px;
+            }
+          </style>
+            </div>
+          </div>
+        </div>
+         <script>
+    // Fonction pour télécharger un fichier
+    function downloadFile(fileName) {
+      // Crée un nouvel élément `a`
+      const link = document.createElement("a");
+
+      // Définit l'attribut `href` de l'élément `a` sur l'emplacement du fichier à télécharger
+      link.href = fileName;
+
+      // Définit l'attribut `download` de l'élément `a` sur le nom du fichier à télécharger
+      link.download = fileName;
+
+      // Lance le téléchargement du fichier
+      link.click();
+    }
+  </script>
+
+  <button onclick="downloadFile('DEBAB Amine - Ingenieur Electrotechnique.pdf')">Télécharger</button>
+
+  <button onclick="downloadFile('Amine DEBAB Electrical Engineer.pdf')">Download</button>
+
+     
+        </section>
+
+        
 
 		</div><!-- end:colorlib-main -->
 	</div><!-- end:container-wrap -->
