@@ -649,6 +649,7 @@ if(el){new Swiper('.'+cls,Object.assign({},cfg,{navigation:{nextEl:el.querySelec
 })();
 </script>
 
+<script>
 (function(){
 /* ===== TRANSLATIONS ===== */
 var T={
@@ -780,7 +781,7 @@ function applyLang(lang){
   currentLang=lang;
 }
 
-document.addEventListener('DOMContentLoaded',function(){
+(function(){
   var langBtn=document.getElementById('langToggle');
   if(langBtn){
     langBtn.addEventListener('click',function(){
@@ -788,7 +789,7 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   }
   applyLang(currentLang);
-});
+})();
 
 /* ===== DARK / LIGHT THEME ===== */
 var currentTheme=localStorage.getItem('theme')||'dark';
@@ -801,7 +802,7 @@ function applyTheme(theme){
   currentTheme=theme;
 }
 
-document.addEventListener('DOMContentLoaded',function(){
+(function(){
   var themeBtn=document.getElementById('themeToggle');
   if(themeBtn){
     themeBtn.addEventListener('click',function(){
@@ -809,9 +810,10 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   }
   applyTheme(currentTheme);
-});
+})();
 
 })();
+</script>
 
 </body>
 </html>
