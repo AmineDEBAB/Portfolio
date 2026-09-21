@@ -179,6 +179,34 @@ footer span{color:var(--accent)}
 .tl-row:nth-child(odd) .tl-co{justify-content:flex-start}
 }
 
+
+/* ========== LIGHT MODE ========== */
+[data-theme="light"]{
+  --bg:#F0F4F8;--bg2:#FFFFFF;--bg3:#E8EEF5;--card:#FFFFFF;
+  --accent:#E07800;--text:#1A2942;--muted:#5C6B7A;
+  --border:rgba(0,0,0,0.09);--sh:0 4px 30px rgba(0,0,0,.08)
+}
+[data-theme="light"] body{background:var(--bg)}
+[data-theme="light"] #mainNav{background:rgba(240,244,248,.97)}
+[data-theme="light"] .nav-logo{color:var(--text)}
+[data-theme="light"] .nav-logo span{color:var(--accent)}
+[data-theme="light"] .nav-links a{color:var(--muted)}
+[data-theme="light"] .nav-links a:hover,[data-theme="light"] .nav-links a.active{color:var(--accent)}
+[data-theme="light"] .hero-name{color:var(--text)}
+[data-theme="light"] .sk-bg{background:#DDE5F0}
+[data-theme="light"] .tl::before{background:linear-gradient(to bottom,transparent 0%,var(--accent) 10%,var(--accent) 90%,transparent 100%)}
+[data-theme="light"] .exp-card,[data-theme="light"] .edu-c,[data-theme="light"] .gal-co,[data-theme="light"] .dl-c{box-shadow:0 2px 16px rgba(0,0,0,.07)}
+[data-theme="light"] .btn-dl{background:var(--accent);color:#fff}
+[data-theme="light"] footer{border-top:1px solid var(--border)}
+
+/* ========== NAV CONTROLS ========== */
+.nav-controls{display:flex;align-items:center;gap:8px;margin-right:12px}
+.lang-btn,.theme-btn{background:transparent;border:1px solid var(--border);color:var(--text);
+  padding:4px 10px;border-radius:20px;cursor:pointer;font-size:.78rem;font-weight:700;
+  transition:var(--tr);display:flex;align-items:center;gap:5px;line-height:1}
+.lang-btn:hover,.theme-btn:hover{border-color:var(--accent);color:var(--accent)}
+.theme-btn{padding:6px 10px}
+
 </style>
 </head>
 <body>
@@ -186,17 +214,17 @@ footer span{color:var(--accent)}
   <div class="nav-inner">
     <div class="nav-logo">A.<span>DEBAB</span></div>
     <div class="nav-links" id="navLinks">
-      <a href="#hero" class="active">Home</a>
-      <a href="#about">About</a>
-      <a href="#expertise">Expertise</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#education">Education</a>
+      <a href="#hero" class="active" data-i18n="nav.home">Home</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#expertise" data-i18n="nav.expertise">Expertise</a>
+      <a href="#skills" data-i18n="nav.skills">Skills</a>
+      <a href="#experience" data-i18n="nav.experience">Experience</a>
+      <a href="#gallery" data-i18n="nav.gallery">Gallery</a>
+      <a href="#education" data-i18n="nav.education">Education</a>
       <a href="#download">CV</a>
       <a href="#contact">Contact</a>
     </div>
-    <button class="nav-toggle" id="navToggle">
+    <div class="nav-controls"><button class="lang-btn" id="langToggle" title="Switch language">FR</button><button class="theme-btn" id="themeToggle" title="Toggle dark/light"><i class="fa-solid fa-moon"></i></button></div><button class="nav-toggle" id="navToggle">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -206,18 +234,18 @@ footer span{color:var(--accent)}
   <div class="container">
     <div class="hero-grid">
       <div>
-        <span class="hero-tag">Senior Engineer</span>
+        <span class="hero-tag" data-i18n="hero.tag">Senior Engineer</span>
         <h1 class="hero-name">Amine <span>DEBAB</span></h1>
-        <p class="hero-title">Sr. Maintenance &amp; Reliability Engineer</p>
-        <p class="hero-desc">14+ years across industrial engineering, Amazon-scale RME, and maintenance automation. From Algeria&#39;s heavy industry to commissioning Amazon&#39;s newest European fulfillment centers.</p>
+        <p class="hero-title" data-i18n="hero.title">Sr. Maintenance &amp; Reliability Engineer</p>
+        <p class="hero-desc" data-i18n="hero.desc">14+ years across industrial engineering, Amazon-scale RME, and maintenance automation. From Algeria&#39;s heavy industry to commissioning Amazon&#39;s newest European fulfillment centers.</p>
         <div class="hero-btns">
-          <a href="#experience" class="btn-p"><i class="fa-solid fa-timeline"></i> Experience</a>
-          <a href="#contact" class="btn-o"><i class="fa-solid fa-envelope"></i> Contact</a>
+          <a href="#experience" class="btn-p"><i class="fa-solid fa-timeline"></i> <span data-i18n="hero.btn_exp">Experience</span></a>
+          <a href="#contact" class="btn-o"><i class="fa-solid fa-envelope"></i> <span data-i18n="hero.btn_ct">Contact</span></a>
         </div>
         <div class="hero-stats">
-          <div class="hero-stat"><strong>14+</strong><span>Years exp.</span></div>
-          <div class="hero-stat"><strong>8</strong><span>Companies</span></div>
-          <div class="hero-stat"><strong>2</strong><span>Amazon FCs</span></div>
+          <div class="hero-stat"><strong>14+</strong><span data-i18n="hero.stat1">Years exp.</span></div>
+          <div class="hero-stat"><strong>8</strong><span data-i18n="hero.stat2">Companies</span></div>
+          <div class="hero-stat"><strong>2</strong><span data-i18n="hero.stat3">Amazon FCs</span></div>
         </div>
       </div>
       <div class="hero-img-wrap">
@@ -237,17 +265,17 @@ footer span{color:var(--accent)}
         <div class="about-badge"><strong>14+</strong>Years<br>Experience</div>
       </div>
       <div class="rv-r">
-        <span class="lbl">About Me</span>
-        <h2 class="sh">Who Am <span>I?</span></h2>
+        <span class="lbl" data-i18n="about.lbl">About Me</span>
+        <h2 class="sh" data-i18n-html="about.h2">Who Am <span>I?</span></h2>
         <div class="about-text">
-          <p>Senior Maintenance &amp; Reliability Engineer with 14+ years in electrical engineering, industrial maintenance, and production operations management across Algeria and France.</p>
-          <p>Currently commissioning Amazon LYS2 Lyon from zero — building the full RME structure, CMMS, and maintenance team. Passionate about data-driven maintenance and operational excellence at scale.</p>
+          <p data-i18n="about.p1">Senior Maintenance &amp; Reliability Engineer with 14+ years in electrical engineering, industrial maintenance, and production operations management across Algeria and France.</p>
+          <p data-i18n="about.p2">Currently commissioning Amazon LYS2 Lyon from zero — building the full RME structure, CMMS, and maintenance team. Passionate about data-driven maintenance and operational excellence at scale.</p>
         </div>
         <div class="about-info">
-          <div class="ai"><strong>Location</strong><span>Lyon, France</span></div>
-          <div class="ai"><strong>Current Role</strong><span>Sr. Tech PMO &amp; Reliability</span></div>
-          <div class="ai"><strong>Company</strong><span>Amazon LYS2</span></div>
-          <div class="ai"><strong>Email</strong><span>ing.debab@hotmail.fr</span></div>
+          <div class="ai"><strong data-i18n="about.loc_lbl">Location</strong><span>Lyon, France</span></div>
+          <div class="ai"><strong data-i18n="about.role_lbl">Current Role</strong><span data-i18n="about.role_val">Sr. Tech PMO &amp; Reliability</span></div>
+          <div class="ai"><strong data-i18n="about.co_lbl">Company</strong><span>Amazon LYS2</span></div>
+          <div class="ai"><strong data-i18n="about.email_lbl">Email</strong><span>ing.debab@hotmail.fr</span></div>
         </div>
       </div>
     </div>
@@ -257,23 +285,23 @@ footer span{color:var(--accent)}
 <section id="expertise">
   <div class="container">
     <div class="rv" style="text-align:center;max-width:560px;margin:0 auto">
-      <span class="lbl">What I Do</span>
-      <h2 class="sh">Areas of <span>Expertise</span></h2>
+      <span class="lbl" data-i18n="exp.lbl">What I Do</span>
+      <h2 class="sh" data-i18n-html="exp.h2">Areas of <span>Expertise</span></h2>
     </div>
     <div class="exp-grid">
-      <div class="exp-card rv rv-d1"><div class="exp-icon"><i class="fa-solid fa-diagram-project"></i></div><h3>Project Management</h3><p>End-to-end project delivery from scope to commissioning. Greenfield FC buildouts at Amazon scale.</p></div>
-      <div class="exp-card rv rv-d2"><div class="exp-icon"><i class="fa-solid fa-people-group"></i></div><h3>Team Leadership</h3><p>Multinational teams (15+ nationalities). Building cohesive teams in high-pressure operational environments.</p></div>
-      <div class="exp-card rv rv-d3"><div class="exp-icon"><i class="fa-solid fa-bolt"></i></div><h3>Electrical Engineering</h3><p>Power systems, automation, PLC/SCADA, E&amp;I. Certified H0V, B1V, BR. Industrial gas habilitation.</p></div>
-      <div class="exp-card rv rv-d4"><div class="exp-icon"><i class="fa-solid fa-chart-line"></i></div><h3>Reliability &amp; CMMS</h3><p>RME from zero: PM/PdM plans, OEE monitoring, DPMO analysis, CMMS implementation.</p></div>
-      <div class="exp-card rv rv-d5"><div class="exp-icon"><i class="fa-brands fa-python"></i></div><h3>Data &amp; Automation</h3><p>Python for maintenance KPIs. Automated DPMO reporting: 3h to 20 min. QuickSight dashboards.</p></div>
-      <div class="exp-card rv rv-d1"><div class="exp-icon"><i class="fa-solid fa-pen-ruler"></i></div><h3>Technical Design</h3><p>AutoCAD Electrical, Caneco BT, See Electrical. Technical documentation and procedures.</p></div>
+      <div class="exp-card rv rv-d1"><div class="exp-icon"><i class="fa-solid fa-diagram-project"></i></div><h3 data-i18n="exp.c1.h">Project Management</h3><p data-i18n="exp.c1.p">End-to-end project delivery from scope to commissioning. Greenfield FC buildouts at Amazon scale.</p></div>
+      <div class="exp-card rv rv-d2"><div class="exp-icon"><i class="fa-solid fa-people-group"></i></div><h3 data-i18n="exp.c2.h">Team Leadership</h3><p data-i18n="exp.c2.p">Multinational teams (15+ nationalities). Building cohesive teams in high-pressure operational environments.</p></div>
+      <div class="exp-card rv rv-d3"><div class="exp-icon"><i class="fa-solid fa-bolt"></i></div><h3 data-i18n="exp.c3.h">Electrical Engineering</h3><p data-i18n="exp.c3.p">Power systems, automation, PLC/SCADA, E&amp;I. Certified H0V, B1V, BR. Industrial gas habilitation.</p></div>
+      <div class="exp-card rv rv-d4"><div class="exp-icon"><i class="fa-solid fa-chart-line"></i></div><h3 data-i18n="exp.c4.h">Reliability &amp; CMMS</h3><p data-i18n="exp.c4.p">RME from zero: PM/PdM plans, OEE monitoring, DPMO analysis, CMMS implementation.</p></div>
+      <div class="exp-card rv rv-d5"><div class="exp-icon"><i class="fa-brands fa-python"></i></div><h3 data-i18n="exp.c5.h">Data &amp; Automation</h3><p data-i18n="exp.c5.p">Python for maintenance KPIs. Automated DPMO reporting: 3h to 20 min. QuickSight dashboards.</p></div>
+      <div class="exp-card rv rv-d1"><div class="exp-icon"><i class="fa-solid fa-pen-ruler"></i></div><h3 data-i18n="exp.c6.h">Technical Design</h3><p data-i18n="exp.c6.p">AutoCAD Electrical, Caneco BT, See Electrical. Technical documentation and procedures.</p></div>
     </div>
   </div>
 </section>
 
 <section id="skills" class="alt">
   <div class="container">
-    <div class="rv"><span class="lbl">Technical Skills</span><h2 class="sh">My <span>Skill Set</span></h2></div>
+    <div class="rv"><span class="lbl" data-i18n="sk.lbl">Technical Skills</span><h2 class="sh" data-i18n-html="sk.h2">My <span>Skill Set</span></h2></div>
     <div class="sk-grid">
       <div class="sk rv rv-d1"><div class="sk-hd"><span class="sk-nm">Electrical Engineering</span><span class="sk-pct">90%</span></div><div class="sk-bg"><div class="sk-bar" data-w="90"></div></div></div>
       <div class="sk rv rv-d2"><div class="sk-hd"><span class="sk-nm">CMMS / Reliability Engineering</span><span class="sk-pct">85%</span></div><div class="sk-bg"><div class="sk-bar" data-w="85"></div></div></div>
@@ -289,17 +317,17 @@ footer span{color:var(--accent)}
 <section id="experience">
   <div class="container">
     <div class="rv" style="text-align:center;max-width:560px;margin:0 auto">
-      <span class="lbl">Career</span>
-      <h2 class="sh">Work <span>Experience</span></h2>
+      <span class="lbl" data-i18n="work.lbl">Career</span>
+      <h2 class="sh" data-i18n-html="work.h2">Work <span>Experience</span></h2>
     </div>
     <div class="tl">
       <div class="tl-row rv rv-r">
         <div class="tl-c tl-amz">
-          <div class="tl-tag">&#127381; Current</div>
+          <div class="tl-tag" data-i18n="work.current">&#127381; Current</div>
           <div class="tl-per">April 2026 - Present</div>
           <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Amazon LYS2 - Lyon, France</div>
-          <h3>Sr. Technician - PMO &amp; Reliability</h3>
-          <p>Full commissioning of a new Amazon FC from zero. Designed and implemented RME service structure, CMMS, safety protocols, KPI frameworks. Built and managed multinational team (15+ nationalities). Piloted Jam DPMO reduction strategy and OEE reporting.</p>
+          <h3 data-i18n="work.j1.title">Sr. Technician - PMO &amp; Reliability</h3>
+          <p data-i18n="work.j1.desc">Full commissioning of a new Amazon FC from zero. Designed and implemented RME service structure, CMMS, safety protocols, KPI frameworks. Built and managed multinational team (15+ nationalities). Piloted Jam DPMO reduction strategy and OEE reporting.</p>
         </div>
         <div class="tl-node"><div class="tl-dot"></div></div>
         <div class="tl-void"></div>
@@ -310,16 +338,16 @@ footer span{color:var(--accent)}
         <div class="tl-c tl-amz">
           <div class="tl-per">July 2024 - March 2026</div>
           <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Amazon ETZ2 - Metz, France</div>
-          <h3>Sr. Technician - Shift &amp; Maintenance (SRMET)</h3>
-          <p>Autonomous shift management with full accountability for maintenance operations, backlog follow-up and team coordination. Supervised technicians, managed HIE safety protocols. Recruited and trained 2 apprentices. Automated DPMO reporting with Python (3h to 20 min). OEE above 95%.</p>
+          <h3 data-i18n="work.j2.title">Sr. Technician - Shift &amp; Maintenance (SRMET)</h3>
+          <p data-i18n="work.j2.desc">Autonomous shift management with full accountability for maintenance operations, backlog follow-up and team coordination. Supervised technicians, managed HIE safety protocols. Recruited and trained 2 apprentices. Automated DPMO reporting with Python (3h to 20 min). OEE above 95%.</p>
         </div>
       </div>
       <div class="tl-row rv rv-r">
         <div class="tl-c">
           <div class="tl-per">Oct. 2023 - June 2024</div>
           <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Greif - France</div>
-          <h3>Production Supervisor</h3>
-          <p>Supervised industrial drum manufacturing production lines. Managed production teams, planned and scheduled daily tasks. Implemented and enforced safety rules and procedures on the shop floor.</p>
+          <h3 data-i18n="work.j3.title">Production Supervisor</h3>
+          <p data-i18n="work.j3.desc">Supervised industrial drum manufacturing production lines. Managed production teams, planned and scheduled daily tasks. Implemented and enforced safety rules and procedures on the shop floor.</p>
         </div>
         <div class="tl-node"><div class="tl-dot"></div></div>
         <div class="tl-void"></div>
@@ -328,8 +356,8 @@ footer span{color:var(--accent)}
         <div class="tl-c">
           <div class="tl-per">2021 - Oct. 2023</div>
           <div class="tl-co"><i class="fa-solid fa-location-dot"></i> DiamGrain - France</div>
-          <h3>Utility &amp; Reliability Manager</h3>
-          <p>Project managed utility services implementation (boilers, air compressors, water treatment, piping). Supplied cattle feed plant via 1,200m piping network. Led full maintenance operations and reliability engineering.</p>
+          <h3 data-i18n="work.j4.title">Utility &amp; Reliability Manager</h3>
+          <p data-i18n="work.j4.desc">Project managed utility services implementation (boilers, air compressors, water treatment, piping). Supplied cattle feed plant via 1,200m piping network. Led full maintenance operations and reliability engineering.</p>
         </div>
         <div class="tl-node"><div class="tl-dot"></div></div>
         <div class="tl-void"></div>
@@ -340,16 +368,16 @@ footer span{color:var(--accent)}
         <div class="tl-c">
           <div class="tl-per">2016 - 2021</div>
           <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Linde Gaz - Algeria</div>
-          <h3>Production &amp; Maintenance Manager</h3>
-          <p>In charge of production and maintenance operations. Monitored KPIs, created operational procedures. Commissioned nitrous oxide equipment and led major maintenance campaigns.</p>
+          <h3 data-i18n="work.j5.title">Production &amp; Maintenance Manager</h3>
+          <p data-i18n="work.j5.desc">In charge of production and maintenance operations. Monitored KPIs, created operational procedures. Commissioned nitrous oxide equipment and led major maintenance campaigns.</p>
         </div>
       </div>
       <div class="tl-row rv rv-r">
         <div class="tl-c">
           <div class="tl-per">2014 - 2016</div>
           <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Sonelgaz - Algeria</div>
-          <h3>Electrical Engineer</h3>
-          <p>Interim manager of commercial agency. Led electrical and gas intervention teams. Prepared management reviews, dashboards, and Access-based tracking systems.</p>
+          <h3 data-i18n="work.j6.title">Electrical Engineer</h3>
+          <p data-i18n="work.j6.desc">Interim manager of commercial agency. Led electrical and gas intervention teams. Prepared management reviews, dashboards, and Access-based tracking systems.</p>
         </div>
         <div class="tl-node"><div class="tl-dot"></div></div>
         <div class="tl-void"></div>
@@ -360,16 +388,16 @@ footer span{color:var(--accent)}
         <div class="tl-c">
           <div class="tl-per">2014</div>
           <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Mobiserve - Algeria</div>
-          <h3>Telecom Engineer</h3>
-          <p>Deployment of 4G service in western Algeria. Maintenance of Siemens and Huawei telecommunication cabinets.</p>
+          <h3 data-i18n="work.j7.title">Telecom Engineer</h3>
+          <p data-i18n="work.j7.desc">Deployment of 4G service in western Algeria. Maintenance of Siemens and Huawei telecommunication cabinets.</p>
         </div>
       </div>
       <div class="tl-row rv rv-r">
         <div class="tl-c">
           <div class="tl-per">2012 - 2014</div>
           <div class="tl-co"><i class="fa-solid fa-location-dot"></i> FerobMetal - Algeria</div>
-          <h3>Maintenance &amp; Production Manager</h3>
-          <p>Electrical and mechanical assembly of aluminum profile extruders. Led cross-functional engineering teams, production and maintenance follow-up.</p>
+          <h3 data-i18n="work.j8.title">Maintenance &amp; Production Manager</h3>
+          <p data-i18n="work.j8.desc">Electrical and mechanical assembly of aluminum profile extruders. Led cross-functional engineering teams, production and maintenance follow-up.</p>
         </div>
         <div class="tl-node"><div class="tl-dot"></div></div>
         <div class="tl-void"></div>
@@ -380,8 +408,8 @@ footer span{color:var(--accent)}
         <div class="tl-c">
           <div class="tl-per">2012</div>
           <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Mitsubishi Heavy Industry - Algeria</div>
-          <h3>Electrician</h3>
-          <p>Installation of equipment and electrical cabinets. Pre-commissioning and commissioning of industrial equipment.</p>
+          <h3 data-i18n="work.j9.title">Electrician</h3>
+          <p data-i18n="work.j9.desc">Installation of equipment and electrical cabinets. Pre-commissioning and commissioning of industrial equipment.</p>
         </div>
       </div>
     </div>
@@ -390,8 +418,8 @@ footer span{color:var(--accent)}
 <section id="gallery" class="alt">
   <div class="container">
     <div class="rv" style="text-align:center;max-width:560px;margin:0 auto">
-      <span class="lbl">On the Field</span>
-      <h2 class="sh">Photo <span>Gallery</span></h2>
+      <span class="lbl" data-i18n="gal.lbl">On the Field</span>
+      <h2 class="sh" data-i18n-html="gal.h2">Photo <span>Gallery</span></h2>
     </div>
     <div class="gal-co rv">
       <div class="gal-hd"><h3>Amazon - ETZ2 Metz &amp; LYS2 Lyon</h3><span class="gal-badge">2024 - Present</span></div>
@@ -550,21 +578,21 @@ footer span{color:var(--accent)}
 
 <section id="education">
   <div class="container">
-    <div class="rv"><span class="lbl">Education &amp; Certifications</span><h2 class="sh">Diploma &amp; <span>Training</span></h2></div>
+    <div class="rv"><span class="lbl" data-i18n="edu.lbl">Education &amp; Certifications</span><h2 class="sh" data-i18n-html="edu.h2">Diploma &amp; <span>Training</span></h2></div>
     <div class="edu-grid">
-      <div class="edu-c rv rv-d1"><div class="edu-ic"><i class="fa-solid fa-graduation-cap"></i></div><div class="edu-yr">2011</div><h3>Electrical Engineer - MEng</h3><p>University of Science and Technology, Oran, Algeria. Top of class. Thesis on electrical bypassing in power grids (Comsol 4.0).</p></div>
-      <div class="edu-c rv rv-d2"><div class="edu-ic"><i class="fa-solid fa-bolt"></i></div><div class="edu-yr">Certification</div><h3>Electrical Accreditation</h3><p>H0V, B1V, BR - Schneider Electric and Sonelgaz. Authorisation for electrical work on LV and HV installations.</p></div>
-      <div class="edu-c rv rv-d3"><div class="edu-ic"><i class="fa-solid fa-wrench"></i></div><div class="edu-yr">Certification</div><h3>Maintenance Management</h3><p>Preventive, curative, predictive and palliative maintenance organisation and management training.</p></div>
-      <div class="edu-c rv rv-d4"><div class="edu-ic"><i class="fa-solid fa-flask"></i></div><div class="edu-yr">Certification</div><h3>Gas Risk Habilitation</h3><p>Industrial gas risk habilitation - handling, storage and safety for compressed and cryogenic gases.</p></div>
-      <div class="edu-c rv rv-d5"><div class="edu-ic"><i class="fa-solid fa-shield-halved"></i></div><div class="edu-yr">Certification</div><h3>HAZOP &amp; Risk Assessment</h3><p>Hazard and Operability Study - process risk identification and mitigation in industrial environments.</p></div>
-      <div class="edu-c rv rv-d1"><div class="edu-ic"><i class="fa-brands fa-amazon"></i></div><div class="edu-yr">Ongoing</div><h3>Amazon Leadership &amp; RME</h3><p>Amazon Leadership Principles, RME certification programme, HIE safety, LOTO and operational excellence.</p></div>
+      <div class="edu-c rv rv-d1"><div class="edu-ic"><i class="fa-solid fa-graduation-cap"></i></div><div class="edu-yr">2011</div><h3 data-i18n="edu.c1.h">Electrical Engineer - MEng</h3><p data-i18n="edu.c1.p">University of Science and Technology, Oran, Algeria. Top of class. Thesis on electrical bypassing in power grids (Comsol 4.0).</p></div>
+      <div class="edu-c rv rv-d2"><div class="edu-ic"><i class="fa-solid fa-bolt"></i></div><div class="edu-yr">Certification</div><h3 data-i18n="edu.c2.h">Electrical Accreditation</h3><p data-i18n="edu.c2.p">H0V, B1V, BR - Schneider Electric and Sonelgaz. Authorisation for electrical work on LV and HV installations.</p></div>
+      <div class="edu-c rv rv-d3"><div class="edu-ic"><i class="fa-solid fa-wrench"></i></div><div class="edu-yr">Certification</div><h3 data-i18n="edu.c3.h">Maintenance Management</h3><p data-i18n="edu.c3.p">Preventive, curative, predictive and palliative maintenance organisation and management training.</p></div>
+      <div class="edu-c rv rv-d4"><div class="edu-ic"><i class="fa-solid fa-flask"></i></div><div class="edu-yr">Certification</div><h3 data-i18n="edu.c4.h">Gas Risk Habilitation</h3><p data-i18n="edu.c4.p">Industrial gas risk habilitation - handling, storage and safety for compressed and cryogenic gases.</p></div>
+      <div class="edu-c rv rv-d5"><div class="edu-ic"><i class="fa-solid fa-shield-halved"></i></div><div class="edu-yr">Certification</div><h3 data-i18n="edu.c5.h">HAZOP &amp; Risk Assessment</h3><p data-i18n="edu.c5.p">Hazard and Operability Study - process risk identification and mitigation in industrial environments.</p></div>
+      <div class="edu-c rv rv-d1"><div class="edu-ic"><i class="fa-brands fa-amazon"></i></div><div class="edu-yr">Ongoing</div><h3 data-i18n="edu.c6.h">Amazon Leadership &amp; RME</h3><p data-i18n="edu.c6.p">Amazon Leadership Principles, RME certification programme, HIE safety, LOTO and operational excellence.</p></div>
     </div>
   </div>
 </section>
 
 <section id="download">
   <div class="container">
-    <div class="rv" style="text-align:center;max-width:520px;margin:0 auto"><span class="lbl">Resume</span><h2 class="sh">Download my <span>CV</span></h2></div>
+    <div class="rv" style="text-align:center;max-width:520px;margin:0 auto"><span class="lbl" data-i18n="dl.lbl">Resume</span><h2 class="sh" data-i18n-html="dl.h2">Download my <span>CV</span></h2></div>
     <div class="dl-grid rv">
       <div class="dl-c"><i class="fa-solid fa-file-word"></i><h3>CV Fran&#231;ais</h3><p>Version fran&#231;aise - 2026</p><a href="DEBAB_Amine_CV_FR_2026.docx" class="btn-dl" download><i class="fa-solid fa-download"></i> T&#233;l&#233;charger</a></div>
       <div class="dl-c"><i class="fa-solid fa-file-word"></i><h3>CV English</h3><p>English version - 2026</p><a href="DEBAB_Amine_CV_EN_2026.docx" class="btn-dl" download><i class="fa-solid fa-download"></i> Download</a></div>
@@ -574,12 +602,12 @@ footer span{color:var(--accent)}
 
 <section id="contact" class="alt">
   <div class="container">
-    <div class="rv"><span class="lbl">Get in Touch</span><h2 class="sh">Contact <span>Me</span></h2></div>
+    <div class="rv"><span class="lbl" data-i18n="ct.lbl">Get in Touch</span><h2 class="sh" data-i18n-html="ct.h2">Contact <span>Me</span></h2></div>
     <div class="ct-grid">
       <div>
         <div class="ct-item rv rv-d1"><div class="ct-ico"><i class="fa-solid fa-envelope"></i></div><div><h4>Email</h4><a href="mailto:ing.debab@hotmail.fr">ing.debab@hotmail.fr</a></div></div>
-        <div class="ct-item rv rv-d2"><div class="ct-ico"><i class="fa-solid fa-location-dot"></i></div><div><h4>Location</h4><p>Lyon, France</p></div></div>
-        <div class="ct-item rv rv-d3"><div class="ct-ico"><i class="fa-solid fa-phone"></i></div><div><h4>Phone</h4><a href="tel:+33605700346">+33 6.05.70.03.46</a></div></div>
+        <div class="ct-item rv rv-d2"><div class="ct-ico"><i class="fa-solid fa-location-dot"></i></div><div><h4 data-i18n="ct.loc">Location</h4><p>Lyon, France</p></div></div>
+        <div class="ct-item rv rv-d3"><div class="ct-ico"><i class="fa-solid fa-phone"></i></div><div><h4 data-i18n="ct.phone">Phone</h4><a href="tel:+33605700346">+33 6.05.70.03.46</a></div></div>
         <div class="soc rv rv-d4">
           <a href="https://www.linkedin.com/in/aminedebab/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
           <a href="https://github.com/AmineDEBAB" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
@@ -587,8 +615,8 @@ footer span{color:var(--accent)}
         </div>
       </div>
       <div class="rv rv-r" style="padding-top:1rem">
-        <p style="color:var(--muted);font-size:.92rem;line-height:1.9">Open to new opportunities in maintenance and reliability engineering, project management, and industrial automation. Based in Lyon, France.</p>
-        <a href="https://www.linkedin.com/in/aminedebab/" target="_blank" class="btn-p" style="margin-top:1.5rem;display:inline-flex"><i class="fa-brands fa-linkedin-in"></i> Connect on LinkedIn</a>
+        <p style="color:var(--muted);font-size:.92rem;line-height:1.9" data-i18n="ct.text">Open to new opportunities in maintenance and reliability engineering, project management, and industrial automation. Based in Lyon, France.</p>
+        <a href="https://www.linkedin.com/in/aminedebab/" target="_blank" class="btn-p" style="margin-top:1.5rem;display:inline-flex"><i class="fa-brands fa-linkedin-in"></i> <span data-i18n="ct.linkedin">Connect on LinkedIn</span></a>
       </div>
     </div>
   </div>
@@ -620,5 +648,170 @@ if(el){new Swiper('.'+cls,Object.assign({},cfg,{navigation:{nextEl:el.querySelec
 });
 })();
 </script>
+
+(function(){
+/* ===== TRANSLATIONS ===== */
+var T={
+  en:{
+    "nav.home":"Home","nav.about":"About","nav.expertise":"Expertise",
+    "nav.skills":"Skills","nav.experience":"Experience","nav.gallery":"Gallery",
+    "nav.education":"Education",
+    "hero.tag":"Senior Engineer",
+    "hero.title":"Sr. Maintenance & Reliability Engineer",
+    "hero.desc":"14+ years across industrial engineering, Amazon-scale RME, and maintenance automation. From Algeria's heavy industry to commissioning Amazon's newest European fulfillment centers.",
+    "hero.btn_exp":"Experience","hero.btn_ct":"Contact",
+    "hero.stat1":"Years exp.","hero.stat2":"Companies","hero.stat3":"Amazon FCs",
+    "about.lbl":"About Me","about.h2":"Who Am <span>I?</span>",
+    "about.p1":"Senior Maintenance & Reliability Engineer with 14+ years in electrical engineering, industrial maintenance, and production operations management across Algeria and France.",
+    "about.p2":"Currently commissioning Amazon LYS2 Lyon from zero — building the full RME structure, CMMS, and maintenance team. Passionate about data-driven maintenance and operational excellence at scale.",
+    "about.loc_lbl":"Location","about.role_lbl":"Current Role","about.role_val":"Sr. Tech PMO & Reliability","about.co_lbl":"Company","about.email_lbl":"Email",
+    "exp.lbl":"What I Do","exp.h2":"Areas of <span>Expertise</span>",
+    "exp.c1.h":"Project Management","exp.c1.p":"End-to-end project delivery from scope to commissioning. Greenfield FC buildouts at Amazon scale.",
+    "exp.c2.h":"Team Leadership","exp.c2.p":"Multinational teams (15+ nationalities). Building cohesive teams in high-pressure operational environments.",
+    "exp.c3.h":"Electrical Engineering","exp.c3.p":"Power systems, automation, PLC/SCADA, E&I. Certified H0V, B1V, BR. Industrial gas habilitation.",
+    "exp.c4.h":"Reliability & CMMS","exp.c4.p":"RME from zero: PM/PdM plans, OEE monitoring, DPMO analysis, CMMS implementation.",
+    "exp.c5.h":"Data & Automation","exp.c5.p":"Python for maintenance KPIs. Automated DPMO reporting: 3h to 20 min. QuickSight dashboards.",
+    "exp.c6.h":"Technical Design","exp.c6.p":"AutoCAD Electrical, Caneco BT, See Electrical. Technical documentation and procedures.",
+    "sk.lbl":"Technical Skills","sk.h2":"My <span>Skill Set</span>",
+    "work.lbl":"Career","work.h2":"Work <span>Experience</span>","work.current":"\uD83D\uDE80 Current",
+    "work.j1.title":"Sr. Technician - PMO & Reliability",
+    "work.j1.desc":"Full commissioning of a new Amazon FC from zero. Designed and implemented RME service structure, CMMS, safety protocols, KPI frameworks. Built and managed multinational team (15+ nationalities). Piloted Jam DPMO reduction strategy and OEE reporting.",
+    "work.j2.title":"Sr. Technician - Shift & Maintenance (SRMET)",
+    "work.j2.desc":"Autonomous shift management with full accountability for maintenance operations, backlog follow-up and team coordination. Supervised technicians, managed HIE safety protocols. Recruited and trained 2 apprentices. Automated DPMO reporting with Python (3h to 20 min). OEE above 95%.",
+    "work.j3.title":"Production Supervisor",
+    "work.j3.desc":"Supervised industrial drum manufacturing production lines. Managed production teams, planned and scheduled daily tasks. Implemented and enforced safety rules and procedures on the shop floor.",
+    "work.j4.title":"Utility & Reliability Manager",
+    "work.j4.desc":"Project managed utility services implementation (boilers, air compressors, water treatment, piping). Supplied cattle feed plant via 1,200m piping network. Led full maintenance operations and reliability engineering.",
+    "work.j5.title":"Production & Maintenance Manager",
+    "work.j5.desc":"In charge of production and maintenance operations. Monitored KPIs, created operational procedures. Commissioned nitrous oxide equipment and led major maintenance campaigns.",
+    "work.j6.title":"Electrical Engineer",
+    "work.j6.desc":"Interim manager of commercial agency. Led electrical and gas intervention teams. Prepared management reviews, dashboards, and Access-based tracking systems.",
+    "work.j7.title":"Telecom Engineer",
+    "work.j7.desc":"Deployment of 4G service in western Algeria. Maintenance of Siemens and Huawei telecommunication cabinets.",
+    "work.j8.title":"Maintenance & Production Manager",
+    "work.j8.desc":"Electrical and mechanical assembly of aluminum profile extruders. Led cross-functional engineering teams, production and maintenance follow-up.",
+    "work.j9.title":"Electrician",
+    "work.j9.desc":"Installation of equipment and electrical cabinets. Pre-commissioning and commissioning of industrial equipment.",
+    "gal.lbl":"On the Field","gal.h2":"Photo <span>Gallery</span>",
+    "edu.lbl":"Education & Certifications","edu.h2":"Diploma &amp; <span>Training</span>",
+    "edu.c1.h":"Electrical Engineer - MEng","edu.c1.p":"University of Science and Technology, Oran, Algeria. Top of class. Thesis on electrical bypassing in power grids (Comsol 4.0).",
+    "edu.c2.h":"Electrical Accreditation","edu.c2.p":"H0V, B1V, BR - Schneider Electric and Sonelgaz. Authorisation for electrical work on LV and HV installations.",
+    "edu.c3.h":"Maintenance Management","edu.c3.p":"Preventive, curative, predictive and palliative maintenance organisation and management training.",
+    "edu.c4.h":"Gas Risk Habilitation","edu.c4.p":"Industrial gas risk habilitation - handling, storage and safety for compressed and cryogenic gases.",
+    "edu.c5.h":"HAZOP & Risk Assessment","edu.c5.p":"Hazard and Operability Study - process risk identification and mitigation in industrial environments.",
+    "edu.c6.h":"Amazon Leadership & RME","edu.c6.p":"Amazon Leadership Principles, RME certification programme, HIE safety, LOTO and operational excellence.",
+    "dl.lbl":"Resume","dl.h2":"Download my <span>CV</span>",
+    "ct.lbl":"Get in Touch","ct.h2":"Contact <span>Me</span>","ct.loc":"Location","ct.phone":"Phone",
+    "ct.text":"Open to new opportunities in maintenance and reliability engineering, project management, and industrial automation. Based in Lyon, France.",
+    "ct.linkedin":"Connect on LinkedIn"
+  },
+  fr:{
+    "nav.home":"Accueil","nav.about":"\u00C0 propos","nav.expertise":"Expertise",
+    "nav.skills":"Comp\u00E9tences","nav.experience":"Exp\u00E9rience","nav.gallery":"Galerie",
+    "nav.education":"Formation",
+    "hero.tag":"Ing\u00E9nieur Senior",
+    "hero.title":"Sr. Tech. Maintenance & Reliability",
+    "hero.desc":"14+ ans d\u2019exp\u00E9rience en ing\u00E9nierie industrielle, maintenance Amazon et automatisation. De l\u2019industrie lourde alg\u00E9rienne au commissioning des derniers centres de distribution europ\u00E9ens Amazon.",
+    "hero.btn_exp":"Exp\u00E9rience","hero.btn_ct":"Contact",
+    "hero.stat1":"Ans d\u2019exp.","hero.stat2":"Entreprises","hero.stat3":"Amazon FCs",
+    "about.lbl":"\u00C0 propos","about.h2":"Qui suis-je\u00A0<span>?</span>",
+    "about.p1":"Ing\u00E9nieur Senior en Maintenance & Reliability avec 14+ ans en g\u00E9nie \u00E9lectrique, maintenance industrielle et management de production en Alg\u00E9rie et en France.",
+    "about.p2":"Actuellement en charge du commissioning complet d\u2019Amazon LYS2 Lyon de z\u00E9ro : structure RME, GMAO et constitution de l\u2019\u00E9quipe. Passionn\u00E9 par la maintenance bas\u00E9e sur les donn\u00E9es et l\u2019excellence op\u00E9rationnelle.",
+    "about.loc_lbl":"Localisation","about.role_lbl":"Poste actuel","about.role_val":"Sr. Tech PMO & Reliability","about.co_lbl":"Entreprise","about.email_lbl":"Email",
+    "exp.lbl":"Ce que je fais","exp.h2":"Domaines d\u2019<span>Expertise</span>",
+    "exp.c1.h":"Gestion de Projet","exp.c1.p":"Pilotage de projets de A \u00E0 Z : scope, planification, commissioning. Ouverture de sites Amazon (greenfield).",
+    "exp.c2.h":"Leadership","exp.c2.p":"\u00C9quipes multinationales (15+ nationalit\u00E9s). Constitution et animation d\u2019\u00E9quipes performantes en environnement industriel exigeant.",
+    "exp.c3.h":"G\u00E9nie \u00C9lectrique","exp.c3.p":"Syst\u00E8mes HTA/BTA, automatismes, PLC/SCADA. Habilit\u00E9 H0V, B1V, BR. Habilitation gaz industriel.",
+    "exp.c4.h":"Reliability & GMAO","exp.c4.p":"RME de z\u00E9ro : plans PM/PdM, suivi OEE, analyse DPMO, impl\u00E9mentation GMAO.",
+    "exp.c5.h":"Data & Automatisation","exp.c5.p":"Python pour KPIs maintenance. Reporting DPMO automatis\u00E9 : 3h \u2192 20 min. Dashboards QuickSight.",
+    "exp.c6.h":"Bureau d\u2019\u00C9tudes","exp.c6.p":"AutoCAD Electrical, Caneco BT, See Electrical. Documentation technique et r\u00E9daction de proc\u00E9dures.",
+    "sk.lbl":"Comp\u00E9tences Techniques","sk.h2":"Mes <span>Comp\u00E9tences</span>",
+    "work.lbl":"Carri\u00E8re","work.h2":"Exp\u00E9rience <span>Professionnelle</span>","work.current":"\uD83D\uDE80 En poste",
+    "work.j1.title":"Sr. Technicien \u2013 PMO & Reliability",
+    "work.j1.desc":"Commissioning complet d\u2019un nouveau site Amazon de z\u00E9ro. Mise en place du service RME : structure Reliability, programmes PM, GMAO, KPIs OEE. Constitution et management d\u2019une \u00E9quipe multiculturelle (15+ nationalit\u00E9s). D\u00E9ploiement de la strat\u00E9gie JAM DPMO.",
+    "work.j2.title":"Sr. Technicien de Shift (SRMET)",
+    "work.j2.desc":"Prise en charge autonome du shift maintenance (r\u00E9f\u00E9rent technique). Gestion du backlog et planification des interventions correctives. Supervision techniciens, gestion des HIE. Recrutement et formation de 2 apprentis (promus en CDI). Reporting DPMO automatis\u00E9 Python : 3h \u2192 20 min. OEE > 95%.",
+    "work.j3.title":"Superviseur de Production",
+    "work.j3.desc":"Supervision des lignes de production de f\u00FBts industriels (acier et HDPE). Management des \u00E9quipes de production, planification des t\u00E2ches quotidiennes. Application et contr\u00F4le des r\u00E8gles HSE sur le poste de travail.",
+    "work.j4.title":"Responsable Utilit\u00E9 & Reliability",
+    "work.j4.desc":"Chef de projet implantation service utilit\u00E9 (chaudi\u00E8res, air comprim\u00E9, traitement d\u2019eau, tuyauterie). Alimentation usine d\u2019aliments b\u00E9tail via r\u00E9seau 1\u202F200\u202Fm. Management maintenance et ing\u00E9nierie de fiabilit\u00E9.",
+    "work.j5.title":"Responsable Production & Maintenance",
+    "work.j5.desc":"Pilotage des op\u00E9rations de production et maintenance. Suivi KPIs, cr\u00E9ation de proc\u00E9dures op\u00E9rationnelles. Commissioning ligne protoxyde d\u2019azote et conduite de campagnes de maintenance.",
+    "work.j6.title":"Ing\u00E9nieur d\u2019\u00C9tude",
+    "work.j6.desc":"Directeur d\u2019agence int\u00E9rimaire (12\u202F000 abonn\u00E9s, 24 agents). Animation des \u00E9quipes d\u2019intervention \u00E9lectrique et gaz. Reporting de gestion et base de donn\u00E9es Access de suivi des anomalies.",
+    "work.j7.title":"Ing\u00E9nieur T\u00E9l\u00E9com",
+    "work.j7.desc":"D\u00E9ploiement r\u00E9seau 4G en Alg\u00E9rie occidentale. Maintenance des armoires t\u00E9l\u00E9com Siemens et Huawei.",
+    "work.j8.title":"Responsable Production & Maintenance",
+    "work.j8.desc":"Montage \u00E9lectrique et m\u00E9canique d\u2019extrudeuses profilés aluminium. Management d\u2019\u00E9quipes pluridisciplinaires, suivi production et maintenance.",
+    "work.j9.title":"\u00C9lectricien",
+    "work.j9.desc":"Installation d\u2019\u00E9quipements et armoires \u00E9lectriques. Pr\u00E9-commissioning et commissioning d\u2019\u00E9quipements industriels.",
+    "gal.lbl":"Sur le Terrain","gal.h2":"Galerie <span>Photos</span>",
+    "edu.lbl":"Formation & Certifications","edu.h2":"Dipl\u00F4me &amp; <span>Formation</span>",
+    "edu.c1.h":"Ing\u00E9nieur \u00C9lectrotechnique","edu.c1.p":"Universit\u00E9 des Sciences et de la Technologie, Oran, Alg\u00E9rie. Major de promotion. Th\u00E8se sur le contournement \u00E9lectrique dans les r\u00E9seaux (Comsol 4.0).",
+    "edu.c2.h":"Habilitation \u00C9lectrique","edu.c2.p":"H0V, B1V, BR \u2013 Schneider Electric et Sonelgaz. Autorisation d\u2019interventions sur installations BT et HT.",
+    "edu.c3.h":"Gestion de la Maintenance","edu.c3.p":"Formation en organisation et management de la maintenance pr\u00E9ventive, curative, pr\u00E9dictive et palliative.",
+    "edu.c4.h":"Habilitation Risque Gaz","edu.c4.p":"Habilitation risque gaz industriel : manutention, stockage et s\u00E9curit\u00E9 pour gaz comprim\u00E9s et cryog\u00E9niques.",
+    "edu.c5.h":"HAZOP & Analyse de Risques","edu.c5.p":"\u00C9tude de Danger et d\u2019Op\u00E9rabilit\u00E9 \u2013 identification et r\u00E9duction des risques proc\u00E9d\u00E9 en milieu industriel.",
+    "edu.c6.h":"Amazon Leadership & RME","edu.c6.p":"Leadership Principles Amazon, programme de certification RME, s\u00E9curit\u00E9 HIE, LOTO et excellence op\u00E9rationnelle.",
+    "dl.lbl":"CV","dl.h2":"T\u00E9l\u00E9charger mon <span>CV</span>",
+    "ct.lbl":"Contactez-moi","ct.h2":"Me <span>Contacter</span>","ct.loc":"Localisation","ct.phone":"T\u00E9l\u00E9phone",
+    "ct.text":"Ouvert \u00E0 de nouvelles opportunit\u00E9s en maintenance et reliability, gestion de projet et automatisation industrielle. Bas\u00E9 \u00E0 Lyon, France.",
+    "ct.linkedin":"Me connecter sur LinkedIn"
+  }
+};
+
+/* ===== LANGUAGE SWITCHER ===== */
+var currentLang=localStorage.getItem('lang')||'en';
+
+function applyLang(lang){
+  var d=T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k=el.getAttribute('data-i18n');
+    if(d[k]!==undefined) el.textContent=d[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var k=el.getAttribute('data-i18n-html');
+    if(d[k]!==undefined) el.innerHTML=d[k];
+  });
+  var btn=document.getElementById('langToggle');
+  if(btn) btn.textContent=lang==='en'?'FR':'EN';
+  document.documentElement.setAttribute('lang',lang);
+  localStorage.setItem('lang',lang);
+  currentLang=lang;
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var langBtn=document.getElementById('langToggle');
+  if(langBtn){
+    langBtn.addEventListener('click',function(){
+      applyLang(currentLang==='en'?'fr':'en');
+    });
+  }
+  applyLang(currentLang);
+});
+
+/* ===== DARK / LIGHT THEME ===== */
+var currentTheme=localStorage.getItem('theme')||'dark';
+
+function applyTheme(theme){
+  document.documentElement.setAttribute('data-theme',theme);
+  var btn=document.getElementById('themeToggle');
+  if(btn) btn.innerHTML=theme==='dark'?'<i class="fa-solid fa-sun"></i>':'<i class="fa-solid fa-moon"></i>';
+  localStorage.setItem('theme',theme);
+  currentTheme=theme;
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var themeBtn=document.getElementById('themeToggle');
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      applyTheme(currentTheme==='dark'?'light':'dark');
+    });
+  }
+  applyTheme(currentTheme);
+});
+
+})();
+
 </body>
 </html>
