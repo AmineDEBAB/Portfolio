@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon180.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon180.png">
 <title>Amine DEBAB - Sr. Maintenance &amp; Reliability Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
@@ -13,22 +13,30 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <style>
 
-:root{--bg:#080D1A;--bg2:#0F172A;--bg3:#0D1F38;--card:#131F32;--accent:#FF9900;--text:#DDE5F0;--muted:#7A8EAA;--border:rgba(255,255,255,0.07);--nav-h:68px;--r:14px;--sh:0 4px 30px rgba(0,0,0,.4);--tr:all .3s cubic-bezier(.4,0,.2,1)}
+:root{--bg:#080D1A;--bg2:#0F172A;--bg3:#0D1F38;--card:#131F32;--accent:#FF9900;--text:#DDE5F0;--muted:#7A8EAA;--head:#fff;--border:rgba(255,255,255,0.07);--nav-h:68px;--r:14px;--sh:0 4px 30px rgba(0,0,0,.4);--tr:all .3s cubic-bezier(.4,0,.2,1)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+body.lb-open{overflow:hidden}
+button{font-family:inherit}
 a{color:var(--accent);text-decoration:none;transition:var(--tr)}
 a:hover{color:#FFB84D}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 img{max-width:100%;display:block}
 ul{list-style:none}
 h1,h2,h3,h4{font-family:'Poppins',sans-serif;line-height:1.25}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .lbl{font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.5rem}
-.sh{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;color:#fff;margin-bottom:1.5rem}
+.sh{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;color:var(--head);margin-bottom:1.5rem}
 .sh span{color:var(--accent)}
+.sec-hd{text-align:center;max-width:560px;margin:0 auto}
+.sec-hd.narrow{max-width:520px}
 .container{max-width:1080px;margin:0 auto;padding:0 1.5rem}
-section{padding:88px 0}
+section{padding:88px 0;scroll-margin-top:0}
 .alt{background:var(--bg2)}
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:rgba(8,13,26,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center}
+.progress{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#FFD566);transform:scaleX(0);transform-origin:left;pointer-events:none}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}
 .nav-logo{font-family:'Poppins',sans-serif;font-weight:800;font-size:1.15rem;color:#fff}
 .nav-logo span{color:var(--accent)}
@@ -39,21 +47,32 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);backgro
 .nav-links a:hover::after,.nav-links a.active::after{width:100%}
 .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
 .nav-toggle span{width:22px;height:2px;background:var(--text);display:block;transition:var(--tr)}
-#hero{min-height:100vh;display:flex;align-items:center;padding-top:var(--nav-h);background:radial-gradient(ellipse 80% 60% at 70% 50%,rgba(255,153,0,.06) 0%,transparent 65%),linear-gradient(155deg,var(--bg) 0%,var(--bg3) 100%);overflow:hidden}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:var(--nav-h);background:radial-gradient(ellipse 80% 60% at 70% 50%,rgba(255,153,0,.06) 0%,transparent 65%),linear-gradient(155deg,var(--bg) 0%,var(--bg3) 100%);overflow:hidden}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+#hero .container{position:relative;z-index:1;width:100%}
 .hero-grid{display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center}
 .hero-tag{display:inline-block;background:rgba(255,153,0,.12);color:var(--accent);border:1px solid rgba(255,153,0,.25);border-radius:30px;padding:5px 16px;font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1.2rem}
 .hero-name{font-size:clamp(2.6rem,5.5vw,4.2rem);font-weight:800;color:#fff;margin-bottom:.4rem}
 .hero-name span{color:var(--accent)}
-.hero-title{font-size:1.05rem;color:var(--muted);margin-bottom:1.5rem;display:flex;align-items:center;gap:8px}
+.hero-title{font-size:1.05rem;color:var(--muted);margin-bottom:.6rem;display:flex;align-items:center;gap:8px}
 .hero-title::before{content:'';width:28px;height:2px;background:var(--accent)}
+.hero-typed{font-family:'Poppins',sans-serif;font-size:clamp(1.05rem,2.4vw,1.35rem);font-weight:600;color:var(--head);margin-bottom:1.3rem;min-height:1.6em}
+.hero-typed-lbl{color:var(--muted);font-weight:500;margin-right:.35rem}
+.typed{color:var(--accent)}
+.typed-caret{display:inline-block;width:2px;height:1.1em;background:var(--accent);margin-left:3px;vertical-align:-.15em;animation:blink 1s steps(1) infinite}
+.hero-typed.static .typed-caret{display:none}
+@keyframes blink{50%{opacity:0}}
 .hero-desc{color:var(--muted);font-size:.92rem;line-height:1.85;margin-bottom:2rem;max-width:480px}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
 .btn-p{background:var(--accent);color:#000;font-weight:700;font-size:.88rem;padding:12px 26px;border-radius:10px;transition:var(--tr);display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer}
 .btn-p:hover{background:#FFB84D;color:#000;transform:translateY(-3px);box-shadow:0 10px 28px rgba(255,153,0,.35)}
-.btn-o{background:transparent;color:var(--text);font-weight:500;font-size:.88rem;padding:12px 26px;border-radius:10px;border:1px solid rgba(255,255,255,.12);transition:var(--tr);display:inline-flex;align-items:center;gap:8px}
+.btn-o{background:transparent;color:var(--text);font-weight:500;font-size:.88rem;padding:12px 26px;border-radius:10px;border:1px solid rgba(255,255,255,.12);transition:var(--tr);display:inline-flex;align-items:center;gap:8px;cursor:pointer}
 .btn-o:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
-.hero-stats{display:flex;gap:2.5rem}
-.hero-stat strong{display:block;font-size:2rem;font-weight:800;color:var(--accent);font-family:'Poppins',sans-serif;line-height:1}
+.hero-stats{display:flex;gap:2.5rem;flex-wrap:wrap}
+.hero-stat strong{display:block;font-size:2rem;font-weight:800;color:var(--accent);font-family:'Poppins',sans-serif;line-height:1;font-variant-numeric:tabular-nums}
 .hero-stat span{font-size:.75rem;color:var(--muted);margin-top:4px;display:block}
 .hero-img-wrap{position:relative;flex-shrink:0}
 .hero-img{width:300px;height:300px;border-radius:50%;object-fit:cover;object-position:top;border:3px solid rgba(255,153,0,.35);box-shadow:0 0 70px rgba(255,153,0,.18),var(--sh);position:relative;z-index:1}
@@ -69,70 +88,137 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);backgro
 .about-info{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.5rem}
 .ai{background:var(--card);border-radius:10px;padding:1rem;border:1px solid var(--border)}
 .ai strong{color:var(--accent);font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;display:block;margin-bottom:3px}
-.ai span{font-size:.88rem}
+.ai span{font-size:.88rem;overflow-wrap:anywhere}
+
+/* ========== FILTER CHIPS ========== */
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1.2rem}
+.filter-bar{display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;justify-content:center;align-items:center;margin-top:1.5rem}
+.filter-bar .filters{margin-top:0}
+.chip{background:var(--card);color:var(--muted);border:1px solid var(--border);border-radius:30px;padding:7px 16px;font-size:.8rem;font-weight:600;cursor:pointer;transition:background-color .25s,color .25s,border-color .25s,transform .25s}
+.chip:hover{color:var(--accent);border-color:rgba(255,153,0,.4);transform:translateY(-2px)}
+.chip.is-on{background:var(--accent);color:#000;border-color:var(--accent)}
+.filter-count{text-align:center;color:var(--muted);font-size:.78rem;margin-top:.8rem}
+
+/* ========== EXPERTISE (tilt + flip) ========== */
 .exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
-.exp-card{background:var(--card);border-radius:var(--r);padding:1.8rem;border:1px solid var(--border);transition:var(--tr);position:relative;overflow:hidden}
-.exp-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);transform:scaleX(0);transform-origin:left;transition:var(--tr)}
-.exp-card:hover{border-color:rgba(255,153,0,.3);transform:translateY(-5px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
-.exp-card:hover::after{transform:scaleX(1)}
+.exp-card{position:relative;perspective:1100px;cursor:pointer}
+.exp-inner{display:grid;height:100%;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(calc(var(--ry,0deg) + var(--flip,0deg)));transition:transform .65s cubic-bezier(.4,0,.2,1)}
+.exp-card.tilting .exp-inner{transition:transform .12s ease-out}
+.exp-card.flipped .exp-inner{--flip:180deg}
+.exp-face{grid-area:1/1;-webkit-backface-visibility:hidden;backface-visibility:hidden;background:var(--card);border-radius:var(--r);padding:1.8rem;border:1px solid var(--border);position:relative;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,box-shadow .3s}
+.exp-face::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);transform:scaleX(0);transform-origin:left;transition:var(--tr)}
+.exp-card:hover .exp-face{border-color:rgba(255,153,0,.3);box-shadow:0 14px 40px rgba(0,0,0,.35)}
+.exp-card:hover .exp-face::after{transform:scaleX(1)}
+.exp-back{transform:rotateY(180deg);background:linear-gradient(135deg,var(--bg3),var(--card))}
 .exp-icon{width:50px;height:50px;border-radius:12px;background:rgba(255,153,0,.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;font-size:1.3rem;color:var(--accent)}
-.exp-card h3{font-size:.98rem;color:#fff;margin-bottom:.5rem}
+.exp-card h3{font-size:.98rem;color:var(--head);margin-bottom:.5rem}
 .exp-card p{font-size:.83rem;color:var(--muted);line-height:1.7}
-.sk-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 4rem;margin-top:2.5rem}
-.sk-hd{display:flex;justify-content:space-between;margin-bottom:8px}
-.sk-nm{font-size:.88rem;color:var(--text);font-weight:500}
+.exp-list{margin:.2rem 0 1rem;display:grid;gap:.55rem}
+.exp-list li{font-size:.82rem;color:var(--text);line-height:1.55;padding-left:1.3rem;position:relative}
+.exp-list li::before{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;position:absolute;left:0;top:1px;color:var(--accent);font-size:.72rem}
+.exp-flip{margin-top:auto;align-self:flex-start;background:none;border:1px solid rgba(255,153,0,.3);color:var(--accent);border-radius:20px;padding:5px 13px;font-size:.75rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:background-color .25s,color .25s}
+.exp-front p{margin-bottom:1rem}
+.exp-flip:hover{background:var(--accent);color:#000}
+
+/* ========== SKILLS ========== */
+.sk-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 4rem;margin-top:2rem}
+.sk{position:relative;border-radius:8px;outline-offset:6px}
+.sk.sk-in{animation:fadeUp .45s ease both}
+.sk-hd{display:flex;justify-content:space-between;margin-bottom:8px;gap:1rem}
+.sk-nm{font-size:.88rem;color:var(--text);font-weight:500;display:inline-flex;align-items:center;gap:6px}
+.sk-nm i{color:var(--muted);font-size:.72rem}
 .sk-pct{font-size:.82rem;color:var(--accent);font-weight:700}
 .sk-bg{background:rgba(255,255,255,.05);border-radius:6px;height:5px;overflow:hidden}
 .sk-bar{height:100%;background:linear-gradient(90deg,var(--accent),#FFD566);border-radius:6px;width:0;transition:width 1.3s cubic-bezier(.4,0,.2,1)}
-.tl{position:relative;padding:2rem 0;margin-top:2rem}
+.sk-tip{position:absolute;left:0;bottom:calc(100% + 8px);z-index:5;max-width:min(340px,100%);background:var(--bg3);color:var(--text);border:1px solid rgba(255,153,0,.3);border-radius:10px;padding:.6rem .8rem;font-size:.76rem;line-height:1.5;box-shadow:var(--sh);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .2s,transform .2s,visibility .2s;pointer-events:none}
+.sk:hover .sk-tip,.sk:focus-visible .sk-tip{opacity:1;visibility:visible;transform:translateY(0)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ========== TIMELINE ========== */
+.tl{position:relative;padding:2rem 0;margin-top:1.5rem}
 .tl::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent 0%,var(--accent) 10%,var(--accent) 90%,transparent 100%);transform:translateX(-50%)}
 .tl-row{display:grid;grid-template-columns:1fr 56px 1fr;margin-bottom:2.5rem;align-items:start}
-.tl-row:nth-child(odd) .tl-c{grid-column:1;text-align:right;padding-right:1.8rem}
-.tl-row:nth-child(odd) .tl-node{grid-column:2}
-.tl-row:nth-child(odd) .tl-void{grid-column:3}
-.tl-row:nth-child(even) .tl-void{grid-column:1}
-.tl-row:nth-child(even) .tl-node{grid-column:2}
-.tl-row:nth-child(even) .tl-c{grid-column:3;text-align:left;padding-left:1.8rem}
+.tl-row>.tl-c,.tl-row>.tl-node{grid-row:1}
+.tl-row>.tl-node{grid-column:2}
+.tl-row.is-left>.tl-c{grid-column:1;text-align:right;padding-right:1.8rem}
+.tl-row.is-right>.tl-c{grid-column:3;text-align:left;padding-left:1.8rem}
+.tl-row.tl-anim{animation:fadeUp .5s ease both}
 .tl-node{display:flex;justify-content:center;padding-top:8px}
 .tl-dot{width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(255,153,0,.2);flex-shrink:0}
 .tl-c{background:var(--card);border-radius:var(--r);padding:1.4rem;border:1px solid var(--border);transition:var(--tr)}
 .tl-c:hover{border-color:rgba(255,153,0,.25);box-shadow:0 10px 32px rgba(0,0,0,.25)}
+.tl-c.expandable{cursor:pointer}
 .tl-per{font-size:.72rem;color:var(--accent);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.35rem}
 .tl-co{font-size:.78rem;color:var(--muted);margin-bottom:.55rem;display:flex;align-items:center;gap:5px}
-.tl-row:nth-child(odd) .tl-co{justify-content:flex-end}
-.tl-c h3{font-size:.96rem;color:#fff;margin-bottom:.6rem}
+.tl-row.is-left .tl-co{justify-content:flex-end}
+.tl-c h3{font-size:.96rem;color:var(--head);margin-bottom:.6rem}
 .tl-c p{font-size:.82rem;color:var(--muted);line-height:1.7}
+.tl-desc{max-height:calc(1.7em * 2);overflow:hidden;transition:max-height .4s ease;position:relative}
+.tl-c.expandable:not(.open) .tl-desc{-webkit-mask-image:linear-gradient(#000 45%,transparent);mask-image:linear-gradient(#000 45%,transparent)}
+.tl-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+.tl-row.is-left .tl-actions{justify-content:flex-end}
+.tl-btn{background:none;border:1px solid var(--border);color:var(--text);border-radius:20px;padding:5px 12px;font-size:.74rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:border-color .25s,color .25s,background-color .25s}
+.tl-btn:hover{border-color:var(--accent);color:var(--accent)}
+.tl-more i{transition:transform .3s}
+.tl-c.open .tl-more i{transform:rotate(180deg)}
 .tl-amz{border-color:rgba(255,153,0,.3);background:linear-gradient(135deg,var(--bg3),#102038)}
 .tl-amz .tl-dot{box-shadow:0 0 0 5px rgba(255,153,0,.22),0 0 18px rgba(255,153,0,.35)}
 .tl-tag{display:inline-block;background:rgba(255,153,0,.15);color:var(--accent);border-radius:20px;padding:2px 10px;font-size:.7rem;font-weight:600;margin-bottom:.5rem}
-.gal-co{margin-bottom:3.5rem}
+.tl-empty{text-align:center;color:var(--muted);padding:2rem 0;font-size:.9rem}
+
+/* ========== GALLERY ========== */
+.gal-filters{margin:1.2rem 0 2.5rem}
+.gal-co{margin-bottom:3.5rem;scroll-margin-top:calc(var(--nav-h) + 16px);border-radius:var(--r);transition:box-shadow .4s}
+.gal-co.gal-in{animation:fadeUp .45s ease both}
+.gal-co.gal-hl{animation:galHl 2.4s ease}
+@keyframes galHl{0%,100%{box-shadow:0 0 0 0 rgba(255,153,0,0)}15%,70%{box-shadow:0 0 0 3px var(--accent),0 0 40px rgba(255,153,0,.35)}}
 .gal-hd{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap}
-.gal-hd h3{font-size:1.1rem;color:#fff;font-weight:600}
+.gal-hd h3{font-size:1.1rem;color:var(--head);font-weight:600}
+.gal-hd h3:focus{outline:none}
 .gal-badge{background:rgba(255,153,0,.1);color:var(--accent);border:1px solid rgba(255,153,0,.2);border-radius:20px;padding:3px 12px;font-size:.72rem;font-weight:600}
 .swiper{border-radius:var(--r);overflow:hidden}
 .swiper-slide{background:var(--card);border-radius:var(--r);overflow:hidden}
 .swiper-slide img{width:100%;height:280px;object-fit:cover;display:block;transition:transform .6s ease}
 .swiper-slide:hover img{transform:scale(1.05)}
+.gal-open{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;position:relative;border-radius:var(--r);overflow:hidden}
+.gal-open::after{content:'\f00e';font-family:'Font Awesome 6 Free';font-weight:900;position:absolute;right:12px;bottom:12px;width:36px;height:36px;border-radius:50%;background:rgba(8,13,26,.7);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.9rem;opacity:0;transform:scale(.8);transition:opacity .25s,transform .25s}
+.gal-open:hover::after,.gal-open:focus-visible::after{opacity:1;transform:scale(1)}
+.gal-open:focus-visible{outline-offset:-3px}
 .swiper-button-next,.swiper-button-prev{color:var(--accent)!important}
 .swiper-button-next::after,.swiper-button-prev::after{font-size:1.1rem!important;font-weight:800}
 .swiper-pagination-bullet{background:var(--accent)!important;opacity:.4}
 .swiper-pagination-bullet-active{opacity:1!important}
-.gal-ph{background:var(--card);border:1.5px dashed rgba(255,153,0,.25);border-radius:var(--r);padding:3.5rem;text-align:center}
-.gal-ph i{font-size:2.2rem;color:rgba(255,153,0,.35);margin-bottom:1rem;display:block}
-.gal-ph p{color:var(--muted);font-size:.88rem}
+
+/* ========== LIGHTBOX ========== */
+.lb{position:fixed;inset:0;z-index:2000;background:rgba(4,7,14,.94);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s ease}
+.lb.on{opacity:1}
+.lb-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:64px 72px 84px;touch-action:pan-y}
+.lb-fig{display:flex;flex-direction:column;align-items:center;gap:.8rem;max-width:100%;max-height:100%}
+.lb-img{max-width:100%;max-height:calc(100vh - 170px);object-fit:contain;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.6);transition:opacity .25s ease,transform .25s ease}
+.lb-img.loading{opacity:.25;transform:scale(.98)}
+.lb-cap{color:#DDE5F0;font-size:.88rem;text-align:center}
+.lb-count{position:absolute;top:20px;left:24px;color:#DDE5F0;font-size:.85rem;font-weight:700;letter-spacing:1px;font-variant-numeric:tabular-nums}
+.lb-btn{position:absolute;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(19,31,50,.75);color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background-color .2s,color .2s,transform .2s}
+.lb-btn:hover{background:#FF9900;color:#000}
+.lb-close{top:14px;right:16px}
+.lb-prev{left:16px;top:50%;transform:translateY(-50%)}
+.lb-next{right:16px;top:50%;transform:translateY(-50%)}
+
+/* ========== EDUCATION / DOWNLOAD / CONTACT ========== */
 .edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2.5rem}
 .edu-c{background:var(--card);border-radius:var(--r);padding:1.6rem;border:1px solid var(--border);transition:var(--tr)}
 .edu-c:hover{border-color:rgba(255,153,0,.25);transform:translateY(-4px)}
 .edu-ic{font-size:1.4rem;color:var(--accent);margin-bottom:.9rem}
 .edu-yr{font-size:.7rem;color:var(--accent);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.4rem}
-.edu-c h3{font-size:.95rem;color:#fff;margin-bottom:.4rem}
+.edu-c h3{font-size:.95rem;color:var(--head);margin-bottom:.4rem}
 .edu-c p{font-size:.82rem;color:var(--muted);line-height:1.65}
 #download{background:linear-gradient(160deg,var(--bg3) 0%,var(--bg) 100%)}
 .dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem}
 .dl-c{background:rgba(255,153,0,.05);border:1px solid rgba(255,153,0,.18);border-radius:var(--r);padding:2rem;text-align:center;transition:var(--tr)}
 .dl-c:hover{background:rgba(255,153,0,.1);border-color:rgba(255,153,0,.38);transform:translateY(-5px)}
 .dl-c i{font-size:2.4rem;color:var(--accent);margin-bottom:1rem}
-.dl-c h3{font-size:1rem;color:#fff;margin-bottom:.4rem}
+.dl-c .btn-dl i{font-size:inherit;color:inherit;margin:0}
+.dl-c h3{font-size:1rem;color:var(--head);margin-bottom:.4rem}
 .dl-c p{font-size:.83rem;color:var(--muted);margin-bottom:1.4rem}
 .btn-dl{background:var(--accent);color:#000;font-weight:700;font-size:.84rem;padding:10px 22px;border-radius:9px;display:inline-flex;align-items:center;gap:8px}
 .btn-dl:hover{background:#FFB84D;color:#000}
@@ -140,10 +226,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);backgro
 .ct-item{display:flex;gap:.9rem;align-items:flex-start;margin-bottom:1.5rem}
 .ct-ico{width:42px;height:42px;border-radius:10px;background:rgba(255,153,0,.1);display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0}
 .ct-item h4{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px}
-.ct-item p,.ct-item a{font-size:.92rem;color:var(--text)}
+.ct-item p,.ct-item a{font-size:.92rem;color:var(--text);overflow-wrap:anywhere}
+.ct-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:.5rem}
+.ct-actions .btn-o{padding:10px 18px;font-size:.82rem}
+.ct-side{padding-top:1rem}
+.ct-text{color:var(--muted);font-size:.92rem;line-height:1.9}
+.ct-cta{margin-top:1.5rem}
 .soc{display:flex;gap:.8rem;margin-top:2rem}
 .soc a{width:42px;height:42px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:var(--tr);font-size:.9rem}
 .soc a:hover{background:var(--accent);color:#000;border-color:var(--accent);transform:translateY(-3px)}
+
+/* ========== TOAST / BACK TO TOP ========== */
+.toast{position:fixed;left:50%;bottom:28px;z-index:2100;transform:translate(-50%,20px);background:var(--card);color:var(--text);border:1px solid rgba(255,153,0,.4);border-radius:12px;padding:.75rem 1.2rem;font-size:.86rem;box-shadow:var(--sh);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s;max-width:calc(100vw - 32px);text-align:center}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.to-top{position:fixed;right:20px;bottom:22px;z-index:900;width:46px;height:46px;border-radius:50%;border:none;background:var(--accent);color:#000;font-size:1rem;cursor:pointer;box-shadow:0 8px 24px rgba(255,153,0,.35);opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .3s,transform .3s,visibility .3s}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top:hover{background:#FFB84D}
+
 .rv{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
 .rv.vis{opacity:1;transform:translateY(0)}
 .rv-l{opacity:0;transform:translateX(-28px);transition:opacity .75s ease,transform .75s ease}
@@ -152,7 +251,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);backgro
 .rv-r.vis{opacity:1;transform:translateX(0)}
 .rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}.rv-d4{transition-delay:.4s}.rv-d5{transition-delay:.5s}
 footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem 0;text-align:center;color:var(--muted);font-size:.82rem}
-footer span{color:var(--accent)}
+footer .ft-name{color:var(--accent)}
+.ft-keys{margin-top:.4rem;font-size:.74rem;opacity:.8}
+kbd{font-family:inherit;border:1px solid var(--border);border-bottom-width:2px;border-radius:4px;padding:0 5px;font-size:.72rem}
 @media(max-width:900px){
 .exp-grid{grid-template-columns:1fr 1fr}
 .hero-grid{grid-template-columns:1fr}
@@ -173,17 +274,26 @@ footer span{color:var(--accent)}
 .exp-grid{grid-template-columns:1fr}
 .tl::before{left:18px}
 .tl-row{grid-template-columns:36px 1fr}
-.tl-row:nth-child(odd) .tl-c,.tl-row:nth-child(even) .tl-c{grid-column:2;text-align:left;padding-left:1.2rem;padding-right:0}
-.tl-row:nth-child(odd) .tl-node,.tl-row:nth-child(even) .tl-node{grid-column:1}
-.tl-row:nth-child(odd) .tl-void,.tl-row:nth-child(even) .tl-void{display:none}
-.tl-row:nth-child(odd) .tl-co{justify-content:flex-start}
+.tl-row>.tl-node{grid-column:1}
+.tl-row.is-left>.tl-c,.tl-row.is-right>.tl-c{grid-column:2;text-align:left;padding-left:1.2rem;padding-right:1.4rem}
+.tl-row.is-left .tl-co,.tl-row.is-left .tl-actions{justify-content:flex-start}
+.lb-stage{padding:60px 12px 96px}
+.lb-prev,.lb-next{top:auto;bottom:18px;transform:none}
+.lb-prev{left:calc(50% - 60px)}
+.lb-next{right:calc(50% - 60px)}
+.lb-img{max-height:calc(100vh - 200px)}
 }
-
+@media(max-width:420px){
+.nav-controls{margin-right:4px}
+.hero-stats{gap:1.5rem}
+.about-info{grid-template-columns:1fr}
+.chip{padding:6px 12px;font-size:.76rem}
+}
 
 /* ========== LIGHT MODE ========== */
 [data-theme="light"]{
   --bg:#F0F4F8;--bg2:#FFFFFF;--bg3:#E8EEF5;--card:#FFFFFF;
-  --accent:#E07800;--text:#1A2942;--muted:#5C6B7A;
+  --accent:#E07800;--text:#1A2942;--muted:#5C6B7A;--head:#1A2942;
   --border:rgba(0,0,0,0.09);--sh:0 4px 30px rgba(0,0,0,.08)
 }
 [data-theme="light"] body{background:var(--bg)}
@@ -195,9 +305,13 @@ footer span{color:var(--accent)}
 [data-theme="light"] .hero-name{color:var(--text)}
 [data-theme="light"] .sk-bg{background:#DDE5F0}
 [data-theme="light"] .tl::before{background:linear-gradient(to bottom,transparent 0%,var(--accent) 10%,var(--accent) 90%,transparent 100%)}
-[data-theme="light"] .exp-card,[data-theme="light"] .edu-c,[data-theme="light"] .gal-co,[data-theme="light"] .dl-c{box-shadow:0 2px 16px rgba(0,0,0,.07)}
+[data-theme="light"] .exp-face,[data-theme="light"] .edu-c,[data-theme="light"] .gal-co,[data-theme="light"] .dl-c{box-shadow:0 2px 16px rgba(0,0,0,.07)}
+[data-theme="light"] .tl-amz{background:linear-gradient(135deg,#FFF6EA,#FFFFFF)}
+[data-theme="light"] .btn-o{border-color:rgba(0,0,0,.15)}
 [data-theme="light"] .btn-dl{background:var(--accent);color:#fff}
+[data-theme="light"] .chip.is-on{color:#fff}
 [data-theme="light"] footer{border-top:1px solid var(--border)}
+@media(max-width:768px){[data-theme="light"] .nav-links{background:rgba(240,244,248,.98)}}
 
 /* ========== NAV CONTROLS ========== */
 .nav-controls{display:flex;align-items:center;gap:8px;margin-right:12px}
@@ -207,10 +321,20 @@ footer span{color:var(--accent)}
 .lang-btn:hover,.theme-btn:hover{border-color:var(--accent);color:var(--accent)}
 .theme-btn{padding:6px 10px}
 
+/* ========== REDUCED MOTION ========== */
+@media (prefers-reduced-motion: reduce){
+html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+.rv,.rv-l,.rv-r{opacity:1;transform:none}
+.hero-ring1,.hero-ring2{animation:none}
+.typed-caret{display:none}
+}
+
 </style>
 </head>
 <body>
-<nav id="mainNav">
+<nav id="mainNav" aria-label="Main">
+  <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="nav-inner">
     <div class="nav-logo">A.<span>DEBAB</span></div>
     <div class="nav-links" id="navLinks">
@@ -221,31 +345,38 @@ footer span{color:var(--accent)}
       <a href="#experience" data-i18n="nav.experience">Experience</a>
       <a href="#gallery" data-i18n="nav.gallery">Gallery</a>
       <a href="#education" data-i18n="nav.education">Education</a>
-      <a href="#download">CV</a>
-      <a href="#contact">Contact</a>
+      <a href="#download" data-i18n="nav.cv">CV</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
     </div>
-    <div class="nav-controls"><button class="lang-btn" id="langToggle" title="Switch language">FR</button><button class="theme-btn" id="themeToggle" title="Toggle dark/light"><i class="fa-solid fa-moon"></i></button></div><button class="nav-toggle" id="navToggle">
+    <div class="nav-controls">
+      <button type="button" class="lang-btn" id="langToggle" title="Switch to French" aria-label="Switch to French" data-i18n-aria="ui.lang" aria-keyshortcuts="l">FR</button>
+      <button type="button" class="theme-btn" id="themeToggle" title="Toggle dark/light theme" aria-label="Toggle dark/light theme" data-i18n-aria="ui.theme" aria-keyshortcuts="t"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
+    </div>
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" data-i18n-aria="nav.menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
+<main id="main">
 <section id="hero">
+  <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
   <div class="container">
     <div class="hero-grid">
       <div>
         <span class="hero-tag" data-i18n="hero.tag">Senior Engineer</span>
         <h1 class="hero-name">Amine <span>DEBAB</span></h1>
         <p class="hero-title" data-i18n="hero.title">Sr. Maintenance &amp; Reliability Engineer</p>
+        <p class="hero-typed" id="heroTyped"><span class="hero-typed-lbl" data-i18n="hero.typed_lbl">Focus:</span><span class="typed" id="typed" aria-hidden="true">Reliability</span><span class="typed-caret" aria-hidden="true"></span><span class="sr-only" id="typedSr">Reliability, PMO, Electrical Engineering, Data &amp; Automation</span></p>
         <p class="hero-desc" data-i18n="hero.desc">14+ years across industrial engineering, Amazon-scale RME, and maintenance automation. From Algeria&#39;s heavy industry to commissioning Amazon&#39;s newest European fulfillment centers.</p>
         <div class="hero-btns">
-          <a href="#experience" class="btn-p"><i class="fa-solid fa-timeline"></i> <span data-i18n="hero.btn_exp">Experience</span></a>
-          <a href="#contact" class="btn-o"><i class="fa-solid fa-envelope"></i> <span data-i18n="hero.btn_ct">Contact</span></a>
+          <a href="#experience" class="btn-p"><i class="fa-solid fa-timeline" aria-hidden="true"></i> <span data-i18n="hero.btn_exp">Experience</span></a>
+          <a href="#contact" class="btn-o"><i class="fa-solid fa-envelope" aria-hidden="true"></i> <span data-i18n="hero.btn_ct">Contact</span></a>
         </div>
-        <div class="hero-stats">
-          <div class="hero-stat"><strong>14+</strong><span data-i18n="hero.stat1">Years exp.</span></div>
-          <div class="hero-stat"><strong>8</strong><span data-i18n="hero.stat2">Companies</span></div>
-          <div class="hero-stat"><strong>2</strong><span data-i18n="hero.stat3">Amazon FCs</span></div>
+        <div class="hero-stats" id="heroStats">
+          <div class="hero-stat"><strong data-count="14" data-suffix="+">14+</strong><span data-i18n="hero.stat1">Years exp.</span></div>
+          <div class="hero-stat"><strong data-count="8">8</strong><span data-i18n="hero.stat2">Companies</span></div>
+          <div class="hero-stat"><strong data-count="2">2</strong><span data-i18n="hero.stat3">Amazon FCs</span></div>
         </div>
       </div>
       <div class="hero-img-wrap">
@@ -261,8 +392,8 @@ footer span{color:var(--accent)}
   <div class="container">
     <div class="about-grid">
       <div class="about-img-wrap rv-l">
-        <img src="images/about.jpg" alt="Amine DEBAB" class="about-img">
-        <div class="about-badge"><strong>14+</strong>Years<br>Experience</div>
+        <img src="images/about.jpg" alt="Amine DEBAB" class="about-img" loading="lazy">
+        <div class="about-badge"><strong>14+</strong><span data-i18n-html="about.badge">Years<br>Experience</span></div>
       </div>
       <div class="rv-r">
         <span class="lbl" data-i18n="about.lbl">About Me</span>
@@ -284,17 +415,89 @@ footer span{color:var(--accent)}
 
 <section id="expertise">
   <div class="container">
-    <div class="rv" style="text-align:center;max-width:560px;margin:0 auto">
+    <div class="rv sec-hd">
       <span class="lbl" data-i18n="exp.lbl">What I Do</span>
       <h2 class="sh" data-i18n-html="exp.h2">Areas of <span>Expertise</span></h2>
     </div>
     <div class="exp-grid">
-      <div class="exp-card rv rv-d1"><div class="exp-icon"><i class="fa-solid fa-diagram-project"></i></div><h3 data-i18n="exp.c1.h">Project Management</h3><p data-i18n="exp.c1.p">End-to-end project delivery from scope to commissioning. Greenfield FC buildouts at Amazon scale.</p></div>
-      <div class="exp-card rv rv-d2"><div class="exp-icon"><i class="fa-solid fa-people-group"></i></div><h3 data-i18n="exp.c2.h">Team Leadership</h3><p data-i18n="exp.c2.p">Multinational teams (15+ nationalities). Building cohesive teams in high-pressure operational environments.</p></div>
-      <div class="exp-card rv rv-d3"><div class="exp-icon"><i class="fa-solid fa-bolt"></i></div><h3 data-i18n="exp.c3.h">Electrical Engineering</h3><p data-i18n="exp.c3.p">Power systems, automation, PLC/SCADA, E&amp;I. Certified H0V, B1V, BR. Industrial gas habilitation.</p></div>
-      <div class="exp-card rv rv-d4"><div class="exp-icon"><i class="fa-solid fa-chart-line"></i></div><h3 data-i18n="exp.c4.h">Reliability &amp; CMMS</h3><p data-i18n="exp.c4.p">RME from zero: PM/PdM plans, OEE monitoring, DPMO analysis, CMMS implementation.</p></div>
-      <div class="exp-card rv rv-d5"><div class="exp-icon"><i class="fa-brands fa-python"></i></div><h3 data-i18n="exp.c5.h">Data &amp; Automation</h3><p data-i18n="exp.c5.p">Python for maintenance KPIs. Automated DPMO reporting: 3h to 20 min. QuickSight dashboards.</p></div>
-      <div class="exp-card rv rv-d1"><div class="exp-icon"><i class="fa-solid fa-pen-ruler"></i></div><h3 data-i18n="exp.c6.h">Technical Design</h3><p data-i18n="exp.c6.p">AutoCAD Electrical, Caneco BT, See Electrical. Technical documentation and procedures.</p></div>
+      <div class="exp-card rv rv-d1">
+        <div class="exp-inner">
+          <div class="exp-face exp-front" id="exp1-front">
+            <div class="exp-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></div><h3 data-i18n="exp.c1.h">Project Management</h3><p data-i18n="exp.c1.p">End-to-end project delivery from scope to commissioning. Greenfield FC buildouts at Amazon scale.</p>
+            <button type="button" class="exp-flip" aria-expanded="false" aria-controls="exp1-back"><i class="fa-solid fa-rotate" aria-hidden="true"></i> <span data-i18n="exp.flip">Key achievements</span></button>
+          </div>
+          <div class="exp-face exp-back" id="exp1-back" inert>
+            <h3 data-i18n="exp.c1.h">Project Management</h3>
+            <ul class="exp-list"><li data-i18n="exp.c1.a1">Full commissioning of Amazon LYS2 Lyon from zero</li><li data-i18n="exp.c1.a2">Utility services project at DiamGrain: boilers, air compressors, water treatment, 1,200m piping network</li><li data-i18n="exp.c1.a3">Commissioned nitrous oxide equipment at Linde Gaz</li></ul>
+            <button type="button" class="exp-flip exp-unflip"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> <span data-i18n="exp.back">Back</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="exp-card rv rv-d2">
+        <div class="exp-inner">
+          <div class="exp-face exp-front" id="exp2-front">
+            <div class="exp-icon"><i class="fa-solid fa-people-group" aria-hidden="true"></i></div><h3 data-i18n="exp.c2.h">Team Leadership</h3><p data-i18n="exp.c2.p">Multinational teams (15+ nationalities). Building cohesive teams in high-pressure operational environments.</p>
+            <button type="button" class="exp-flip" aria-expanded="false" aria-controls="exp2-back"><i class="fa-solid fa-rotate" aria-hidden="true"></i> <span data-i18n="exp.flip">Key achievements</span></button>
+          </div>
+          <div class="exp-face exp-back" id="exp2-back" inert>
+            <h3 data-i18n="exp.c2.h">Team Leadership</h3>
+            <ul class="exp-list"><li data-i18n="exp.c2.a1">Built and managed a multinational team (15+ nationalities) at LYS2</li><li data-i18n="exp.c2.a2">Recruited and trained 2 apprentices at Amazon ETZ2</li><li data-i18n="exp.c2.a3">Led electrical and gas intervention teams at Sonelgaz</li></ul>
+            <button type="button" class="exp-flip exp-unflip"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> <span data-i18n="exp.back">Back</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="exp-card rv rv-d3">
+        <div class="exp-inner">
+          <div class="exp-face exp-front" id="exp3-front">
+            <div class="exp-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div><h3 data-i18n="exp.c3.h">Electrical Engineering</h3><p data-i18n="exp.c3.p">Power systems, automation, PLC/SCADA, E&amp;I. Certified H0V, B1V, BR. Industrial gas habilitation.</p>
+            <button type="button" class="exp-flip" aria-expanded="false" aria-controls="exp3-back"><i class="fa-solid fa-rotate" aria-hidden="true"></i> <span data-i18n="exp.flip">Key achievements</span></button>
+          </div>
+          <div class="exp-face exp-back" id="exp3-back" inert>
+            <h3 data-i18n="exp.c3.h">Electrical Engineering</h3>
+            <ul class="exp-list"><li data-i18n="exp.c3.a1">Installation and commissioning of electrical cabinets and industrial equipment (MHI)</li><li data-i18n="exp.c3.a2">Electrical and mechanical assembly of aluminum profile extruders (FerobMetal)</li><li data-i18n="exp.c3.a3">H0V, B1V, BR accreditation - Schneider Electric and Sonelgaz</li></ul>
+            <button type="button" class="exp-flip exp-unflip"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> <span data-i18n="exp.back">Back</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="exp-card rv rv-d4">
+        <div class="exp-inner">
+          <div class="exp-face exp-front" id="exp4-front">
+            <div class="exp-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div><h3 data-i18n="exp.c4.h">Reliability &amp; CMMS</h3><p data-i18n="exp.c4.p">RME from zero: PM/PdM plans, OEE monitoring, DPMO analysis, CMMS implementation.</p>
+            <button type="button" class="exp-flip" aria-expanded="false" aria-controls="exp4-back"><i class="fa-solid fa-rotate" aria-hidden="true"></i> <span data-i18n="exp.flip">Key achievements</span></button>
+          </div>
+          <div class="exp-face exp-back" id="exp4-back" inert>
+            <h3 data-i18n="exp.c4.h">Reliability &amp; CMMS</h3>
+            <ul class="exp-list"><li data-i18n="exp.c4.a1">RME service structure, CMMS and KPI frameworks built at LYS2</li><li data-i18n="exp.c4.a2">Jam DPMO reduction strategy and OEE reporting</li><li data-i18n="exp.c4.a3">OEE above 95% at Amazon ETZ2</li></ul>
+            <button type="button" class="exp-flip exp-unflip"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> <span data-i18n="exp.back">Back</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="exp-card rv rv-d5">
+        <div class="exp-inner">
+          <div class="exp-face exp-front" id="exp5-front">
+            <div class="exp-icon"><i class="fa-brands fa-python" aria-hidden="true"></i></div><h3 data-i18n="exp.c5.h">Data &amp; Automation</h3><p data-i18n="exp.c5.p">Python for maintenance KPIs. Automated DPMO reporting: 3h to 20 min. QuickSight dashboards.</p>
+            <button type="button" class="exp-flip" aria-expanded="false" aria-controls="exp5-back"><i class="fa-solid fa-rotate" aria-hidden="true"></i> <span data-i18n="exp.flip">Key achievements</span></button>
+          </div>
+          <div class="exp-face exp-back" id="exp5-back" inert>
+            <h3 data-i18n="exp.c5.h">Data &amp; Automation</h3>
+            <ul class="exp-list"><li data-i18n="exp.c5.a1">Automated DPMO reporting with Python: 3h to 20 min</li><li data-i18n="exp.c5.a2">QuickSight dashboards for maintenance KPIs</li><li data-i18n="exp.c5.a3">Access-based tracking systems at Sonelgaz</li></ul>
+            <button type="button" class="exp-flip exp-unflip"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> <span data-i18n="exp.back">Back</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="exp-card rv rv-d1">
+        <div class="exp-inner">
+          <div class="exp-face exp-front" id="exp6-front">
+            <div class="exp-icon"><i class="fa-solid fa-pen-ruler" aria-hidden="true"></i></div><h3 data-i18n="exp.c6.h">Technical Design</h3><p data-i18n="exp.c6.p">AutoCAD Electrical, Caneco BT, See Electrical. Technical documentation and procedures.</p>
+            <button type="button" class="exp-flip" aria-expanded="false" aria-controls="exp6-back"><i class="fa-solid fa-rotate" aria-hidden="true"></i> <span data-i18n="exp.flip">Key achievements</span></button>
+          </div>
+          <div class="exp-face exp-back" id="exp6-back" inert>
+            <h3 data-i18n="exp.c6.h">Technical Design</h3>
+            <ul class="exp-list"><li data-i18n="exp.c6.a1">Electrical design with AutoCAD Electrical, Caneco BT and See Electrical</li><li data-i18n="exp.c6.a2">Operational procedures created at Linde Gaz</li><li data-i18n="exp.c6.a3">Safety rules and procedures enforced on the shop floor at Greif</li></ul>
+            <button type="button" class="exp-flip exp-unflip"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> <span data-i18n="exp.back">Back</span></button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -302,127 +505,184 @@ footer span{color:var(--accent)}
 <section id="skills" class="alt">
   <div class="container">
     <div class="rv"><span class="lbl" data-i18n="sk.lbl">Technical Skills</span><h2 class="sh" data-i18n-html="sk.h2">My <span>Skill Set</span></h2></div>
-    <div class="sk-grid">
-      <div class="sk rv rv-d1"><div class="sk-hd"><span class="sk-nm">Electrical Engineering</span><span class="sk-pct">90%</span></div><div class="sk-bg"><div class="sk-bar" data-w="90"></div></div></div>
-      <div class="sk rv rv-d2"><div class="sk-hd"><span class="sk-nm">CMMS / Reliability Engineering</span><span class="sk-pct">85%</span></div><div class="sk-bg"><div class="sk-bar" data-w="85"></div></div></div>
-      <div class="sk rv rv-d3"><div class="sk-hd"><span class="sk-nm">Project Management</span><span class="sk-pct">85%</span></div><div class="sk-bg"><div class="sk-bar" data-w="85"></div></div></div>
-      <div class="sk rv rv-d4"><div class="sk-hd"><span class="sk-nm">OEE / DPMO Analysis</span><span class="sk-pct">80%</span></div><div class="sk-bg"><div class="sk-bar" data-w="80"></div></div></div>
-      <div class="sk rv rv-d1"><div class="sk-hd"><span class="sk-nm">Excel / Access / Power BI</span><span class="sk-pct">85%</span></div><div class="sk-bg"><div class="sk-bar" data-w="85"></div></div></div>
-      <div class="sk rv rv-d2"><div class="sk-hd"><span class="sk-nm">Python / Automation</span><span class="sk-pct">75%</span></div><div class="sk-bg"><div class="sk-bar" data-w="75"></div></div></div>
-      <div class="sk rv rv-d3"><div class="sk-hd"><span class="sk-nm">AutoCAD / AutoCAD Electrical</span><span class="sk-pct">70%</span></div><div class="sk-bg"><div class="sk-bar" data-w="70"></div></div></div>
-      <div class="sk rv rv-d4"><div class="sk-hd"><span class="sk-nm">Ms Project / Primavera P6</span><span class="sk-pct">60%</span></div><div class="sk-bg"><div class="sk-bar" data-w="60"></div></div></div>
+    <div class="filters sk-filters" id="skFilters" role="group" aria-label="Filter skills by category" data-i18n-aria="sk.f_label">
+      <button type="button" class="chip is-on" data-sk-filter="all" aria-pressed="true" data-i18n="f.all">All</button>
+      <button type="button" class="chip" data-sk-filter="eng" aria-pressed="false" data-i18n="sk.f_eng">Engineering</button>
+      <button type="button" class="chip" data-sk-filter="data" aria-pressed="false" data-i18n="sk.f_data">Data &amp; Tools</button>
+      <button type="button" class="chip" data-sk-filter="mgmt" aria-pressed="false" data-i18n="sk.f_mgmt">Management</button>
+    </div>
+    <div class="sk-grid" id="skGrid">
+      <div class="sk rv rv-d1" data-cat="eng" tabindex="0" aria-describedby="skt1"><div class="sk-hd"><span class="sk-nm"><span data-i18n="sk.s1">Electrical Engineering</span><i class="fa-solid fa-circle-info" aria-hidden="true"></i></span><span class="sk-pct">90%</span></div><div class="sk-bg"><div class="sk-bar" data-w="90"></div></div><span class="sk-tip" role="tooltip" id="skt1" data-i18n="sk.s1.tip">Power systems, automation, PLC/SCADA, E&amp;I. Certified H0V, B1V, BR.</span></div>
+      <div class="sk rv rv-d2" data-cat="eng" tabindex="0" aria-describedby="skt2"><div class="sk-hd"><span class="sk-nm"><span data-i18n="sk.s2">CMMS / Reliability Engineering</span><i class="fa-solid fa-circle-info" aria-hidden="true"></i></span><span class="sk-pct">85%</span></div><div class="sk-bg"><div class="sk-bar" data-w="85"></div></div><span class="sk-tip" role="tooltip" id="skt2" data-i18n="sk.s2.tip">RME from zero: PM/PdM plans, OEE monitoring, DPMO analysis, CMMS implementation.</span></div>
+      <div class="sk rv rv-d3" data-cat="mgmt" tabindex="0" aria-describedby="skt3"><div class="sk-hd"><span class="sk-nm"><span data-i18n="sk.s3">Project Management</span><i class="fa-solid fa-circle-info" aria-hidden="true"></i></span><span class="sk-pct">85%</span></div><div class="sk-bg"><div class="sk-bar" data-w="85"></div></div><span class="sk-tip" role="tooltip" id="skt3" data-i18n="sk.s3.tip">End-to-end project delivery from scope to commissioning.</span></div>
+      <div class="sk rv rv-d4" data-cat="data" tabindex="0" aria-describedby="skt4"><div class="sk-hd"><span class="sk-nm"><span data-i18n="sk.s4">OEE / DPMO Analysis</span><i class="fa-solid fa-circle-info" aria-hidden="true"></i></span><span class="sk-pct">80%</span></div><div class="sk-bg"><div class="sk-bar" data-w="80"></div></div><span class="sk-tip" role="tooltip" id="skt4" data-i18n="sk.s4.tip">Jam DPMO reduction strategy and OEE reporting. OEE above 95% at ETZ2.</span></div>
+      <div class="sk rv rv-d1" data-cat="data" tabindex="0" aria-describedby="skt5"><div class="sk-hd"><span class="sk-nm"><span data-i18n="sk.s5">Excel / Access / Power BI</span><i class="fa-solid fa-circle-info" aria-hidden="true"></i></span><span class="sk-pct">85%</span></div><div class="sk-bg"><div class="sk-bar" data-w="85"></div></div><span class="sk-tip" role="tooltip" id="skt5" data-i18n="sk.s5.tip">Management reviews, dashboards and Access-based tracking systems.</span></div>
+      <div class="sk rv rv-d2" data-cat="data" tabindex="0" aria-describedby="skt6"><div class="sk-hd"><span class="sk-nm"><span data-i18n="sk.s6">Python / Automation</span><i class="fa-solid fa-circle-info" aria-hidden="true"></i></span><span class="sk-pct">75%</span></div><div class="sk-bg"><div class="sk-bar" data-w="75"></div></div><span class="sk-tip" role="tooltip" id="skt6" data-i18n="sk.s6.tip">Python for maintenance KPIs. Automated DPMO reporting: 3h to 20 min.</span></div>
+      <div class="sk rv rv-d3" data-cat="eng" tabindex="0" aria-describedby="skt7"><div class="sk-hd"><span class="sk-nm"><span data-i18n="sk.s7">AutoCAD / AutoCAD Electrical</span><i class="fa-solid fa-circle-info" aria-hidden="true"></i></span><span class="sk-pct">70%</span></div><div class="sk-bg"><div class="sk-bar" data-w="70"></div></div><span class="sk-tip" role="tooltip" id="skt7" data-i18n="sk.s7.tip">AutoCAD Electrical, Caneco BT, See Electrical. Technical documentation.</span></div>
+      <div class="sk rv rv-d4" data-cat="mgmt" tabindex="0" aria-describedby="skt8"><div class="sk-hd"><span class="sk-nm"><span data-i18n="sk.s8">Ms Project / Primavera P6</span><i class="fa-solid fa-circle-info" aria-hidden="true"></i></span><span class="sk-pct">60%</span></div><div class="sk-bg"><div class="sk-bar" data-w="60"></div></div><span class="sk-tip" role="tooltip" id="skt8" data-i18n="sk.s8.tip">Project planning and scheduling, from scope to commissioning.</span></div>
     </div>
   </div>
 </section>
 <section id="experience">
   <div class="container">
-    <div class="rv" style="text-align:center;max-width:560px;margin:0 auto">
+    <div class="rv sec-hd">
       <span class="lbl" data-i18n="work.lbl">Career</span>
       <h2 class="sh" data-i18n-html="work.h2">Work <span>Experience</span></h2>
     </div>
-    <div class="tl">
-      <div class="tl-row rv rv-r">
-        <div class="tl-c tl-amz">
-          <div class="tl-tag" data-i18n="work.current">&#127381; Current</div>
-          <div class="tl-per">April 2026 - Present</div>
-          <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Amazon LYS2 - Lyon, France</div>
-          <h3 data-i18n="work.j1.title">Sr. Technician - PMO &amp; Reliability</h3>
-          <p data-i18n="work.j1.desc">Full commissioning of a new Amazon FC from zero. Designed and implemented RME service structure, CMMS, safety protocols, KPI frameworks. Built and managed multinational team (15+ nationalities). Piloted Jam DPMO reduction strategy and OEE reporting.</p>
-        </div>
-        <div class="tl-node"><div class="tl-dot"></div></div>
-        <div class="tl-void"></div>
+    <div class="filter-bar">
+      <div class="filters" id="tlCountry" role="group" aria-label="Filter by country" data-i18n-aria="work.f_country">
+        <button type="button" class="chip is-on" data-tl-country="all" aria-pressed="true" data-i18n="f.all">All</button>
+        <button type="button" class="chip" data-tl-country="fr" aria-pressed="false" data-i18n="work.f_fr">France</button>
+        <button type="button" class="chip" data-tl-country="dz" aria-pressed="false" data-i18n="work.f_dz">Algeria</button>
       </div>
-      <div class="tl-row rv rv-l">
-        <div class="tl-void"></div>
-        <div class="tl-node"><div class="tl-dot"></div></div>
-        <div class="tl-c tl-amz">
-          <div class="tl-per">July 2024 - March 2026</div>
-          <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Amazon ETZ2 - Metz, France</div>
-          <h3 data-i18n="work.j2.title">Sr. Technician - Shift &amp; Maintenance (SRMET)</h3>
-          <p data-i18n="work.j2.desc">Autonomous shift management with full accountability for maintenance operations, backlog follow-up and team coordination. Supervised technicians, managed HIE safety protocols. Recruited and trained 2 apprentices. Automated DPMO reporting with Python (3h to 20 min). OEE above 95%.</p>
-        </div>
-      </div>
-      <div class="tl-row rv rv-r">
-        <div class="tl-c">
-          <div class="tl-per">Oct. 2023 - June 2024</div>
-          <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Greif - France</div>
-          <h3 data-i18n="work.j3.title">Production Supervisor</h3>
-          <p data-i18n="work.j3.desc">Supervised industrial drum manufacturing production lines. Managed production teams, planned and scheduled daily tasks. Implemented and enforced safety rules and procedures on the shop floor.</p>
-        </div>
-        <div class="tl-node"><div class="tl-dot"></div></div>
-        <div class="tl-void"></div>
-      </div>
-<div class="tl-row rv rv-r">
-        <div class="tl-c">
-          <div class="tl-per">2021 - Oct. 2023</div>
-          <div class="tl-co"><i class="fa-solid fa-location-dot"></i> DiamGrain - France</div>
-          <h3 data-i18n="work.j4.title">Utility &amp; Reliability Manager</h3>
-          <p data-i18n="work.j4.desc">Project managed utility services implementation (boilers, air compressors, water treatment, piping). Supplied cattle feed plant via 1,200m piping network. Led full maintenance operations and reliability engineering.</p>
-        </div>
-        <div class="tl-node"><div class="tl-dot"></div></div>
-        <div class="tl-void"></div>
-      </div>
-            <div class="tl-row rv rv-l">
-        <div class="tl-void"></div>
-        <div class="tl-node"><div class="tl-dot"></div></div>
-        <div class="tl-c">
-          <div class="tl-per">2016 - 2021</div>
-          <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Linde Gaz - Algeria</div>
-          <h3 data-i18n="work.j5.title">Production &amp; Maintenance Manager</h3>
-          <p data-i18n="work.j5.desc">In charge of production and maintenance operations. Monitored KPIs, created operational procedures. Commissioned nitrous oxide equipment and led major maintenance campaigns.</p>
-        </div>
-      </div>
-      <div class="tl-row rv rv-r">
-        <div class="tl-c">
-          <div class="tl-per">2014 - 2016</div>
-          <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Sonelgaz - Algeria</div>
-          <h3 data-i18n="work.j6.title">Electrical Engineer</h3>
-          <p data-i18n="work.j6.desc">Interim manager of commercial agency. Led electrical and gas intervention teams. Prepared management reviews, dashboards, and Access-based tracking systems.</p>
-        </div>
-        <div class="tl-node"><div class="tl-dot"></div></div>
-        <div class="tl-void"></div>
-      </div>
-      <div class="tl-row rv rv-l">
-        <div class="tl-void"></div>
-        <div class="tl-node"><div class="tl-dot"></div></div>
-        <div class="tl-c">
-          <div class="tl-per">2014</div>
-          <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Mobiserve - Algeria</div>
-          <h3 data-i18n="work.j7.title">Telecom Engineer</h3>
-          <p data-i18n="work.j7.desc">Deployment of 4G service in western Algeria. Maintenance of Siemens and Huawei telecommunication cabinets.</p>
-        </div>
-      </div>
-      <div class="tl-row rv rv-r">
-        <div class="tl-c">
-          <div class="tl-per">2012 - 2014</div>
-          <div class="tl-co"><i class="fa-solid fa-location-dot"></i> FerobMetal - Algeria</div>
-          <h3 data-i18n="work.j8.title">Maintenance &amp; Production Manager</h3>
-          <p data-i18n="work.j8.desc">Electrical and mechanical assembly of aluminum profile extruders. Led cross-functional engineering teams, production and maintenance follow-up.</p>
-        </div>
-        <div class="tl-node"><div class="tl-dot"></div></div>
-        <div class="tl-void"></div>
-      </div>
-      <div class="tl-row rv rv-l">
-        <div class="tl-void"></div>
-        <div class="tl-node"><div class="tl-dot"></div></div>
-        <div class="tl-c">
-          <div class="tl-per">2012</div>
-          <div class="tl-co"><i class="fa-solid fa-location-dot"></i> Mitsubishi Heavy Industry - Algeria</div>
-          <h3 data-i18n="work.j9.title">Electrician</h3>
-          <p data-i18n="work.j9.desc">Installation of equipment and electrical cabinets. Pre-commissioning and commissioning of industrial equipment.</p>
-        </div>
+      <div class="filters" id="tlCompany" role="group" aria-label="Filter by company" data-i18n-aria="work.f_co">
+        <button type="button" class="chip is-on" data-tl-co="all" aria-pressed="true" data-i18n="work.f_allco">All companies</button>
+        <button type="button" class="chip" data-tl-co="amazon" aria-pressed="false">Amazon</button>
       </div>
     </div>
+    <p class="filter-count" id="tlCount" aria-live="polite"></p>
+    <div class="tl" id="timeline">
+      <article class="tl-row rv is-left" data-country="fr" data-co="amazon">
+        <div class="tl-c tl-amz">
+          <div class="tl-tag" data-i18n="work.current">&#127381; Current</div>
+          <div class="tl-per" data-i18n="work.p1">April 2026 - Present</div>
+          <div class="tl-co"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span>Amazon LYS2 - Lyon, France</span></div>
+          <h3 data-i18n="work.j1.title">Sr. Technician - PMO &amp; Reliability</h3>
+          <p class="tl-desc" id="job1-desc" data-i18n="work.j1.desc">Full commissioning of a new Amazon FC from zero. Designed and implemented RME service structure, CMMS, safety protocols, KPI frameworks. Built and managed multinational team (15+ nationalities). Piloted Jam DPMO reduction strategy and OEE reporting.</p>
+          <div class="tl-actions">
+            <button type="button" class="tl-btn tl-more" aria-expanded="false" aria-controls="job1-desc"><span class="tl-more-t">See more</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+            <button type="button" class="tl-btn tl-photos" data-gal="amazon"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="work.photos">See photos</span></button>
+          </div>
+        </div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+      </article>
+      <article class="tl-row rv is-right" data-country="fr" data-co="amazon">
+        <div class="tl-c tl-amz">
+          <div class="tl-per" data-i18n="work.p2">July 2024 - March 2026</div>
+          <div class="tl-co"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span>Amazon ETZ2 - Metz, France</span></div>
+          <h3 data-i18n="work.j2.title">Sr. Technician - Shift &amp; Maintenance (SRMET)</h3>
+          <p class="tl-desc" id="job2-desc" data-i18n="work.j2.desc">Autonomous shift management with full accountability for maintenance operations, backlog follow-up and team coordination. Supervised technicians, managed HIE safety protocols. Recruited and trained 2 apprentices. Automated DPMO reporting with Python (3h to 20 min). OEE above 95%.</p>
+          <div class="tl-actions">
+            <button type="button" class="tl-btn tl-more" aria-expanded="false" aria-controls="job2-desc"><span class="tl-more-t">See more</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+            <button type="button" class="tl-btn tl-photos" data-gal="amazon"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="work.photos">See photos</span></button>
+          </div>
+        </div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+      </article>
+      <article class="tl-row rv is-left" data-country="fr" data-co="other">
+        <div class="tl-c">
+          <div class="tl-per" data-i18n="work.p3">Oct. 2023 - June 2024</div>
+          <div class="tl-co"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span>Greif - France</span></div>
+          <h3 data-i18n="work.j3.title">Production Supervisor</h3>
+          <p class="tl-desc" id="job3-desc" data-i18n="work.j3.desc">Supervised industrial drum manufacturing production lines. Managed production teams, planned and scheduled daily tasks. Implemented and enforced safety rules and procedures on the shop floor.</p>
+          <div class="tl-actions">
+            <button type="button" class="tl-btn tl-more" aria-expanded="false" aria-controls="job3-desc"><span class="tl-more-t">See more</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+            <button type="button" class="tl-btn tl-photos" data-gal="greif"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="work.photos">See photos</span></button>
+          </div>
+        </div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+      </article>
+      <article class="tl-row rv is-right" data-country="fr" data-co="other">
+        <div class="tl-c">
+          <div class="tl-per" data-i18n="work.p4">2021 - Oct. 2023</div>
+          <div class="tl-co"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span>DiamGrain - France</span></div>
+          <h3 data-i18n="work.j4.title">Utility &amp; Reliability Manager</h3>
+          <p class="tl-desc" id="job4-desc" data-i18n="work.j4.desc">Project managed utility services implementation (boilers, air compressors, water treatment, piping). Supplied cattle feed plant via 1,200m piping network. Led full maintenance operations and reliability engineering.</p>
+          <div class="tl-actions">
+            <button type="button" class="tl-btn tl-more" aria-expanded="false" aria-controls="job4-desc"><span class="tl-more-t">See more</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+            <button type="button" class="tl-btn tl-photos" data-gal="diamgrain"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="work.photos">See photos</span></button>
+          </div>
+        </div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+      </article>
+      <article class="tl-row rv is-left" data-country="dz" data-co="other">
+        <div class="tl-c">
+          <div class="tl-per">2016 - 2021</div>
+          <div class="tl-co"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span data-i18n="work.l5">Linde Gaz - Algeria</span></div>
+          <h3 data-i18n="work.j5.title">Production &amp; Maintenance Manager</h3>
+          <p class="tl-desc" id="job5-desc" data-i18n="work.j5.desc">In charge of production and maintenance operations. Monitored KPIs, created operational procedures. Commissioned nitrous oxide equipment and led major maintenance campaigns.</p>
+          <div class="tl-actions">
+            <button type="button" class="tl-btn tl-more" aria-expanded="false" aria-controls="job5-desc"><span class="tl-more-t">See more</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+            <button type="button" class="tl-btn tl-photos" data-gal="linde"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="work.photos">See photos</span></button>
+          </div>
+        </div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+      </article>
+      <article class="tl-row rv is-right" data-country="dz" data-co="other">
+        <div class="tl-c">
+          <div class="tl-per">2014 - 2016</div>
+          <div class="tl-co"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span data-i18n="work.l6">Sonelgaz - Algeria</span></div>
+          <h3 data-i18n="work.j6.title">Electrical Engineer</h3>
+          <p class="tl-desc" id="job6-desc" data-i18n="work.j6.desc">Interim manager of commercial agency. Led electrical and gas intervention teams. Prepared management reviews, dashboards, and Access-based tracking systems.</p>
+          <div class="tl-actions">
+            <button type="button" class="tl-btn tl-more" aria-expanded="false" aria-controls="job6-desc"><span class="tl-more-t">See more</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+            <button type="button" class="tl-btn tl-photos" data-gal="sonelgaz"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="work.photos">See photos</span></button>
+          </div>
+        </div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+      </article>
+      <article class="tl-row rv is-left" data-country="dz" data-co="other">
+        <div class="tl-c">
+          <div class="tl-per">2014</div>
+          <div class="tl-co"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span data-i18n="work.l7">Mobiserve - Algeria</span></div>
+          <h3 data-i18n="work.j7.title">Telecom Engineer</h3>
+          <p class="tl-desc" id="job7-desc" data-i18n="work.j7.desc">Deployment of 4G service in western Algeria. Maintenance of Siemens and Huawei telecommunication cabinets.</p>
+          <div class="tl-actions">
+            <button type="button" class="tl-btn tl-more" aria-expanded="false" aria-controls="job7-desc"><span class="tl-more-t">See more</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+            <button type="button" class="tl-btn tl-photos" data-gal="mobiserve"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="work.photos">See photos</span></button>
+          </div>
+        </div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+      </article>
+      <article class="tl-row rv is-right" data-country="dz" data-co="other">
+        <div class="tl-c">
+          <div class="tl-per">2012 - 2014</div>
+          <div class="tl-co"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span data-i18n="work.l8">FerobMetal - Algeria</span></div>
+          <h3 data-i18n="work.j8.title">Maintenance &amp; Production Manager</h3>
+          <p class="tl-desc" id="job8-desc" data-i18n="work.j8.desc">Electrical and mechanical assembly of aluminum profile extruders. Led cross-functional engineering teams, production and maintenance follow-up.</p>
+          <div class="tl-actions">
+            <button type="button" class="tl-btn tl-more" aria-expanded="false" aria-controls="job8-desc"><span class="tl-more-t">See more</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+            <button type="button" class="tl-btn tl-photos" data-gal="ferob"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="work.photos">See photos</span></button>
+          </div>
+        </div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+      </article>
+      <article class="tl-row rv is-left" data-country="dz" data-co="other">
+        <div class="tl-c">
+          <div class="tl-per">2012</div>
+          <div class="tl-co"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span data-i18n="work.l9">Mitsubishi Heavy Industry - Algeria</span></div>
+          <h3 data-i18n="work.j9.title">Electrician</h3>
+          <p class="tl-desc" id="job9-desc" data-i18n="work.j9.desc">Installation of equipment and electrical cabinets. Pre-commissioning and commissioning of industrial equipment.</p>
+          <div class="tl-actions">
+            <button type="button" class="tl-btn tl-more" aria-expanded="false" aria-controls="job9-desc"><span class="tl-more-t">See more</span> <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+            <button type="button" class="tl-btn tl-photos" data-gal="mhi"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="work.photos">See photos</span></button>
+          </div>
+        </div>
+        <div class="tl-node"><div class="tl-dot"></div></div>
+      </article>
+    </div>
+    <p class="tl-empty" id="tlEmpty" hidden data-i18n="work.empty">No experience matches these filters.</p>
   </div>
 </section>
 <section id="gallery" class="alt">
   <div class="container">
-    <div class="rv" style="text-align:center;max-width:560px;margin:0 auto">
+    <div class="rv sec-hd">
       <span class="lbl" data-i18n="gal.lbl">On the Field</span>
       <h2 class="sh" data-i18n-html="gal.h2">Photo <span>Gallery</span></h2>
     </div>
-    <div class="gal-co rv">
-      <div class="gal-hd"><h3>Amazon - ETZ2 Metz &amp; LYS2 Lyon</h3><span class="gal-badge">2024 - Present</span></div>
+    <div class="filters gal-filters" id="galFilters" role="group" aria-label="Filter gallery by company" data-i18n-aria="gal.f_label">
+      <button type="button" class="chip is-on" data-gal-filter="all" aria-pressed="true" data-i18n="f.all">All</button>
+      <button type="button" class="chip" data-gal-filter="amazon" aria-pressed="false">Amazon <span class="chip-n">(16)</span></button>
+      <button type="button" class="chip" data-gal-filter="greif" aria-pressed="false">Greif <span class="chip-n">(11)</span></button>
+      <button type="button" class="chip" data-gal-filter="diamgrain" aria-pressed="false">DiamGrain <span class="chip-n">(18)</span></button>
+      <button type="button" class="chip" data-gal-filter="linde" aria-pressed="false">Linde Gaz <span class="chip-n">(7)</span></button>
+      <button type="button" class="chip" data-gal-filter="sonelgaz" aria-pressed="false">Sonelgaz <span class="chip-n">(5)</span></button>
+      <button type="button" class="chip" data-gal-filter="mobiserve" aria-pressed="false">Mobiserve <span class="chip-n">(7)</span></button>
+      <button type="button" class="chip" data-gal-filter="ferob" aria-pressed="false">FerobMetal <span class="chip-n">(8)</span></button>
+      <button type="button" class="chip" data-gal-filter="mhi" aria-pressed="false">MHI <span class="chip-n">(8)</span></button>
+    </div>
+    <div class="gal-co rv" id="gal-amazon" data-co="amazon">
+      <div class="gal-hd"><h3 tabindex="-1">Amazon - ETZ2 Metz &amp; LYS2 Lyon</h3><span class="gal-badge" data-i18n="gal.b_amazon">2024 - Present</span></div>
       <div class="swiper swiper-amazon">
         <div class="swiper-wrapper">
           <div class="swiper-slide"><img src="images/8- Amazon/1.jpg" alt="Amazon" loading="lazy"></div>
@@ -446,8 +706,8 @@ footer span{color:var(--accent)}
         <div class="swiper-pagination"></div>
       </div>
     </div>
-    <div class="gal-co rv">
-      <div class="gal-hd"><h3>Greif</h3><span class="gal-badge">Oct. 2023 - June 2024</span></div>
+    <div class="gal-co rv" id="gal-greif" data-co="greif">
+      <div class="gal-hd"><h3 tabindex="-1">Greif</h3><span class="gal-badge" data-i18n="gal.b_greif">Oct. 2023 - June 2024</span></div>
       <div class="swiper swiper-greif">
         <div class="swiper-wrapper">
           <div class="swiper-slide"><img src="images/7- Greif/1.jpg" alt="Greif" loading="lazy"></div>
@@ -466,8 +726,8 @@ footer span{color:var(--accent)}
         <div class="swiper-pagination"></div>
       </div>
     </div>
-    <div class="gal-co rv">
-      <div class="gal-hd"><h3>DiamGrain</h3><span class="gal-badge">2021 - 2023</span></div>
+    <div class="gal-co rv" id="gal-diamgrain" data-co="diamgrain">
+      <div class="gal-hd"><h3 tabindex="-1">DiamGrain</h3><span class="gal-badge">2021 - 2023</span></div>
       <div class="swiper swiper-diamgrain">
         <div class="swiper-wrapper">
           <div class="swiper-slide"><img src="images/6- Diamgrain/1.jpg" alt="DiamGrain" loading="lazy"></div>
@@ -493,8 +753,8 @@ footer span{color:var(--accent)}
         <div class="swiper-pagination"></div>
       </div>
     </div>
-        <div class="gal-co rv">
-      <div class="gal-hd"><h3>Linde Gaz</h3><span class="gal-badge">2016 - 2021</span></div>
+    <div class="gal-co rv" id="gal-linde" data-co="linde">
+      <div class="gal-hd"><h3 tabindex="-1">Linde Gaz</h3><span class="gal-badge">2016 - 2021</span></div>
       <div class="swiper swiper-linde">
         <div class="swiper-wrapper">
           <div class="swiper-slide"><img src="images/5- Lindegas/1.JPG" alt="Linde" loading="lazy"></div>
@@ -509,8 +769,8 @@ footer span{color:var(--accent)}
         <div class="swiper-pagination"></div>
       </div>
     </div>
-    <div class="gal-co rv">
-      <div class="gal-hd"><h3>Sonelgaz</h3><span class="gal-badge">2014 - 2016</span></div>
+    <div class="gal-co rv" id="gal-sonelgaz" data-co="sonelgaz">
+      <div class="gal-hd"><h3 tabindex="-1">Sonelgaz</h3><span class="gal-badge">2014 - 2016</span></div>
       <div class="swiper swiper-sonelgaz">
         <div class="swiper-wrapper">
           <div class="swiper-slide"><img src="images/4- Sonelgaz/1.JPG" alt="Sonelgaz" loading="lazy"></div>
@@ -523,8 +783,8 @@ footer span{color:var(--accent)}
         <div class="swiper-pagination"></div>
       </div>
     </div>
-    <div class="gal-co rv">
-      <div class="gal-hd"><h3>Mobiserve</h3><span class="gal-badge">2014</span></div>
+    <div class="gal-co rv" id="gal-mobiserve" data-co="mobiserve">
+      <div class="gal-hd"><h3 tabindex="-1">Mobiserve</h3><span class="gal-badge">2014</span></div>
       <div class="swiper swiper-mobiserve">
         <div class="swiper-wrapper">
           <div class="swiper-slide"><img src="images/3- Mobiserve/1.JPG" alt="Mobiserve" loading="lazy"></div>
@@ -539,8 +799,8 @@ footer span{color:var(--accent)}
         <div class="swiper-pagination"></div>
       </div>
     </div>
-    <div class="gal-co rv">
-      <div class="gal-hd"><h3>FerobMetal</h3><span class="gal-badge">2012 - 2014</span></div>
+    <div class="gal-co rv" id="gal-ferob" data-co="ferob">
+      <div class="gal-hd"><h3 tabindex="-1">FerobMetal</h3><span class="gal-badge">2012 - 2014</span></div>
       <div class="swiper swiper-ferob">
         <div class="swiper-wrapper">
           <div class="swiper-slide"><img src="images/2- FerobMetal/1.jpg" alt="FerobMetal" loading="lazy"></div>
@@ -556,8 +816,8 @@ footer span{color:var(--accent)}
         <div class="swiper-pagination"></div>
       </div>
     </div>
-    <div class="gal-co rv">
-      <div class="gal-hd"><h3>Mitsubishi Heavy Industry (MHI)</h3><span class="gal-badge">2012</span></div>
+    <div class="gal-co rv" id="gal-mhi" data-co="mhi">
+      <div class="gal-hd"><h3 tabindex="-1">Mitsubishi Heavy Industry (MHI)</h3><span class="gal-badge">2012</span></div>
       <div class="swiper swiper-mhi">
         <div class="swiper-wrapper">
           <div class="swiper-slide"><img src="images/1- MHI/1.JPG" alt="MHI" loading="lazy"></div>
@@ -580,22 +840,22 @@ footer span{color:var(--accent)}
   <div class="container">
     <div class="rv"><span class="lbl" data-i18n="edu.lbl">Education &amp; Certifications</span><h2 class="sh" data-i18n-html="edu.h2">Diploma &amp; <span>Training</span></h2></div>
     <div class="edu-grid">
-      <div class="edu-c rv rv-d1"><div class="edu-ic"><i class="fa-solid fa-graduation-cap"></i></div><div class="edu-yr">2011</div><h3 data-i18n="edu.c1.h">Electrical Engineer - MEng</h3><p data-i18n="edu.c1.p">University of Science and Technology, Oran, Algeria. Top of class. Thesis on electrical bypassing in power grids (Comsol 4.0).</p></div>
-      <div class="edu-c rv rv-d2"><div class="edu-ic"><i class="fa-solid fa-bolt"></i></div><div class="edu-yr">Certification</div><h3 data-i18n="edu.c2.h">Electrical Accreditation</h3><p data-i18n="edu.c2.p">H0V, B1V, BR - Schneider Electric and Sonelgaz. Authorisation for electrical work on LV and HV installations.</p></div>
-      <div class="edu-c rv rv-d3"><div class="edu-ic"><i class="fa-solid fa-wrench"></i></div><div class="edu-yr">Certification</div><h3 data-i18n="edu.c3.h">Maintenance Management</h3><p data-i18n="edu.c3.p">Preventive, curative, predictive and palliative maintenance organisation and management training.</p></div>
-      <div class="edu-c rv rv-d4"><div class="edu-ic"><i class="fa-solid fa-flask"></i></div><div class="edu-yr">Certification</div><h3 data-i18n="edu.c4.h">Gas Risk Habilitation</h3><p data-i18n="edu.c4.p">Industrial gas risk habilitation - handling, storage and safety for compressed and cryogenic gases.</p></div>
-      <div class="edu-c rv rv-d5"><div class="edu-ic"><i class="fa-solid fa-shield-halved"></i></div><div class="edu-yr">Certification</div><h3 data-i18n="edu.c5.h">HAZOP &amp; Risk Assessment</h3><p data-i18n="edu.c5.p">Hazard and Operability Study - process risk identification and mitigation in industrial environments.</p></div>
-      <div class="edu-c rv rv-d1"><div class="edu-ic"><i class="fa-brands fa-amazon"></i></div><div class="edu-yr">Ongoing</div><h3 data-i18n="edu.c6.h">Amazon Leadership &amp; RME</h3><p data-i18n="edu.c6.p">Amazon Leadership Principles, RME certification programme, HIE safety, LOTO and operational excellence.</p></div>
+      <div class="edu-c rv rv-d1"><div class="edu-ic"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div><div class="edu-yr">2011</div><h3 data-i18n="edu.c1.h">Electrical Engineer - MEng</h3><p data-i18n="edu.c1.p">University of Science and Technology, Oran, Algeria. Top of class. Thesis on electrical bypassing in power grids (Comsol 4.0).</p></div>
+      <div class="edu-c rv rv-d2"><div class="edu-ic"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div><div class="edu-yr">Certification</div><h3 data-i18n="edu.c2.h">Electrical Accreditation</h3><p data-i18n="edu.c2.p">H0V, B1V, BR - Schneider Electric and Sonelgaz. Authorisation for electrical work on LV and HV installations.</p></div>
+      <div class="edu-c rv rv-d3"><div class="edu-ic"><i class="fa-solid fa-wrench" aria-hidden="true"></i></div><div class="edu-yr">Certification</div><h3 data-i18n="edu.c3.h">Maintenance Management</h3><p data-i18n="edu.c3.p">Preventive, curative, predictive and palliative maintenance organisation and management training.</p></div>
+      <div class="edu-c rv rv-d4"><div class="edu-ic"><i class="fa-solid fa-flask" aria-hidden="true"></i></div><div class="edu-yr">Certification</div><h3 data-i18n="edu.c4.h">Gas Risk Habilitation</h3><p data-i18n="edu.c4.p">Industrial gas risk habilitation - handling, storage and safety for compressed and cryogenic gases.</p></div>
+      <div class="edu-c rv rv-d5"><div class="edu-ic"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div><div class="edu-yr">Certification</div><h3 data-i18n="edu.c5.h">HAZOP &amp; Risk Assessment</h3><p data-i18n="edu.c5.p">Hazard and Operability Study - process risk identification and mitigation in industrial environments.</p></div>
+      <div class="edu-c rv rv-d1"><div class="edu-ic"><i class="fa-brands fa-amazon" aria-hidden="true"></i></div><div class="edu-yr" data-i18n="edu.ongoing">Ongoing</div><h3 data-i18n="edu.c6.h">Amazon Leadership &amp; RME</h3><p data-i18n="edu.c6.p">Amazon Leadership Principles, RME certification programme, HIE safety, LOTO and operational excellence.</p></div>
     </div>
   </div>
 </section>
 
 <section id="download">
   <div class="container">
-    <div class="rv" style="text-align:center;max-width:520px;margin:0 auto"><span class="lbl" data-i18n="dl.lbl">Resume</span><h2 class="sh" data-i18n-html="dl.h2">Download my <span>CV</span></h2></div>
+    <div class="rv sec-hd narrow"><span class="lbl" data-i18n="dl.lbl">Resume</span><h2 class="sh" data-i18n-html="dl.h2">Download my <span>CV</span></h2></div>
     <div class="dl-grid rv">
-      <div class="dl-c"><i class="fa-solid fa-file-word"></i><h3>CV Fran&#231;ais</h3><p>Version fran&#231;aise - 2026</p><a href="DEBAB_Amine_CV_FR_2026.docx" class="btn-dl" download><i class="fa-solid fa-download"></i> T&#233;l&#233;charger</a></div>
-      <div class="dl-c"><i class="fa-solid fa-file-word"></i><h3>CV English</h3><p>English version - 2026</p><a href="DEBAB_Amine_CV_EN_2026.docx" class="btn-dl" download><i class="fa-solid fa-download"></i> Download</a></div>
+      <div class="dl-c"><i class="fa-solid fa-file-word" aria-hidden="true"></i><h3 data-i18n="dl.fr.h">CV Fran&#231;ais</h3><p data-i18n="dl.fr.p">Version fran&#231;aise - 2026</p><a href="DEBAB_Amine_CV_FR_2026.docx" class="btn-dl" download><i class="fa-solid fa-download" aria-hidden="true"></i> <span data-i18n="dl.btn">T&#233;l&#233;charger</span></a></div>
+      <div class="dl-c"><i class="fa-solid fa-file-word" aria-hidden="true"></i><h3 data-i18n="dl.en.h">CV English</h3><p data-i18n="dl.en.p">English version - 2026</p><a href="DEBAB_Amine_CV_EN_2026.docx" class="btn-dl" download><i class="fa-solid fa-download" aria-hidden="true"></i> <span data-i18n="dl.btn">Download</span></a></div>
     </div>
   </div>
 </section>
@@ -605,52 +865,48 @@ footer span{color:var(--accent)}
     <div class="rv"><span class="lbl" data-i18n="ct.lbl">Get in Touch</span><h2 class="sh" data-i18n-html="ct.h2">Contact <span>Me</span></h2></div>
     <div class="ct-grid">
       <div>
-        <div class="ct-item rv rv-d1"><div class="ct-ico"><i class="fa-solid fa-envelope"></i></div><div><h4>Email</h4><a href="mailto:ing.debab@hotmail.fr">ing.debab@hotmail.fr</a></div></div>
-        <div class="ct-item rv rv-d2"><div class="ct-ico"><i class="fa-solid fa-location-dot"></i></div><div><h4 data-i18n="ct.loc">Location</h4><p>Lyon, France</p></div></div>
-        <div class="ct-item rv rv-d3"><div class="ct-ico"><i class="fa-solid fa-phone"></i></div><div><h4 data-i18n="ct.phone">Phone</h4><a href="tel:+33605700346">+33 6.05.70.03.46</a></div></div>
+        <div class="ct-item rv rv-d1"><div class="ct-ico"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div><div><h4 data-i18n="ct.email">Email</h4><a href="mailto:ing.debab@hotmail.fr" id="ctEmail">ing.debab@hotmail.fr</a></div></div>
+        <div class="ct-item rv rv-d2"><div class="ct-ico"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div><div><h4 data-i18n="ct.loc">Location</h4><p id="ctCity">Lyon, France</p></div></div>
+        <div class="ct-item rv rv-d3"><div class="ct-ico"><i class="fa-solid fa-phone" aria-hidden="true"></i></div><div><h4 data-i18n="ct.phone">Phone</h4><a href="tel:+33605700346" id="ctPhone">+33&nbsp;6.05.70.03.46</a></div></div>
+        <div class="ct-actions rv rv-d3">
+          <button type="button" class="btn-o" id="copyEmail"><i class="fa-regular fa-copy" aria-hidden="true"></i> <span data-i18n="ct.copy">Copy email</span></button>
+          <button type="button" class="btn-o" id="vcardBtn"><i class="fa-solid fa-address-card" aria-hidden="true"></i> <span data-i18n="ct.vcard">Download vCard</span></button>
+        </div>
         <div class="soc rv rv-d4">
-          <a href="https://www.linkedin.com/in/aminedebab/" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="https://github.com/AmineDEBAB" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
-          <a href="mailto:ing.debab@hotmail.fr"><i class="fa-solid fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/aminedebab/" target="_blank" rel="noopener" id="socLinkedin" aria-label="LinkedIn profile" data-i18n-aria="soc.linkedin"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="https://github.com/AmineDEBAB" target="_blank" rel="noopener" id="socGithub" aria-label="GitHub profile" data-i18n-aria="soc.github"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+          <a href="mailto:ing.debab@hotmail.fr" aria-label="Send an email" data-i18n-aria="soc.email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
         </div>
       </div>
-      <div class="rv rv-r" style="padding-top:1rem">
-        <p style="color:var(--muted);font-size:.92rem;line-height:1.9" data-i18n="ct.text">Open to new opportunities in maintenance and reliability engineering, project management, and industrial automation. Based in Lyon, France.</p>
-        <a href="https://www.linkedin.com/in/aminedebab/" target="_blank" class="btn-p" style="margin-top:1.5rem;display:inline-flex"><i class="fa-brands fa-linkedin-in"></i> <span data-i18n="ct.linkedin">Connect on LinkedIn</span></a>
+      <div class="rv rv-r ct-side">
+        <p class="ct-text" data-i18n="ct.text">Open to new opportunities in maintenance and reliability engineering, project management, and industrial automation. Based in Lyon, France.</p>
+        <a href="https://www.linkedin.com/in/aminedebab/" target="_blank" rel="noopener" class="btn-p ct-cta"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i> <span data-i18n="ct.linkedin">Connect on LinkedIn</span></a>
       </div>
     </div>
   </div>
 </section>
+</main>
 
-<footer><p>&#169; 2026 <span>Amine DEBAB</span> &mdash; Sr. Maintenance &amp; Reliability Engineer &mdash; Lyon, France</p></footer>
+<footer><p>&#169; 2026 <span class="ft-name">Amine DEBAB</span> &mdash; <span data-i18n="hero.title">Sr. Maintenance &amp; Reliability Engineer</span> &mdash; Lyon, France</p><p class="ft-keys"><span data-i18n="ui.keys">Shortcuts:</span> <kbd>T</kbd> <span data-i18n="ui.key_theme">theme</span> &middot; <kbd>L</kbd> <span data-i18n="ui.key_lang">language</span></p></footer>
+
+<button type="button" class="to-top" id="toTop" aria-label="Back to top" title="Back to top" data-i18n-aria="ui.top"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" data-i18n-aria="lb.dialog" aria-describedby="lbCaption" hidden>
+  <div class="lb-stage" id="lbStage">
+    <figure class="lb-fig" id="lbFig"><figcaption class="lb-cap" id="lbCaption"></figcaption></figure>
+  </div>
+  <p class="lb-count" id="lbCount" aria-live="polite"></p>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Close" title="Close" data-i18n-aria="lb.close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+  <button type="button" class="lb-btn lb-prev" id="lbPrev" aria-label="Previous photo" title="Previous photo" data-i18n-aria="lb.prev"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+  <button type="button" class="lb-btn lb-next" id="lbNext" aria-label="Next photo" title="Next photo" data-i18n-aria="lb.next"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
 (function(){
-var toggle=document.getElementById('navToggle');
-var links=document.getElementById('navLinks');
-toggle.addEventListener('click',function(){links.classList.toggle('open');});
-links.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');});});
-var sections=document.querySelectorAll('section[id]');
-var navAs=document.querySelectorAll('.nav-links a');
-function onScroll(){var y=window.scrollY+120;sections.forEach(function(s){if(y>=s.offsetTop&&y<s.offsetTop+s.offsetHeight){navAs.forEach(function(a){a.classList.remove('active');});var act=document.querySelector('.nav-links a[href="#'+s.id+'"]');if(act)act.classList.add('active');}});}
-window.addEventListener('scroll',onScroll,{passive:true});
-var rvs=document.querySelectorAll('.rv,.rv-l,.rv-r');
-var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target);}});},{threshold:0.12});
-rvs.forEach(function(el){io.observe(el);});
-var bars=document.querySelectorAll('.sk-bar');
-var so=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.style.width=x.target.getAttribute('data-w')+'%';so.unobserve(x.target);}});},{threshold:0.4});
-bars.forEach(function(b){so.observe(b);});
-var cfg={slidesPerView:3,spaceBetween:16,loop:true,autoplay:{delay:3500,disableOnInteraction:false,pauseOnMouseEnter:true},breakpoints:{0:{slidesPerView:1},600:{slidesPerView:2},900:{slidesPerView:3}}};
-['swiper-amazon','swiper-diamgrain','swiper-greif','swiper-linde','swiper-sonelgaz','swiper-mobiserve','swiper-ferob','swiper-mhi'].forEach(function(cls){
-var el=document.querySelector('.'+cls);
-if(el){new Swiper('.'+cls,Object.assign({},cfg,{navigation:{nextEl:el.querySelector('.swiper-button-next'),prevEl:el.querySelector('.swiper-button-prev')},pagination:{el:el.querySelector('.swiper-pagination'),clickable:true}}));}
-});
-})();
-</script>
-
-<script>
-(function(){
+'use strict';
 /* ===== TRANSLATIONS ===== */
 var T={
   en:{
@@ -704,7 +960,56 @@ var T={
     "dl.lbl":"Resume","dl.h2":"Download my <span>CV</span>",
     "ct.lbl":"Get in Touch","ct.h2":"Contact <span>Me</span>","ct.loc":"Location","ct.phone":"Phone",
     "ct.text":"Open to new opportunities in maintenance and reliability engineering, project management, and industrial automation. Based in Lyon, France.",
-    "ct.linkedin":"Connect on LinkedIn"
+    "ct.linkedin":"Connect on LinkedIn",
+    "nav.cv":"CV","nav.contact":"Contact","nav.menu":"Open menu",
+    "ui.lang":"Switch to French","ui.theme":"Toggle dark/light theme","ui.top":"Back to top",
+    "ui.keys":"Shortcuts:","ui.key_theme":"theme","ui.key_lang":"language",
+    "hero.typed_lbl":"Focus:","hero.roles":"Reliability|PMO|Electrical Engineering|Data & Automation",
+    "about.badge":"Years<br>Experience",
+    "f.all":"All",
+    "exp.flip":"Key achievements","exp.back":"Back",
+    "exp.c1.a1":"Full commissioning of Amazon LYS2 Lyon from zero",
+    "exp.c1.a2":"Utility services project at DiamGrain: boilers, air compressors, water treatment, 1,200m piping network",
+    "exp.c1.a3":"Commissioned nitrous oxide equipment at Linde Gaz",
+    "exp.c2.a1":"Built and managed a multinational team (15+ nationalities) at LYS2",
+    "exp.c2.a2":"Recruited and trained 2 apprentices at Amazon ETZ2",
+    "exp.c2.a3":"Led electrical and gas intervention teams at Sonelgaz",
+    "exp.c3.a1":"Installation and commissioning of electrical cabinets and industrial equipment (MHI)",
+    "exp.c3.a2":"Electrical and mechanical assembly of aluminum profile extruders (FerobMetal)",
+    "exp.c3.a3":"H0V, B1V, BR accreditation - Schneider Electric and Sonelgaz",
+    "exp.c4.a1":"RME service structure, CMMS and KPI frameworks built at LYS2",
+    "exp.c4.a2":"Jam DPMO reduction strategy and OEE reporting",
+    "exp.c4.a3":"OEE above 95% at Amazon ETZ2",
+    "exp.c5.a1":"Automated DPMO reporting with Python: 3h to 20 min",
+    "exp.c5.a2":"QuickSight dashboards for maintenance KPIs",
+    "exp.c5.a3":"Access-based tracking systems at Sonelgaz",
+    "exp.c6.a1":"Electrical design with AutoCAD Electrical, Caneco BT and See Electrical",
+    "exp.c6.a2":"Operational procedures created at Linde Gaz",
+    "exp.c6.a3":"Safety rules and procedures enforced on the shop floor at Greif",
+    "sk.f_label":"Filter skills by category","sk.f_eng":"Engineering","sk.f_data":"Data & Tools","sk.f_mgmt":"Management",
+    "sk.s1":"Electrical Engineering","sk.s1.tip":"Power systems, automation, PLC/SCADA, E&I. Certified H0V, B1V, BR.",
+    "sk.s2":"CMMS / Reliability Engineering","sk.s2.tip":"RME from zero: PM/PdM plans, OEE monitoring, DPMO analysis, CMMS implementation.",
+    "sk.s3":"Project Management","sk.s3.tip":"End-to-end project delivery from scope to commissioning.",
+    "sk.s4":"OEE / DPMO Analysis","sk.s4.tip":"Jam DPMO reduction strategy and OEE reporting. OEE above 95% at ETZ2.",
+    "sk.s5":"Excel / Access / Power BI","sk.s5.tip":"Management reviews, dashboards and Access-based tracking systems.",
+    "sk.s6":"Python / Automation","sk.s6.tip":"Python for maintenance KPIs. Automated DPMO reporting: 3h to 20 min.",
+    "sk.s7":"AutoCAD / AutoCAD Electrical","sk.s7.tip":"AutoCAD Electrical, Caneco BT, See Electrical. Technical documentation.",
+    "sk.s8":"Ms Project / Primavera P6","sk.s8.tip":"Project planning and scheduling, from scope to commissioning.",
+    "work.f_country":"Filter by country","work.f_co":"Filter by company",
+    "work.f_fr":"France","work.f_dz":"Algeria","work.f_allco":"All companies",
+    "work.count":"{n} experiences shown","work.count1":"1 experience shown",
+    "work.empty":"No experience matches these filters.",
+    "work.more":"See more","work.less":"See less","work.photos":"See photos",
+    "work.p1":"April 2026 - Present","work.p2":"July 2024 - March 2026","work.p3":"Oct. 2023 - June 2024","work.p4":"2021 - Oct. 2023",
+    "work.l5":"Linde Gaz - Algeria","work.l6":"Sonelgaz - Algeria","work.l7":"Mobiserve - Algeria","work.l8":"FerobMetal - Algeria","work.l9":"Mitsubishi Heavy Industry - Algeria",
+    "gal.f_label":"Filter gallery by company","gal.b_amazon":"2024 - Present","gal.b_greif":"Oct. 2023 - June 2024",
+    "lb.dialog":"Photo viewer","lb.close":"Close","lb.prev":"Previous photo","lb.next":"Next photo","lb.open":"Open photo {i} of {n} - {co}",
+    "edu.ongoing":"Ongoing",
+    "dl.fr.h":"French CV","dl.fr.p":"French version - 2026","dl.en.h":"English CV","dl.en.p":"English version - 2026","dl.btn":"Download",
+    "ct.email":"Email","ct.copy":"Copy email","ct.vcard":"Download vCard",
+    "soc.linkedin":"LinkedIn profile","soc.github":"GitHub profile","soc.email":"Send an email",
+    "toast.copied":"Email copied to clipboard","toast.copy_fail":"Copy unavailable - email: {e}","toast.vcard":"vCard downloaded",
+    "toast.theme_dark":"Dark theme","toast.theme_light":"Light theme","toast.lang":"English"
   },
   fr:{
     "nav.home":"Accueil","nav.about":"\u00C0 propos","nav.expertise":"Expertise",
@@ -757,61 +1062,588 @@ var T={
     "dl.lbl":"CV","dl.h2":"T\u00E9l\u00E9charger mon <span>CV</span>",
     "ct.lbl":"Contactez-moi","ct.h2":"Me <span>Contacter</span>","ct.loc":"Localisation","ct.phone":"T\u00E9l\u00E9phone",
     "ct.text":"Ouvert \u00E0 de nouvelles opportunit\u00E9s en maintenance et reliability, gestion de projet et automatisation industrielle. Bas\u00E9 \u00E0 Lyon, France.",
-    "ct.linkedin":"Me connecter sur LinkedIn"
+    "ct.linkedin":"Me connecter sur LinkedIn",
+    "nav.cv":"CV","nav.contact":"Contact","nav.menu":"Ouvrir le menu",
+    "ui.lang":"Passer en anglais","ui.theme":"Basculer thème sombre/clair","ui.top":"Retour en haut",
+    "ui.keys":"Raccourcis :","ui.key_theme":"thème","ui.key_lang":"langue",
+    "hero.typed_lbl":"Focus :","hero.roles":"Fiabilité|PMO|Génie électrique|Data & Automatisation",
+    "about.badge":"Ans<br>d’expérience",
+    "f.all":"Tout",
+    "exp.flip":"Réalisations","exp.back":"Retour",
+    "exp.c1.a1":"Commissioning complet d’Amazon LYS2 Lyon, de zéro",
+    "exp.c1.a2":"Projet utilités chez DiamGrain : chaudières, air comprimé, traitement d’eau, réseau de 1 200 m",
+    "exp.c1.a3":"Commissioning de la ligne protoxyde d’azote chez Linde Gaz",
+    "exp.c2.a1":"Constitution et management d’une équipe multiculturelle (15+ nationalités) à LYS2",
+    "exp.c2.a2":"Recrutement et formation de 2 apprentis (promus en CDI) à Amazon ETZ2",
+    "exp.c2.a3":"Animation des équipes d’intervention électrique et gaz chez Sonelgaz",
+    "exp.c3.a1":"Installation et commissioning d’armoires et d’équipements électriques industriels (MHI)",
+    "exp.c3.a2":"Montage électrique et mécanique d’extrudeuses profilés aluminium (FerobMetal)",
+    "exp.c3.a3":"Habilitation H0V, B1V, BR – Schneider Electric et Sonelgaz",
+    "exp.c4.a1":"Service RME, GMAO et KPIs mis en place à LYS2",
+    "exp.c4.a2":"Stratégie de réduction JAM DPMO et reporting OEE",
+    "exp.c4.a3":"OEE > 95 % à Amazon ETZ2",
+    "exp.c5.a1":"Reporting DPMO automatisé en Python : 3h → 20 min",
+    "exp.c5.a2":"Dashboards QuickSight pour les KPIs maintenance",
+    "exp.c5.a3":"Base de données Access de suivi des anomalies chez Sonelgaz",
+    "exp.c6.a1":"Conception électrique sous AutoCAD Electrical, Caneco BT et See Electrical",
+    "exp.c6.a2":"Création de procédures opérationnelles chez Linde Gaz",
+    "exp.c6.a3":"Application et contrôle des règles HSE sur le poste de travail chez Greif",
+    "sk.f_label":"Filtrer les compétences par catégorie","sk.f_eng":"Ingénierie","sk.f_data":"Data & Outils","sk.f_mgmt":"Management",
+    "sk.s1":"Génie électrique","sk.s1.tip":"Systèmes HTA/BTA, automatismes, PLC/SCADA. Habilité H0V, B1V, BR.",
+    "sk.s2":"GMAO / Ingénierie de fiabilité","sk.s2.tip":"RME de zéro : plans PM/PdM, suivi OEE, analyse DPMO, implémentation GMAO.",
+    "sk.s3":"Gestion de projet","sk.s3.tip":"Pilotage de projets de A à Z : scope, planification, commissioning.",
+    "sk.s4":"Analyse OEE / DPMO","sk.s4.tip":"Stratégie de réduction JAM DPMO et reporting OEE. OEE > 95 % à ETZ2.",
+    "sk.s5":"Excel / Access / Power BI","sk.s5.tip":"Reporting de gestion, tableaux de bord et base de données Access de suivi.",
+    "sk.s6":"Python / Automatisation","sk.s6.tip":"Python pour KPIs maintenance. Reporting DPMO automatisé : 3h → 20 min.",
+    "sk.s7":"AutoCAD / AutoCAD Electrical","sk.s7.tip":"AutoCAD Electrical, Caneco BT, See Electrical. Documentation technique.",
+    "sk.s8":"Ms Project / Primavera P6","sk.s8.tip":"Planification et ordonnancement des projets, du scope au commissioning.",
+    "work.f_country":"Filtrer par pays","work.f_co":"Filtrer par entreprise",
+    "work.f_fr":"France","work.f_dz":"Algérie","work.f_allco":"Toutes les entreprises",
+    "work.count":"{n} expériences affichées","work.count1":"1 expérience affichée",
+    "work.empty":"Aucune expérience ne correspond à ces filtres.",
+    "work.more":"Voir plus","work.less":"Voir moins","work.photos":"Voir les photos",
+    "work.p1":"Avril 2026 - Aujourd’hui","work.p2":"Juillet 2024 - Mars 2026","work.p3":"Oct. 2023 - Juin 2024","work.p4":"2021 - Oct. 2023",
+    "work.l5":"Linde Gaz - Algérie","work.l6":"Sonelgaz - Algérie","work.l7":"Mobiserve - Algérie","work.l8":"FerobMetal - Algérie","work.l9":"Mitsubishi Heavy Industry - Algérie",
+    "gal.f_label":"Filtrer la galerie par entreprise","gal.b_amazon":"2024 - Aujourd’hui","gal.b_greif":"Oct. 2023 - Juin 2024",
+    "lb.dialog":"Visionneuse photo","lb.close":"Fermer","lb.prev":"Photo précédente","lb.next":"Photo suivante","lb.open":"Ouvrir la photo {i} sur {n} - {co}",
+    "edu.ongoing":"En cours",
+    "dl.fr.h":"CV Français","dl.fr.p":"Version française - 2026","dl.en.h":"CV Anglais","dl.en.p":"Version anglaise - 2026","dl.btn":"Télécharger",
+    "ct.email":"E-mail","ct.copy":"Copier l’e-mail","ct.vcard":"Télécharger la vCard",
+    "soc.linkedin":"Profil LinkedIn","soc.github":"Profil GitHub","soc.email":"Envoyer un e-mail",
+    "toast.copied":"E-mail copié dans le presse-papiers","toast.copy_fail":"Copie impossible - e-mail : {e}","toast.vcard":"vCard téléchargée",
+    "toast.theme_dark":"Thème sombre","toast.theme_light":"Thème clair","toast.lang":"Français"
   }
 };
 
-/* ===== LANGUAGE SWITCHER ===== */
-var currentLang=localStorage.getItem('lang')||'en';
+/* ===== HELPERS ===== */
+var doc=document,root=doc.documentElement;
+function $(s,c){return (c||doc).querySelector(s);}
+function $$(s,c){return Array.prototype.slice.call((c||doc).querySelectorAll(s));}
+function mq(q){return window.matchMedia?window.matchMedia(q):{matches:false,addEventListener:function(){}};}
+var reduceMQ=mq('(prefers-reduced-motion: reduce)');
+var fineMQ=mq('(hover: hover) and (pointer: fine)');
+function reduced(){return reduceMQ.matches;}
+function onMQ(m,fn){if(m.addEventListener)m.addEventListener('change',fn);else if(m.addListener)m.addListener(fn);}
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){}return null;}
+function reflow(el){return el.offsetWidth;}
+function replayClass(el,cls){el.classList.remove(cls);reflow(el);el.classList.add(cls);}
+function scrollBehavior(){return reduced()?'auto':'smooth';}
+function debounce(fn,ms){var id;return function(){clearTimeout(id);id=setTimeout(fn,ms);};}
+function fmt(s,o){return s.replace(/\{(\w+)\}/g,function(m,k){return o[k]!==undefined?o[k]:m;});}
 
+/* ===== LANGUAGE ===== */
+var currentLang=store('lang')==='fr'?'fr':'en';
+var langHooks=[];
+function t(k){var v=T[currentLang][k];return v!==undefined?v:(T.en[k]!==undefined?T.en[k]:k);}
+var langBtn=$('#langToggle');
 function applyLang(lang){
-  var d=T[lang];
-  document.querySelectorAll('[data-i18n]').forEach(function(el){
-    var k=el.getAttribute('data-i18n');
-    if(d[k]!==undefined) el.textContent=d[k];
-  });
-  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
-    var k=el.getAttribute('data-i18n-html');
-    if(d[k]!==undefined) el.innerHTML=d[k];
-  });
-  var btn=document.getElementById('langToggle');
-  if(btn) btn.textContent=lang==='en'?'FR':'EN';
-  document.documentElement.setAttribute('lang',lang);
-  localStorage.setItem('lang',lang);
   currentLang=lang;
+  var d=T[lang];
+  $$('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(d[k]!==undefined)el.textContent=d[k];});
+  $$('[data-i18n-html]').forEach(function(el){var k=el.getAttribute('data-i18n-html');if(d[k]!==undefined)el.innerHTML=d[k];});
+  $$('[data-i18n-aria]').forEach(function(el){var k=el.getAttribute('data-i18n-aria');if(d[k]===undefined)return;el.setAttribute('aria-label',d[k]);if(el.hasAttribute('title'))el.setAttribute('title',d[k]);});
+  langBtn.textContent=lang==='en'?'FR':'EN';
+  root.setAttribute('lang',lang);
+  store('lang',lang);
+  langHooks.forEach(function(fn){fn(lang);});
 }
+langBtn.addEventListener('click',function(){applyLang(currentLang==='en'?'fr':'en');});
 
-(function(){
-  var langBtn=document.getElementById('langToggle');
-  if(langBtn){
-    langBtn.addEventListener('click',function(){
-      applyLang(currentLang==='en'?'fr':'en');
-    });
-  }
-  applyLang(currentLang);
-})();
-
-/* ===== DARK / LIGHT THEME ===== */
-var currentTheme=localStorage.getItem('theme')||'dark';
-
+/* ===== THEME ===== */
+var currentTheme=store('theme')==='light'?'light':'dark';
+var themeHooks=[];
+var themeBtn=$('#themeToggle');
 function applyTheme(theme){
-  document.documentElement.setAttribute('data-theme',theme);
-  var btn=document.getElementById('themeToggle');
-  if(btn) btn.innerHTML=theme==='dark'?'<i class="fa-solid fa-sun"></i>':'<i class="fa-solid fa-moon"></i>';
-  localStorage.setItem('theme',theme);
+  root.setAttribute('data-theme',theme);
+  themeBtn.innerHTML=theme==='dark'?'<i class="fa-solid fa-sun" aria-hidden="true"></i>':'<i class="fa-solid fa-moon" aria-hidden="true"></i>';
+  themeBtn.setAttribute('aria-pressed',String(theme==='light'));
+  store('theme',theme);
   currentTheme=theme;
+  themeHooks.forEach(function(fn){fn(theme);});
+}
+themeBtn.addEventListener('click',function(){applyTheme(currentTheme==='dark'?'light':'dark');});
+
+/* ===== TOAST ===== */
+var toastEl=$('#toast'),toastTimer=null;
+function toast(msg){
+  toastEl.textContent=msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){toastEl.classList.remove('show');},2600);
 }
 
-(function(){
-  var themeBtn=document.getElementById('themeToggle');
-  if(themeBtn){
-    themeBtn.addEventListener('click',function(){
-      applyTheme(currentTheme==='dark'?'light':'dark');
-    });
+/* ===== CHIP GROUPS ===== */
+function chipGroup(group,attr,onChange){
+  var chips=$$('['+attr+']',group);
+  function select(v){
+    chips.forEach(function(c){var on=c.getAttribute(attr)===v;c.classList.toggle('is-on',on);c.setAttribute('aria-pressed',String(on));});
+    onChange(v);
   }
-  applyTheme(currentTheme);
-})();
+  group.addEventListener('click',function(e){var c=e.target.closest('['+attr+']');if(c&&group.contains(c))select(c.getAttribute(attr));});
+  return {select:select};
+}
 
+/* ===== NAVIGATION ===== */
+var navToggle=$('#navToggle'),navLinks=$('#navLinks'),navAs=$$('a',navLinks);
+function menuOpen(){return navLinks.classList.contains('open');}
+function setMenu(open){navLinks.classList.toggle('open',open);navToggle.setAttribute('aria-expanded',String(open));}
+navToggle.addEventListener('click',function(){setMenu(!menuOpen());});
+navLinks.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false);});
+doc.addEventListener('click',function(e){if(menuOpen()&&!navLinks.contains(e.target)&&!navToggle.contains(e.target))setMenu(false);});
+
+var sections=$$('main section[id]');
+function setActive(id){
+  navAs.forEach(function(a){
+    var on=a.getAttribute('href')==='#'+id;
+    a.classList.toggle('active',on);
+    if(on)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');
+  });
+}
+if('IntersectionObserver' in window){
+  var secIO=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting)setActive(en.target.id);});
+  },{rootMargin:'-40% 0px -59% 0px'});
+  sections.forEach(function(s){secIO.observe(s);});
+}
+
+var progress=$('#progress'),toTop=$('#toTop'),scrollTick=false;
+function onScroll(){
+  scrollTick=false;
+  var max=root.scrollHeight-window.innerHeight,y=window.pageYOffset;
+  var p=max>0?Math.min(1,Math.max(0,y/max)):0;
+  progress.style.transform='scaleX('+p.toFixed(4)+')';
+  toTop.classList.toggle('show',y>600);
+  if(max>0&&max-y<4)setActive(sections[sections.length-1].id);
+}
+window.addEventListener('scroll',function(){if(!scrollTick){scrollTick=true;requestAnimationFrame(onScroll);}},{passive:true});
+toTop.addEventListener('click',function(){
+  window.scrollTo({top:0,behavior:scrollBehavior()});
+  navAs[0].focus({preventScroll:true});
+});
+
+/* ===== REVEAL ON SCROLL ===== */
+var rvs=$$('.rv,.rv-l,.rv-r');
+if('IntersectionObserver' in window&&!reduced()){
+  var rvIO=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('vis');rvIO.unobserve(x.target);}});},{threshold:0.12});
+  rvs.forEach(function(el){rvIO.observe(el);});
+}else{
+  rvs.forEach(function(el){el.classList.add('vis');});
+}
+
+/* ===== HERO: COUNT-UP ===== */
+function countUp(){
+  $$('#heroStats [data-count]').forEach(function(el){
+    var end=parseInt(el.getAttribute('data-count'),10),suf=el.getAttribute('data-suffix')||'';
+    if(reduced()){el.textContent=end+suf;return;}
+    var t0=null,dur=1600;
+    el.textContent='0';
+    function step(ts){
+      if(t0===null)t0=ts;
+      var p=Math.min(1,(ts-t0)/dur);
+      el.textContent=Math.round(end*(1-Math.pow(1-p,3)))+(p===1?suf:'');
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}
+var heroStats=$('#heroStats');
+if('IntersectionObserver' in window){
+  var cIO=new IntersectionObserver(function(e){if(e[0].isIntersecting){cIO.disconnect();countUp();}},{threshold:0.5});
+  cIO.observe(heroStats);
+}
+
+/* ===== HERO: TYPEWRITER ===== */
+var heroVisible=true;
+var typedEl=$('#typed'),typedSr=$('#typedSr'),typedWrap=$('#heroTyped'),typeTimer=null;
+function startTyped(){
+  clearTimeout(typeTimer);
+  var list=t('hero.roles').split('|');
+  typedSr.textContent=list.join(', ');
+  if(reduced()){typedWrap.classList.add('static');typedEl.textContent=list.join(' · ');return;}
+  typedWrap.classList.remove('static');
+  var ri=0,ci=0,del=false;
+  function tick(){
+    if(!heroVisible||doc.hidden){typeTimer=setTimeout(tick,400);return;}
+    var w=list[ri];
+    if(!del){
+      ci++;typedEl.textContent=w.slice(0,ci);
+      if(ci>=w.length){del=true;typeTimer=setTimeout(tick,1700);return;}
+      typeTimer=setTimeout(tick,75);
+    }else{
+      ci--;typedEl.textContent=w.slice(0,ci);
+      if(ci<=0){del=false;ri=(ri+1)%list.length;typeTimer=setTimeout(tick,350);return;}
+      typeTimer=setTimeout(tick,35);
+    }
+  }
+  typedEl.textContent='';
+  tick();
+}
+langHooks.push(startTyped);
+onMQ(reduceMQ,startTyped);
+
+/* ===== HERO: PARTICLE NETWORK ===== */
+var heroCanvas=(function(){
+  var hero=$('#hero'),cv=$('#heroCanvas');
+  var ctx=cv.getContext?cv.getContext('2d'):null;
+  if(!ctx){cv.hidden=true;return {};}
+  var pts=[],w=0,h=0,raf=0,rgb='255,153,0',mouse={x:-1e4,y:-1e4};
+  function readColor(){
+    var c=getComputedStyle(root).getPropertyValue('--accent').trim();
+    var m=/^#([0-9a-f]{6})$/i.exec(c);
+    if(m){var n=parseInt(m[1],16);rgb=((n>>16)&255)+','+((n>>8)&255)+','+(n&255);}
+  }
+  function resize(){
+    var dpr=Math.min(2,window.devicePixelRatio||1);
+    w=hero.clientWidth;h=hero.clientHeight;
+    cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.round(Math.min(70,Math.max(18,w*h/22000)));
+    pts=[];
+    for(var i=0;i<n;i++)pts.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4});
+  }
+  function frame(){
+    raf=0;
+    ctx.clearRect(0,0,w,h);
+    var i,j,p,q,dx,dy,d;
+    for(i=0;i<pts.length;i++){
+      p=pts[i];
+      dx=p.x-mouse.x;dy=p.y-mouse.y;d=Math.sqrt(dx*dx+dy*dy);
+      if(d<140&&d>0){p.x+=dx/d*1.2;p.y+=dy/d*1.2;}
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>w)p.vx*=-1;
+      if(p.y<0||p.y>h)p.vy*=-1;
+      p.x=Math.max(0,Math.min(w,p.x));p.y=Math.max(0,Math.min(h,p.y));
+    }
+    ctx.lineWidth=1;
+    for(i=0;i<pts.length;i++){
+      p=pts[i];
+      for(j=i+1;j<pts.length;j++){
+        q=pts[j];dx=p.x-q.x;dy=p.y-q.y;d=dx*dx+dy*dy;
+        if(d<14400){ctx.strokeStyle='rgba('+rgb+','+((1-Math.sqrt(d)/120)*.28).toFixed(3)+')';ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}
+      }
+      dx=p.x-mouse.x;dy=p.y-mouse.y;d=Math.sqrt(dx*dx+dy*dy);
+      if(d<180){ctx.strokeStyle='rgba('+rgb+','+((1-d/180)*.45).toFixed(3)+')';ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(mouse.x,mouse.y);ctx.stroke();}
+      ctx.fillStyle='rgba('+rgb+',.65)';ctx.beginPath();ctx.arc(p.x,p.y,1.8,0,6.2832);ctx.fill();
+    }
+    if(running())raf=requestAnimationFrame(frame);
+  }
+  function running(){return heroVisible&&!doc.hidden&&!reduced();}
+  function sync(){
+    if(reduced()){if(raf)cancelAnimationFrame(raf);raf=0;ctx.clearRect(0,0,w,h);cv.hidden=true;return;}
+    cv.hidden=false;
+    if(!w)resize();
+    if(running()&&!raf)raf=requestAnimationFrame(frame);
+    else if(!running()&&raf){cancelAnimationFrame(raf);raf=0;}
+  }
+  hero.addEventListener('mousemove',function(e){var r=hero.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});
+  hero.addEventListener('mouseleave',function(){mouse.x=-1e4;mouse.y=-1e4;});
+  window.addEventListener('resize',debounce(function(){if(!reduced()){resize();}},200));
+  doc.addEventListener('visibilitychange',sync);
+  onMQ(reduceMQ,sync);
+  themeHooks.push(readColor);
+  readColor();
+  return {sync:sync,isRunning:function(){return raf!==0;}};
+})();
+if('IntersectionObserver' in window){
+  new IntersectionObserver(function(e){heroVisible=e[0].isIntersecting;if(heroCanvas.sync)heroCanvas.sync();}).observe($('#hero'));
+}
+
+/* ===== EXPERTISE: TILT + FLIP ===== */
+$$('.exp-card').forEach(function(card){
+  var inner=$('.exp-inner',card),front=$('.exp-front',card),back=$('.exp-back',card),openBtn=$('.exp-flip',front),backBtn=$('.exp-unflip',back);
+  var lockUntil=0;
+  function resetTilt(){inner.style.removeProperty('--rx');inner.style.removeProperty('--ry');card.classList.remove('tilting');}
+  function flip(on,moveFocus){
+    resetTilt();lockUntil=Date.now()+700;
+    card.classList.toggle('flipped',on);
+    if(on){back.removeAttribute('inert');front.setAttribute('inert','');}else{front.removeAttribute('inert');back.setAttribute('inert','');}
+    openBtn.setAttribute('aria-expanded',String(on));
+    if(moveFocus)(on?backBtn:openBtn).focus({preventScroll:true});
+  }
+  card.addEventListener('click',function(e){
+    if(e.target.closest('a'))return;
+    if(window.getSelection&&String(window.getSelection()).length)return;
+    flip(!card.classList.contains('flipped'),!!e.target.closest('.exp-flip'));
+  });
+  card.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse'||!fineMQ.matches||reduced()||Date.now()<lockUntil)return;
+    var r=card.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+    inner.style.setProperty('--rx',(-py*8).toFixed(2)+'deg');
+    inner.style.setProperty('--ry',(px*10).toFixed(2)+'deg');
+    card.classList.add('tilting');
+  });
+  card.addEventListener('pointerleave',resetTilt);
+});
+
+/* ===== SKILLS: FILTER + BARS ===== */
+var skItems=$$('#skGrid .sk');
+function fillBars(bars){bars.forEach(function(b){b.style.width=b.getAttribute('data-w')+'%';});}
+var skIO=null;
+if('IntersectionObserver' in window){
+  skIO=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){fillBars([x.target]);skIO.unobserve(x.target);}});},{threshold:0.4});
+  skItems.forEach(function(it){skIO.observe($('.sk-bar',it));});
+}else{fillBars($$('.sk-bar'));}
+chipGroup($('#skFilters'),'data-sk-filter',function(cat){
+  var shown=[];
+  skItems.forEach(function(it){
+    var ok=cat==='all'||it.getAttribute('data-cat')===cat;
+    it.hidden=!ok;
+    if(ok){it.classList.add('vis');shown.push($('.sk-bar',it));if(!reduced())replayClass(it,'sk-in');}
+  });
+  shown.forEach(function(b){if(skIO)skIO.unobserve(b);b.style.transition='none';b.style.width='0';});
+  if(shown.length)reflow(shown[0]);
+  shown.forEach(function(b){b.style.transition='';});
+  requestAnimationFrame(function(){fillBars(shown);});
+});
+
+/* ===== TIMELINE: FILTERS + EXPAND ===== */
+var tlRows=$$('#timeline .tl-row'),tlState={country:'all',co:'all'},tlShown=tlRows.length;
+function moreLabel(c){$('.tl-more-t',c).textContent=t(c.classList.contains('open')?'work.less':'work.more');}
+function refreshExpandable(){
+  tlRows.forEach(function(r){
+    if(r.hidden)return;
+    var c=$('.tl-c',r),d=$('.tl-desc',c),b=$('.tl-more',c);
+    if(c.classList.contains('open')){d.style.maxHeight='none';b.hidden=false;c.classList.add('expandable');return;}
+    var fits=d.scrollHeight<=d.clientHeight+2;
+    b.hidden=fits;
+    c.classList.toggle('expandable',!fits);
+  });
+}
+function setCard(c,open){
+  var d=$('.tl-desc',c);
+  d.style.maxHeight=d.scrollHeight+'px';
+  if(!open){reflow(d);d.style.maxHeight='';}
+  c.classList.toggle('open',open);
+  $('.tl-more',c).setAttribute('aria-expanded',String(open));
+  moreLabel(c);
+}
+function tlCountText(){$('#tlCount').textContent=tlShown===1?t('work.count1'):fmt(t('work.count'),{n:tlShown});}
+function layoutTimeline(animate){
+  var n=0;
+  tlRows.forEach(function(r){
+    var ok=(tlState.country==='all'||r.getAttribute('data-country')===tlState.country)&&(tlState.co==='all'||r.getAttribute('data-co')===tlState.co);
+    r.hidden=!ok;
+    if(!ok)return;
+    r.classList.toggle('is-left',n%2===0);
+    r.classList.toggle('is-right',n%2===1);
+    n++;
+    if(animate){r.classList.add('vis');if(!reduced())replayClass(r,'tl-anim');}
+  });
+  tlShown=n;
+  $('#tlEmpty').hidden=n>0;
+  tlCountText();
+  refreshExpandable();
+}
+chipGroup($('#tlCountry'),'data-tl-country',function(v){tlState.country=v;layoutTimeline(true);});
+chipGroup($('#tlCompany'),'data-tl-co',function(v){tlState.co=v;layoutTimeline(true);});
+tlRows.forEach(function(r){
+  var c=$('.tl-c',r);
+  $('.tl-desc',c).addEventListener('transitionend',function(e){if(e.propertyName==='max-height'&&c.classList.contains('open'))e.target.style.maxHeight='none';});
+  c.addEventListener('click',function(e){
+    var photos=e.target.closest('.tl-photos');
+    if(photos){showGallery(photos.getAttribute('data-gal'));return;}
+    if(e.target.closest('.tl-more')){setCard(c,!c.classList.contains('open'));return;}
+    if(e.target.closest('a,button'))return;
+    if(!c.classList.contains('expandable'))return;
+    if(window.getSelection&&String(window.getSelection()).length)return;
+    setCard(c,!c.classList.contains('open'));
+  });
+});
+langHooks.push(function(){tlRows.forEach(function(r){moreLabel($('.tl-c',r));});tlCountText();refreshExpandable();});
+window.addEventListener('resize',debounce(refreshExpandable,200));
+window.addEventListener('load',refreshExpandable);
+
+/* ===== GALLERY: CAROUSELS + FILTER ===== */
+var galCos=$$('#gallery .gal-co'),swipers={},galData={};
+var hasSwiper=typeof window.Swiper==='function';
+var swCfg={slidesPerView:3,spaceBetween:16,loop:true,speed:reduced()?0:300,autoplay:reduced()?false:{delay:3500,disableOnInteraction:false,pauseOnMouseEnter:true},breakpoints:{0:{slidesPerView:1},600:{slidesPerView:2},900:{slidesPerView:3}}};
+galCos.forEach(function(g){
+  var key=g.getAttribute('data-co'),items=[];
+  $$('.swiper-slide img',g).forEach(function(img,i){
+    var b=doc.createElement('button');
+    b.type='button';b.className='gal-open';b.setAttribute('data-co',key);b.setAttribute('data-index',String(i));
+    img.parentNode.insertBefore(b,img);b.appendChild(img);
+    items.push({src:img.getAttribute('src'),alt:img.getAttribute('alt'),btn:b});
+  });
+  galData[key]={el:g,title:$('.gal-hd h3',g),badge:$('.gal-badge',g),items:items};
+  if(hasSwiper){
+    var el=$('.swiper',g);
+    swipers[key]=new window.Swiper(el,Object.assign({},swCfg,{navigation:{nextEl:$('.swiper-button-next',el),prevEl:$('.swiper-button-prev',el)},pagination:{el:$('.swiper-pagination',el),clickable:true}}));
+  }
+});
+function galLabels(){
+  Object.keys(galData).forEach(function(k){
+    var g=galData[k];
+    g.items.forEach(function(it,i){it.btn.setAttribute('aria-label',fmt(t('lb.open'),{i:i+1,n:g.items.length,co:g.title.textContent}));});
+  });
+}
+langHooks.push(galLabels);
+function autoplay(key,on){var s=swipers[key];if(s&&s.autoplay&&s.params.autoplay&&s.params.autoplay.enabled){if(on)s.autoplay.start();else s.autoplay.stop();}}
+var galFilter=chipGroup($('#galFilters'),'data-gal-filter',function(v){
+  galCos.forEach(function(g){
+    var key=g.getAttribute('data-co'),ok=v==='all'||key===v;
+    g.hidden=!ok;
+    if(ok){
+      g.classList.add('vis');
+      if(swipers[key])swipers[key].update();
+      if(!reduced())replayClass(g,'gal-in');
+    }
+    autoplay(key,ok);
+  });
+});
+function showGallery(key){
+  var g=galData[key];if(!g)return;
+  galFilter.select(key);
+  g.el.scrollIntoView({behavior:scrollBehavior(),block:'start'});
+  g.title.focus({preventScroll:true});
+  g.el.classList.remove('gal-in');
+  replayClass(g.el,'gal-hl');
+  setTimeout(function(){g.el.classList.remove('gal-hl');},2600);
+}
+
+/* ===== LIGHTBOX ===== */
+var lb=$('#lightbox'),lbFig=$('#lbFig'),lbCap=$('#lbCaption'),lbCount=$('#lbCount'),lbStage=$('#lbStage');
+var lbPrev=$('#lbPrev'),lbNext=$('#lbNext'),lbClose=$('#lbClose');
+var lbImg=doc.createElement('img');lbImg.className='lb-img';lbImg.id='lbImg';lbImg.alt='';lbImg.decoding='async';
+lbFig.insertBefore(lbImg,lbCap);
+var lbState={open:false,key:null,i:0,trigger:null},swipedAt=0;
+var outside=[$('#mainNav'),$('#main'),$('footer'),toTop];
+function lbRender(){
+  var g=galData[lbState.key],n=g.items.length,it=g.items[lbState.i];
+  lbImg.classList.add('loading');
+  lbImg.onload=function(){lbImg.classList.remove('loading');};
+  lbImg.onerror=lbImg.onload;
+  lbImg.src=it.src;
+  lbImg.alt=it.alt+' '+(lbState.i+1)+'/'+n;
+  lbCap.textContent=g.title.textContent+' - '+g.badge.textContent;
+  lbCount.textContent=(lbState.i+1)+'/'+n;
+  lbPrev.hidden=lbNext.hidden=n<2;
+  [1,-1].forEach(function(d){var nb=g.items[(lbState.i+d+n)%n];if(nb){var im=new Image();im.src=nb.src;}});
+}
+function lbOpen(key,i,trigger){
+  if(!galData[key])return;
+  lbState.open=true;lbState.key=key;lbState.i=i;lbState.trigger=trigger||doc.activeElement;
+  outside.forEach(function(el){el.setAttribute('inert','');});
+  doc.body.classList.add('lb-open');
+  lb.hidden=false;
+  lbRender();
+  reflow(lb);lb.classList.add('on');
+  autoplay(key,false);
+  lbClose.focus({preventScroll:true});
+}
+function lbCloseFn(){
+  if(!lbState.open)return;
+  lbState.open=false;
+  lb.classList.remove('on');
+  lb.hidden=true;
+  outside.forEach(function(el){el.removeAttribute('inert');});
+  doc.body.classList.remove('lb-open');
+  if(galData[lbState.key]&&!galData[lbState.key].el.hidden)autoplay(lbState.key,true);
+  if(lbState.trigger&&lbState.trigger.focus)lbState.trigger.focus({preventScroll:true});
+}
+function lbStep(d){var n=galData[lbState.key].items.length;lbState.i=(lbState.i+d+n)%n;lbRender();}
+$('#gallery').addEventListener('click',function(e){
+  var b=e.target.closest('.gal-open');
+  if(!b||e.defaultPrevented)return;
+  lbOpen(b.getAttribute('data-co'),parseInt(b.getAttribute('data-index'),10),b);
+});
+lbPrev.addEventListener('click',function(){lbStep(-1);});
+lbNext.addEventListener('click',function(){lbStep(1);});
+lbClose.addEventListener('click',lbCloseFn);
+lb.addEventListener('click',function(e){
+  if(Date.now()-swipedAt<400)return;
+  if(e.target===lb||e.target===lbStage||e.target===lbFig)lbCloseFn();
+});
+var touch=null;
+lbStage.addEventListener('touchstart',function(e){touch=e.touches.length===1?{x:e.touches[0].clientX,y:e.touches[0].clientY}:null;},{passive:true});
+lbStage.addEventListener('touchend',function(e){
+  if(!touch)return;
+  var p=e.changedTouches[0],dx=p.clientX-touch.x,dy=p.clientY-touch.y;touch=null;
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.2){swipedAt=Date.now();lbStep(dx<0?1:-1);}
+},{passive:true});
+function lbTrap(e){
+  var f=[lbClose,lbPrev,lbNext].filter(function(b){return !b.hidden;});
+  var i=f.indexOf(doc.activeElement);
+  e.preventDefault();
+  if(i===-1){f[0].focus();return;}
+  f[(i+(e.shiftKey?-1:1)+f.length)%f.length].focus();
+}
+
+/* ===== CONTACT: COPY EMAIL + VCARD ===== */
+var emailLink=$('#ctEmail');
+function emailAddr(){return emailLink.getAttribute('href').replace(/^mailto:/,'');}
+function legacyCopy(text){
+  var active=doc.activeElement,ta=doc.createElement('textarea');
+  ta.value=text;ta.setAttribute('readonly','');ta.className='sr-only';
+  doc.body.appendChild(ta);ta.select();
+  var ok=false;
+  try{ok=doc.execCommand('copy');}catch(err){ok=false;}
+  doc.body.removeChild(ta);
+  if(active&&active.focus)active.focus({preventScroll:true});
+  return ok;
+}
+function copyText(text){
+  if(navigator.clipboard&&window.isSecureContext){
+    return navigator.clipboard.writeText(text).then(function(){return true;},function(){return legacyCopy(text);});
+  }
+  return Promise.resolve(legacyCopy(text));
+}
+$('#copyEmail').addEventListener('click',function(){
+  var e=emailAddr();
+  copyText(e).then(function(ok){toast(ok?t('toast.copied'):fmt(t('toast.copy_fail'),{e:e}));});
+});
+function vEsc(s){return String(s).replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/([,;])/g,'\\$1');}
+function buildVCard(){
+  var city=$('#ctCity').textContent.split(',');
+  var lines=['BEGIN:VCARD','VERSION:3.0',
+    'N:DEBAB;Amine;;;','FN:Amine DEBAB',
+    'TITLE:'+vEsc(t('hero.title')),
+    'ORG:Amazon LYS2',
+    'EMAIL;TYPE=INTERNET:'+emailAddr(),
+    'TEL;TYPE=CELL:'+$('#ctPhone').getAttribute('href').replace(/^tel:/,''),
+    'ADR;TYPE=WORK:;;;'+vEsc(city[0].trim())+';;;'+vEsc((city[1]||'').trim()),
+    'URL:'+$('#socLinkedin').href,
+    'X-SOCIALPROFILE;TYPE=github:'+$('#socGithub').href];
+  if(/^https?:$/.test(location.protocol))lines.push('URL:'+location.origin+location.pathname);
+  lines.push('END:VCARD');
+  return lines.join('\r\n')+'\r\n';
+}
+$('#vcardBtn').addEventListener('click',function(){
+  var blob=new Blob([buildVCard()],{type:'text/vcard;charset=utf-8'});
+  var url=URL.createObjectURL(blob),a=doc.createElement('a');
+  a.href=url;a.download='Amine_DEBAB.vcf';
+  doc.body.appendChild(a);a.click();doc.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},1500);
+  toast(t('toast.vcard'));
+});
+
+/* ===== KEYBOARD ===== */
+function isTyping(el){
+  if(!el)return false;
+  var tag=el.tagName;
+  return tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||el.isContentEditable;
+}
+doc.addEventListener('keydown',function(e){
+  if(lbState.open){
+    if(e.key==='Escape'){e.preventDefault();lbCloseFn();}
+    else if(e.key==='ArrowLeft'){e.preventDefault();lbStep(-1);}
+    else if(e.key==='ArrowRight'){e.preventDefault();lbStep(1);}
+    else if(e.key==='Tab')lbTrap(e);
+    return;
+  }
+  if(e.key==='Escape'&&menuOpen()){setMenu(false);navToggle.focus();return;}
+  if(e.ctrlKey||e.metaKey||e.altKey||e.repeat||isTyping(e.target))return;
+  var k=(e.key||'').toLowerCase();
+  if(k==='t'){applyTheme(currentTheme==='dark'?'light':'dark');toast(t('toast.theme_'+currentTheme));}
+  else if(k==='l'){applyLang(currentLang==='en'?'fr':'en');toast(t('toast.lang'));}
+});
+
+/* ===== INIT ===== */
+applyTheme(currentTheme);
+applyLang(currentLang);
+layoutTimeline(false);
+onScroll();
+if(heroCanvas.sync)heroCanvas.sync();
 })();
 </script>
 
