@@ -498,8 +498,8 @@
       let lockUntil = 0;
 
       function resetTilt() {
-        inner.style.removeProperty('--rx');
-        inner.style.removeProperty('--ry');
+        inner.style.removeProperty('--tilt-x');
+        inner.style.removeProperty('--tilt-y');
         card.classList.remove('tilting');
       }
 
@@ -530,8 +530,8 @@
         const r = card.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width - 0.5;
         const py = (e.clientY - r.top) / r.height - 0.5;
-        inner.style.setProperty('--rx', (-py * 8).toFixed(2) + 'deg');
-        inner.style.setProperty('--ry', (px * 10).toFixed(2) + 'deg');
+        inner.style.setProperty('--tilt-x', (-py * 8).toFixed(2) + 'deg');
+        inner.style.setProperty('--tilt-y', (px * 10).toFixed(2) + 'deg');
         card.classList.add('tilting');
       });
       card.addEventListener('pointerleave', resetTilt);

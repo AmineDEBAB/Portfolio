@@ -3,6 +3,24 @@
  * Ordre des blocs : variables, base, layout, composants (dans l'ordre de la page), utilitaires,
  * surcharges du thème clair, responsive, mouvement réduit. L'ordre compte : les surcharges du thème
  * clair, les media queries et le bloc « mouvement réduit » doivent rester après les règles de base.
+ *
+ * Variables CSS (valeurs sombres dans :root, surcharges du thème clair dans [data-theme="light"]) :
+ *   --bg              fond de page (body, footer) et extrémité des dégradés du hero et du téléchargement
+ *   --bg-section-alt  fond des sections alternées (.alt)
+ *   --bg-tint         fond bleuté secondaire : dégradés (hero, téléchargement, carte Amazon, dos des cartes
+ *                     expertise) et info-bulles des compétences
+ *   --card            fond des cartes et panneaux
+ *   --accent          couleur d'accent (orange) ; lue aussi par main.js pour la couleur des particules
+ *   --text            texte courant
+ *   --muted           texte secondaire
+ *   --heading         titres
+ *   --border          bordures fines
+ *   --nav-h           hauteur de la barre de navigation (décalage du hero, des ancres et du menu mobile)
+ *   --radius          rayon d'arrondi commun
+ *   --shadow          ombre portée commune
+ *   --transition      transition par défaut (all .3s)
+ *   --tilt-x/--tilt-y inclinaison des cartes expertise au survol, écrite par main.js (initExpertiseCards)
+ *   --flip-angle      angle de retournement des cartes expertise (180deg sur .flipped)
  */
 
 /* ==========================================================================
@@ -12,31 +30,31 @@
 
 :root {
   --bg: #080D1A;
-  --bg2: #0F172A;
-  --bg3: #0D1F38;
+  --bg-section-alt: #0F172A;
+  --bg-tint: #0D1F38;
   --card: #131F32;
   --accent: #FF9900;
   --text: #DDE5F0;
   --muted: #7A8EAA;
-  --head: #fff;
+  --heading: #fff;
   --border: rgba(255,255,255,0.07);
   --nav-h: 68px;
-  --r: 14px;
-  --sh: 0 4px 30px rgba(0,0,0,.4);
-  --tr: all .3s cubic-bezier(.4,0,.2,1);
+  --radius: 14px;
+  --shadow: 0 4px 30px rgba(0,0,0,.4);
+  --transition: all .3s cubic-bezier(.4,0,.2,1);
 }
 
 [data-theme="light"] {
   --bg: #F0F4F8;
-  --bg2: #FFFFFF;
-  --bg3: #E8EEF5;
+  --bg-section-alt: #FFFFFF;
+  --bg-tint: #E8EEF5;
   --card: #FFFFFF;
   --accent: #E07800;
   --text: #1A2942;
   --muted: #5C6B7A;
-  --head: #1A2942;
+  --heading: #1A2942;
   --border: rgba(0,0,0,0.09);
-  --sh: 0 4px 30px rgba(0,0,0,.08);
+  --shadow: 0 4px 30px rgba(0,0,0,.08);
 }
 
 /* ==========================================================================
@@ -79,7 +97,7 @@ button {
 a {
   color: var(--accent);
   text-decoration: none;
-  transition: var(--tr);
+  transition: var(--transition);
 }
 
 a:hover {
@@ -137,7 +155,7 @@ h4 {
 .sec-title {
   font-size: clamp(1.7rem,4vw,2.4rem);
   font-weight: 700;
-  color: var(--head);
+  color: var(--heading);
   margin-bottom: 1.5rem;
 }
 
@@ -167,7 +185,7 @@ section {
 }
 
 .alt {
-  background: var(--bg2);
+  background: var(--bg-section-alt);
 }
 
 /* ==========================================================================
@@ -182,7 +200,7 @@ section {
   font-size: .88rem;
   padding: 12px 26px;
   border-radius: 10px;
-  transition: var(--tr);
+  transition: var(--transition);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -205,7 +223,7 @@ section {
   padding: 12px 26px;
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,.12);
-  transition: var(--tr);
+  transition: var(--transition);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -291,7 +309,7 @@ nav {
   width: 0;
   height: 2px;
   background: var(--accent);
-  transition: var(--tr);
+  transition: var(--transition);
 }
 
 .nav-links a:hover,
@@ -319,7 +337,7 @@ nav {
   height: 2px;
   background: var(--text);
   display: block;
-  transition: var(--tr);
+  transition: var(--transition);
 }
 
 .nav-toggle[aria-expanded="true"] span:nth-child(1) {
@@ -351,7 +369,7 @@ nav {
   cursor: pointer;
   font-size: .78rem;
   font-weight: 700;
-  transition: var(--tr);
+  transition: var(--transition);
   display: flex;
   align-items: center;
   gap: 5px;
@@ -379,7 +397,7 @@ nav {
   display: flex;
   align-items: center;
   padding-top: var(--nav-h);
-  background: radial-gradient(ellipse 80% 60% at 70% 50%,rgba(255,153,0,.06) 0%,transparent 65%),linear-gradient(155deg,var(--bg) 0%,var(--bg3) 100%);
+  background: radial-gradient(ellipse 80% 60% at 70% 50%,rgba(255,153,0,.06) 0%,transparent 65%),linear-gradient(155deg,var(--bg) 0%,var(--bg-tint) 100%);
   overflow: hidden;
 }
 
@@ -450,7 +468,7 @@ nav {
   font-family: 'Poppins',sans-serif;
   font-size: clamp(1.05rem,2.4vw,1.35rem);
   font-weight: 600;
-  color: var(--head);
+  color: var(--heading);
   margin-bottom: 1.3rem;
   min-height: 1.6em;
 }
@@ -535,7 +553,7 @@ nav {
   object-fit: cover;
   object-position: top;
   border: 3px solid rgba(255,153,0,.35);
-  box-shadow: 0 0 70px rgba(255,153,0,.18),var(--sh);
+  box-shadow: 0 0 70px rgba(255,153,0,.18),var(--shadow);
   position: relative;
   z-index: 1;
 }
@@ -586,12 +604,12 @@ nav {
 }
 
 .about-img {
-  border-radius: var(--r);
+  border-radius: var(--radius);
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
   object-position: top;
-  box-shadow: var(--sh);
+  box-shadow: var(--shadow);
 }
 
 .about-badge {
@@ -603,7 +621,7 @@ nav {
   font-weight: 700;
   font-size: .8rem;
   padding: 14px 20px;
-  border-radius: var(--r);
+  border-radius: var(--radius);
   box-shadow: 0 8px 24px rgba(255,153,0,.4);
   text-align: center;
 }
@@ -777,10 +795,10 @@ nav {
 
 .tl-c {
   background: var(--card);
-  border-radius: var(--r);
+  border-radius: var(--radius);
   padding: 1.4rem;
   border: 1px solid var(--border);
-  transition: var(--tr);
+  transition: var(--transition);
 }
 
 .tl-c:hover {
@@ -816,7 +834,7 @@ nav {
 
 .tl-c h3 {
   font-size: .96rem;
-  color: var(--head);
+  color: var(--heading);
   margin-bottom: .6rem;
 }
 
@@ -879,7 +897,7 @@ nav {
 
 .tl-amz {
   border-color: rgba(255,153,0,.3);
-  background: linear-gradient(135deg,var(--bg3),#102038);
+  background: linear-gradient(135deg,var(--bg-tint),#102038);
 }
 
 .tl-amz .tl-dot {
@@ -906,7 +924,7 @@ nav {
 
 /* ==========================================================================
    10. Expertise
-   Cartes avec inclinaison au survol (--rx / --ry) et retournement (--flip).
+   Cartes avec inclinaison au survol (--tilt-x / --tilt-y) et retournement (--flip-angle).
    ========================================================================== */
 
 .exp-grid {
@@ -926,7 +944,7 @@ nav {
   display: grid;
   height: 100%;
   transform-style: preserve-3d;
-  transform: rotateX(var(--rx,0deg)) rotateY(calc(var(--ry,0deg) + var(--flip,0deg)));
+  transform: rotateX(var(--tilt-x,0deg)) rotateY(calc(var(--tilt-y,0deg) + var(--flip-angle,0deg)));
   transition: transform .65s cubic-bezier(.4,0,.2,1);
 }
 
@@ -935,7 +953,7 @@ nav {
 }
 
 .exp-card.flipped .exp-inner {
-  --flip: 180deg;
+  --flip-angle: 180deg;
 }
 
 .exp-face {
@@ -943,7 +961,7 @@ nav {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   background: var(--card);
-  border-radius: var(--r);
+  border-radius: var(--radius);
   padding: 1.8rem;
   border: 1px solid var(--border);
   position: relative;
@@ -963,7 +981,7 @@ nav {
   background: linear-gradient(90deg,var(--accent),transparent);
   transform: scaleX(0);
   transform-origin: left;
-  transition: var(--tr);
+  transition: var(--transition);
 }
 
 .exp-card:hover .exp-face {
@@ -977,7 +995,7 @@ nav {
 
 .exp-back {
   transform: rotateY(180deg);
-  background: linear-gradient(135deg,var(--bg3),var(--card));
+  background: linear-gradient(135deg,var(--bg-tint),var(--card));
 }
 
 .exp-icon {
@@ -995,7 +1013,7 @@ nav {
 
 .exp-card h3 {
   font-size: .98rem;
-  color: var(--head);
+  color: var(--heading);
   margin-bottom: .5rem;
 }
 
@@ -1126,14 +1144,14 @@ nav {
   bottom: calc(100% + 8px);
   z-index: 5;
   max-width: min(340px,100%);
-  background: var(--bg3);
+  background: var(--bg-tint);
   color: var(--text);
   border: 1px solid rgba(255,153,0,.3);
   border-radius: 10px;
   padding: .6rem .8rem;
   font-size: .76rem;
   line-height: 1.5;
-  box-shadow: var(--sh);
+  box-shadow: var(--shadow);
   opacity: 0;
   visibility: hidden;
   transform: translateY(6px);
@@ -1160,7 +1178,7 @@ nav {
 .gal-co {
   margin-bottom: 3.5rem;
   scroll-margin-top: calc(var(--nav-h) + 16px);
-  border-radius: var(--r);
+  border-radius: var(--radius);
   transition: box-shadow .4s;
 }
 
@@ -1193,7 +1211,7 @@ nav {
 
 .gal-hd h3 {
   font-size: 1.1rem;
-  color: var(--head);
+  color: var(--heading);
   font-weight: 600;
 }
 
@@ -1212,13 +1230,13 @@ nav {
 }
 
 .swiper {
-  border-radius: var(--r);
+  border-radius: var(--radius);
   overflow: hidden;
 }
 
 .swiper-slide {
   background: var(--card);
-  border-radius: var(--r);
+  border-radius: var(--radius);
   overflow: hidden;
 }
 
@@ -1242,7 +1260,7 @@ nav {
   background: none;
   cursor: zoom-in;
   position: relative;
-  border-radius: var(--r);
+  border-radius: var(--radius);
   overflow: hidden;
 }
 
@@ -1419,10 +1437,10 @@ nav {
 
 .edu-c {
   background: var(--card);
-  border-radius: var(--r);
+  border-radius: var(--radius);
   padding: 1.6rem;
   border: 1px solid var(--border);
-  transition: var(--tr);
+  transition: var(--transition);
 }
 
 .edu-c:hover {
@@ -1447,7 +1465,7 @@ nav {
 
 .edu-c h3 {
   font-size: .95rem;
-  color: var(--head);
+  color: var(--heading);
   margin-bottom: .4rem;
 }
 
@@ -1462,7 +1480,7 @@ nav {
    ========================================================================== */
 
 #download {
-  background: linear-gradient(160deg,var(--bg3) 0%,var(--bg) 100%);
+  background: linear-gradient(160deg,var(--bg-tint) 0%,var(--bg) 100%);
 }
 
 .dl-grid {
@@ -1475,10 +1493,10 @@ nav {
 .dl-c {
   background: rgba(255,153,0,.05);
   border: 1px solid rgba(255,153,0,.18);
-  border-radius: var(--r);
+  border-radius: var(--radius);
   padding: 2rem;
   text-align: center;
-  transition: var(--tr);
+  transition: var(--transition);
 }
 
 .dl-c:hover {
@@ -1501,7 +1519,7 @@ nav {
 
 .dl-c h3 {
   font-size: 1rem;
-  color: var(--head);
+  color: var(--heading);
   margin-bottom: .4rem;
 }
 
@@ -1616,7 +1634,7 @@ nav {
   align-items: center;
   justify-content: center;
   color: var(--muted);
-  transition: var(--tr);
+  transition: var(--transition);
   font-size: .9rem;
 }
 
@@ -1676,7 +1694,7 @@ kbd {
   border-radius: 12px;
   padding: .75rem 1.2rem;
   font-size: .86rem;
-  box-shadow: var(--sh);
+  box-shadow: var(--shadow);
   opacity: 0;
   visibility: hidden;
   transition: opacity .25s,transform .25s,visibility .25s;
