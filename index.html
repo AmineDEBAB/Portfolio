@@ -333,7 +333,7 @@ html{scroll-behavior:auto}
 </style>
 </head>
 <body>
-<nav id="mainNav" aria-label="Main">
+<nav id="mainNav" aria-label="Main navigation" data-i18n-aria="nav.main">
   <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="nav-inner">
     <div class="nav-logo">A.<span>DEBAB</span></div>
@@ -961,7 +961,7 @@ var T={
     "ct.lbl":"Get in Touch","ct.h2":"Contact <span>Me</span>","ct.loc":"Location","ct.phone":"Phone",
     "ct.text":"Open to new opportunities in maintenance and reliability engineering, project management, and industrial automation. Based in Lyon, France.",
     "ct.linkedin":"Connect on LinkedIn",
-    "nav.cv":"CV","nav.contact":"Contact","nav.menu":"Open menu",
+    "nav.cv":"CV","nav.contact":"Contact","nav.menu":"Open menu","nav.main":"Main navigation",
     "ui.lang":"Switch to French","ui.theme":"Toggle dark/light theme","ui.top":"Back to top",
     "ui.keys":"Shortcuts:","ui.key_theme":"theme","ui.key_lang":"language",
     "hero.typed_lbl":"Focus:","hero.roles":"Reliability|PMO|Electrical Engineering|Data & Automation",
@@ -1004,6 +1004,8 @@ var T={
     "work.l5":"Linde Gaz - Algeria","work.l6":"Sonelgaz - Algeria","work.l7":"Mobiserve - Algeria","work.l8":"FerobMetal - Algeria","work.l9":"Mitsubishi Heavy Industry - Algeria",
     "gal.f_label":"Filter gallery by company","gal.b_amazon":"2024 - Present","gal.b_greif":"Oct. 2023 - June 2024",
     "lb.dialog":"Photo viewer","lb.close":"Close","lb.prev":"Previous photo","lb.next":"Next photo","lb.open":"Open photo {i} of {n} - {co}",
+    "sw.prev":"Previous slide","sw.next":"Next slide","sw.first":"This is the first slide","sw.last":"This is the last slide",
+    "sw.bullet":"Go to slide {{index}}","sw.slide":"Slide {{index}} of {{slidesLength}}","sw.carousel":"carousel","sw.item":"slide",
     "edu.ongoing":"Ongoing",
     "dl.fr.h":"French CV","dl.fr.p":"French version - 2026","dl.en.h":"English CV","dl.en.p":"English version - 2026","dl.btn":"Download",
     "ct.email":"Email","ct.copy":"Copy email","ct.vcard":"Download vCard",
@@ -1063,7 +1065,7 @@ var T={
     "ct.lbl":"Contactez-moi","ct.h2":"Me <span>Contacter</span>","ct.loc":"Localisation","ct.phone":"T\u00E9l\u00E9phone",
     "ct.text":"Ouvert \u00E0 de nouvelles opportunit\u00E9s en maintenance et reliability, gestion de projet et automatisation industrielle. Bas\u00E9 \u00E0 Lyon, France.",
     "ct.linkedin":"Me connecter sur LinkedIn",
-    "nav.cv":"CV","nav.contact":"Contact","nav.menu":"Ouvrir le menu",
+    "nav.cv":"CV","nav.contact":"Contact","nav.menu":"Ouvrir le menu","nav.main":"Navigation principale",
     "ui.lang":"Passer en anglais","ui.theme":"Basculer thème sombre/clair","ui.top":"Retour en haut",
     "ui.keys":"Raccourcis :","ui.key_theme":"thème","ui.key_lang":"langue",
     "hero.typed_lbl":"Focus :","hero.roles":"Fiabilité|PMO|Génie électrique|Data & Automatisation",
@@ -1106,6 +1108,8 @@ var T={
     "work.l5":"Linde Gaz - Algérie","work.l6":"Sonelgaz - Algérie","work.l7":"Mobiserve - Algérie","work.l8":"FerobMetal - Algérie","work.l9":"Mitsubishi Heavy Industry - Algérie",
     "gal.f_label":"Filtrer la galerie par entreprise","gal.b_amazon":"2024 - Aujourd’hui","gal.b_greif":"Oct. 2023 - Juin 2024",
     "lb.dialog":"Visionneuse photo","lb.close":"Fermer","lb.prev":"Photo précédente","lb.next":"Photo suivante","lb.open":"Ouvrir la photo {i} sur {n} - {co}",
+    "sw.prev":"Diapositive précédente","sw.next":"Diapositive suivante","sw.first":"Ceci est la première diapositive","sw.last":"Ceci est la dernière diapositive",
+    "sw.bullet":"Aller à la diapositive {{index}}","sw.slide":"Diapositive {{index}} sur {{slidesLength}}","sw.carousel":"carrousel","sw.item":"diapositive",
     "edu.ongoing":"En cours",
     "dl.fr.h":"CV Français","dl.fr.p":"Version française - 2026","dl.en.h":"CV Anglais","dl.en.p":"Version anglaise - 2026","dl.btn":"Télécharger",
     "ct.email":"E-mail","ct.copy":"Copier l’e-mail","ct.vcard":"Télécharger la vCard",
@@ -1456,7 +1460,9 @@ window.addEventListener('load',refreshExpandable);
 /* ===== GALLERY: CAROUSELS + FILTER ===== */
 var galCos=$$('#gallery .gal-co'),swipers={},galData={};
 var hasSwiper=typeof window.Swiper==='function';
-var swCfg={slidesPerView:3,spaceBetween:16,loop:true,speed:reduced()?0:300,autoplay:reduced()?false:{delay:3500,disableOnInteraction:false,pauseOnMouseEnter:true},breakpoints:{0:{slidesPerView:1},600:{slidesPerView:2},900:{slidesPerView:3}}};
+var SW_SPEED=300;
+var swCfg={slidesPerView:3,spaceBetween:16,loop:true,speed:reduced()?0:SW_SPEED,autoplay:{delay:3500,disableOnInteraction:false,pauseOnMouseEnter:true},breakpoints:{0:{slidesPerView:1},600:{slidesPerView:2},900:{slidesPerView:3}}};
+function swA11y(){return {prevSlideMessage:t('sw.prev'),nextSlideMessage:t('sw.next'),firstSlideMessage:t('sw.first'),lastSlideMessage:t('sw.last'),paginationBulletMessage:t('sw.bullet'),slideLabelMessage:t('sw.slide'),containerRoleDescriptionMessage:t('sw.carousel'),itemRoleDescriptionMessage:t('sw.item')};}
 galCos.forEach(function(g){
   var key=g.getAttribute('data-co'),items=[];
   $$('.swiper-slide img',g).forEach(function(img,i){
@@ -1468,7 +1474,9 @@ galCos.forEach(function(g){
   galData[key]={el:g,title:$('.gal-hd h3',g),badge:$('.gal-badge',g),items:items};
   if(hasSwiper){
     var el=$('.swiper',g);
-    swipers[key]=new window.Swiper(el,Object.assign({},swCfg,{navigation:{nextEl:$('.swiper-button-next',el),prevEl:$('.swiper-button-prev',el)},pagination:{el:$('.swiper-pagination',el),clickable:true}}));
+    swipers[key]=new window.Swiper(el,Object.assign({},swCfg,{a11y:swA11y(),navigation:{nextEl:$('.swiper-button-next',el),prevEl:$('.swiper-button-prev',el)},pagination:{el:$('.swiper-pagination',el),clickable:true}}));
+    // Autoplay stays configured so pauseOnMouseEnter listeners exist if the motion preference changes later.
+    if(reduced())swipers[key].autoplay.stop();
   }
 });
 function galLabels(){
@@ -1478,7 +1486,39 @@ function galLabels(){
   });
 }
 langHooks.push(galLabels);
-function autoplay(key,on){var s=swipers[key];if(s&&s.autoplay&&s.params.autoplay&&s.params.autoplay.enabled){if(on)s.autoplay.start();else s.autoplay.stop();}}
+function swRelabel(){
+  var m=swA11y();
+  Object.keys(swipers).forEach(function(k){
+    var s=swipers[k],n=s.slides.length;
+    Object.assign(s.params.a11y,m);
+    s.el.setAttribute('aria-roledescription',m.containerRoleDescriptionMessage);
+    if(s.navigation){
+      if(s.navigation.nextEl)s.navigation.nextEl.setAttribute('aria-label',m.nextSlideMessage);
+      if(s.navigation.prevEl)s.navigation.prevEl.setAttribute('aria-label',m.prevSlideMessage);
+    }
+    s.slides.forEach(function(sl,i){
+      var idx=s.params.loop?parseInt(sl.getAttribute('data-swiper-slide-index'),10):i;
+      sl.setAttribute('aria-roledescription',m.itemRoleDescriptionMessage);
+      sl.setAttribute('aria-label',m.slideLabelMessage.replace('{{index}}',idx+1).replace('{{slidesLength}}',n));
+    });
+    if(s.pagination&&s.pagination.update)s.pagination.update();
+  });
+}
+langHooks.push(swRelabel);
+function galCanPlay(key){return !reduced()&&!galData[key].el.hidden&&!lbState.open;}
+function syncAutoplay(){
+  Object.keys(swipers).forEach(function(k){
+    var s=swipers[k];
+    if(!s.autoplay)return;
+    if(galCanPlay(k)){if(!s.autoplay.running)s.autoplay.start();}
+    else if(s.autoplay.running)s.autoplay.stop();
+  });
+}
+onMQ(reduceMQ,function(){
+  var sp=reduced()?0:SW_SPEED;
+  Object.keys(swipers).forEach(function(k){swipers[k].params.speed=sp;});
+  syncAutoplay();
+});
 var galFilter=chipGroup($('#galFilters'),'data-gal-filter',function(v){
   galCos.forEach(function(g){
     var key=g.getAttribute('data-co'),ok=v==='all'||key===v;
@@ -1488,8 +1528,8 @@ var galFilter=chipGroup($('#galFilters'),'data-gal-filter',function(v){
       if(swipers[key])swipers[key].update();
       if(!reduced())replayClass(g,'gal-in');
     }
-    autoplay(key,ok);
   });
+  syncAutoplay();
 });
 function showGallery(key){
   var g=galData[key];if(!g)return;
@@ -1528,7 +1568,7 @@ function lbOpen(key,i,trigger){
   lb.hidden=false;
   lbRender();
   reflow(lb);lb.classList.add('on');
-  autoplay(key,false);
+  syncAutoplay();
   lbClose.focus({preventScroll:true});
 }
 function lbCloseFn(){
@@ -1538,7 +1578,7 @@ function lbCloseFn(){
   lb.hidden=true;
   outside.forEach(function(el){el.removeAttribute('inert');});
   doc.body.classList.remove('lb-open');
-  if(galData[lbState.key]&&!galData[lbState.key].el.hidden)autoplay(lbState.key,true);
+  syncAutoplay();
   if(lbState.trigger&&lbState.trigger.focus)lbState.trigger.focus({preventScroll:true});
 }
 function lbStep(d){var n=galData[lbState.key].items.length;lbState.i=(lbState.i+d+n)%n;lbRender();}
@@ -1601,7 +1641,7 @@ function buildVCard(){
     'ORG:Amazon LYS2',
     'EMAIL;TYPE=INTERNET:'+emailAddr(),
     'TEL;TYPE=CELL:'+$('#ctPhone').getAttribute('href').replace(/^tel:/,''),
-    'ADR;TYPE=WORK:;;;'+vEsc(city[0].trim())+';;;'+vEsc((city[1]||'').trim()),
+    'ADR;TYPE=WORK:'+['','','',city[0].trim(),'','',(city[1]||'').trim()].map(vEsc).join(';'),
     'URL:'+$('#socLinkedin').href,
     'X-SOCIALPROFILE;TYPE=github:'+$('#socGithub').href];
   if(/^https?:$/.test(location.protocol))lines.push('URL:'+location.origin+location.pathname);
