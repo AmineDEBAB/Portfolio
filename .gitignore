@@ -1,0 +1,12 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Caches et dépendances de build
+.sass-cache/
+node_modules/
+*.log
+
+# Configuration des éditeurs
+.vscode/
+.idea/
